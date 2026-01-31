@@ -154,5 +154,5 @@
 <!--Internal quill js -->
 <script src="{{URL::asset('assets/admin/plugins/quill/quill.min.js')}}"></script>
 <!-- Internal Form-editor js -->
-<script src="{{URL::asset('assets/js/form-editor.js')}}"></script>
+<script src="{{URL::asset('assets/admin/js/form-editor.js')}}"></script>
 @endsection

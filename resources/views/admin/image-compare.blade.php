@@ -84,5 +84,5 @@
 <!--Internal  Images-Comparsion js -->
 <script src="{{URL::asset('assets/admin/plugins/images-comparsion/jquery.twentytwenty.js')}}"></script>
 <script src="{{URL::asset('assets/admin/plugins/images-comparsion/jquery.event.move.js')}}"></script>
-<script src="{{URL::asset('assets/js/image-comparision.js')}}"></script>
+<script src="{{URL::asset('assets/admin/js/image-comparision.js')}}"></script>
 @endsection

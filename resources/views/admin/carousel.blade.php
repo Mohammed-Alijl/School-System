@@ -319,5 +319,5 @@
 <script src="{{URL::asset('assets/admin/plugins/owl-carousel/owl.carousel.js')}}"></script>
 <!---Internal  Multislider js-->
 <script src="{{URL::asset('assets/admin/plugins/multislider/multislider.js')}}"></script>
-<script src="{{URL::asset('assets/js/carousel.js')}}"></script>
+<script src="{{URL::asset('assets/admin/js/carousel.js')}}"></script>
 @endsection

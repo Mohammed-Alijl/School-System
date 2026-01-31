@@ -90,5 +90,5 @@
 @section('js')
 <!--Internal  Leaflet-maps js -->
 <script src="{{URL::asset('assets/admin/plugins/leaflet/leaflet.js')}}"></script>
-<script src="{{URL::asset('assets/js/map-leafleft.js')}}"></script>
+<script src="{{URL::asset('assets/admin/js/map-leafleft.js')}}"></script>
 @endsection

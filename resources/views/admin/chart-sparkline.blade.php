@@ -159,5 +159,5 @@
 <script src="{{URL::asset('assets/admin/plugins/select2/js/select2.min.js')}}"></script>
 <!-- Internal Jquery-sparkline js -->
 <script src="{{URL::asset('assets/admin/plugins/jquery-sparkline/jquery.sparkline.min.js')}}"></script>
-<script src="{{URL::asset('assets/js/chart.sparkline.js')}}"></script>
+<script src="{{URL::asset('assets/admin/js/chart.sparkline.js')}}"></script>
 @endsection

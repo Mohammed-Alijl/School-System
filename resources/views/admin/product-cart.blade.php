@@ -229,7 +229,7 @@
 @section('js')
 <!-- Internal Select2.min js -->
 <script src="{{URL::asset('assets/admin/plugins/select2/js/select2.min.js')}}"></script>
-<script src="{{URL::asset('assets/js/select2.js')}}"></script>
+<script src="{{URL::asset('assets/admin/js/select2.js')}}"></script>
 <!-- Internal Nice-select js-->
 <script src="{{URL::asset('assets/admin/plugins/jquery-nice-select/js/jquery.nice-select.js')}}"></script>
 <script src="{{URL::asset('assets/admin/plugins/jquery-nice-select/js/nice-select.js')}}"></script>

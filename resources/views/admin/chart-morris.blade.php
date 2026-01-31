@@ -190,5 +190,5 @@
 <script src="{{URL::asset('assets/admin/plugins/raphael/raphael.min.js')}}"></script>
 <script src="{{URL::asset('assets/admin/plugins/morris.js/morris.min.js')}}"></script>
 <!--Internal Chart Morris js -->
-<script src="{{URL::asset('assets/js/chart.morris.js')}}"></script>
+<script src="{{URL::asset('assets/admin/js/chart.morris.js')}}"></script>
 @endsection

@@ -695,5 +695,5 @@
 <!--Internal  pickerjs js -->
 <script src="{{URL::asset('assets/admin/plugins/pickerjs/picker.min.js')}}"></script>
 <!-- Internal form-elements js -->
-<script src="{{URL::asset('assets/js/form-elements.js')}}"></script>
+<script src="{{URL::asset('assets/admin/js/form-elements.js')}}"></script>
 @endsection

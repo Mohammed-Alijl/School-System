@@ -152,5 +152,5 @@
 <script src="{{URL::asset('assets/admin/plugins/raphael/raphael.min.js')}}"></script>
 <!-- Internal Select2.min js -->
 <script src="{{URL::asset('assets/admin/plugins/select2/js/select2.min.js')}}"></script>
-<script src="{{URL::asset('assets/js/select2.js')}}"></script>
+<script src="{{URL::asset('assets/admin/js/select2.js')}}"></script>
 @endsection

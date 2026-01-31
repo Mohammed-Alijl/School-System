@@ -277,8 +277,8 @@
 <script src="{{URL::asset('assets/admin/plugins/fancyuploder/jquery.fancy-fileupload.js')}}"></script>
 <script src="{{URL::asset('assets/admin/plugins/fancyuploder/fancy-uploader.js')}}"></script>
 <!--Internal  Form-elements js-->
-<script src="{{URL::asset('assets/js/advanced-form-elements.js')}}"></script>
-<script src="{{URL::asset('assets/js/select2.js')}}"></script>
+<script src="{{URL::asset('assets/admin/js/advanced-form-elements.js')}}"></script>
+<script src="{{URL::asset('assets/admin/js/select2.js')}}"></script>
 <!--Internal Sumoselect js-->
 <script src="{{URL::asset('assets/admin/plugins/sumoselect/jquery.sumoselect.js')}}"></script>
 <!-- Internal TelephoneInput js-->

@@ -298,5 +298,5 @@
 @endsection
 @section('js')
 <!--Internal  Contact js -->
-<script src="{{URL::asset('assets/js/contact.js')}}"></script>
+<script src="{{URL::asset('assets/admin/js/contact.js')}}"></script>
 @endsection

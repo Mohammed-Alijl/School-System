@@ -329,5 +329,5 @@
 <!--Internal  Select2 js -->
 <script src="{{URL::asset('assets/admin/plugins/select2/js/select2.min.js')}}"></script>
 <!-- Form-layouts js -->
-<script src="{{URL::asset('assets/js/form-layouts.js')}}"></script>
+<script src="{{URL::asset('assets/admin/js/form-layouts.js')}}"></script>
 @endsection

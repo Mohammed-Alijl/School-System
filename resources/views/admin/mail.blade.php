@@ -359,7 +359,7 @@
 <!-- Moment js -->
 <script src="{{URL::asset('assets/admin/plugins/raphael/raphael.min.js')}}"></script>
 <!--- Internal Check-all-mail js -->
-<script src="{{URL::asset('assets/js/check-all-mail.js')}}"></script>
+<script src="{{URL::asset('assets/admin/js/check-all-mail.js')}}"></script>
 <!--Internal Apexchart js-->
-<script src="{{URL::asset('assets/js/apexcharts.js')}}"></script>
+<script src="{{URL::asset('assets/admin/js/apexcharts.js')}}"></script>
 @endsection

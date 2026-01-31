@@ -98,6 +98,6 @@
 <!-- Internal Select2.full.min js -->
 <script src="{{URL::asset('assets/admin/plugins/select2/js/select2.full.min.js')}}"></script>
 <!--Internal App calendar js -->
-<script src="{{URL::asset('assets/js/app-calendar-events.js')}}"></script>
-<script src="{{URL::asset('assets/js/app-calendar.js')}}"></script>
+<script src="{{URL::asset('assets/admin/js/app-calendar-events.js')}}"></script>
+<script src="{{URL::asset('assets/admin/js/app-calendar.js')}}"></script>
 @endsection

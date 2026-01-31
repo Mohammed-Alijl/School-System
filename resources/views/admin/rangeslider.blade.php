@@ -139,5 +139,5 @@
 <!-- Internal Chart js -->
 <script src="{{URL::asset('assets/admin/plugins/chart.js/Chart.bundle.min.js')}}"></script>
 <!-- Internal  rangeslider js -->
-<script src="{{URL::asset('assets/js/rangeslider.js')}}"></script>
+<script src="{{URL::asset('assets/admin/js/rangeslider.js')}}"></script>
 @endsection

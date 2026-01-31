@@ -257,5 +257,5 @@
 <!-- Internal Select2 js-->
 <script src="{{URL::asset('assets/admin/plugins/select2/js/select2.min.js')}}"></script>
 <!-- Internal Peity js -->
-<script src="{{URL::asset('assets/js/chart.peity.js')}}"></script>
+<script src="{{URL::asset('assets/admin/js/chart.peity.js')}}"></script>
 @endsection

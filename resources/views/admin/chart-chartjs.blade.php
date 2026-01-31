@@ -212,5 +212,5 @@
 <!-- Internal Select2 js-->
 <script src="{{URL::asset('assets/admin/plugins/select2/js/select2.min.js')}}"></script>
 <!--Internal Chartjs js -->
-<script src="{{URL::asset('assets/js/chart.chartjs.js')}}"></script>
+<script src="{{URL::asset('assets/admin/js/chart.chartjs.js')}}"></script>
 @endsection

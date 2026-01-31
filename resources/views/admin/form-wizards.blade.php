@@ -298,5 +298,5 @@
 <script src="{{URL::asset('assets/admin/plugins/jquery-steps/jquery.steps.min.js')}}"></script>
 <script src="{{URL::asset('assets/admin/plugins/parsleyjs/parsley.min.js')}}"></script>
 <!--Internal  Form-wizard js -->
-<script src="{{URL::asset('assets/js/form-wizard.js')}}"></script>
+<script src="{{URL::asset('assets/admin/js/form-wizard.js')}}"></script>
 @endsection

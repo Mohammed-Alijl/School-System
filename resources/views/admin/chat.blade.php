@@ -333,5 +333,5 @@
 <!--Internal  lightslider js -->
 <script src="{{URL::asset('assets/admin/plugins/lightslider/js/lightslider.min.js')}}"></script>
 <!--Internal  Chat js -->
-<script src="{{URL::asset('assets/js/chat.js')}}"></script>
+<script src="{{URL::asset('assets/admin/js/chat.js')}}"></script>
 @endsection

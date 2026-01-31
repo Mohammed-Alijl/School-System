@@ -235,5 +235,5 @@
 <!--Internal  Parsley.min js -->
 <script src="{{URL::asset('assets/admin/plugins/parsleyjs/parsley.min.js')}}"></script>
 <!-- Internal Form-validation js -->
-<script src="{{URL::asset('assets/js/form-validation.js')}}"></script>
+<script src="{{URL::asset('assets/admin/js/form-validation.js')}}"></script>
 @endsection

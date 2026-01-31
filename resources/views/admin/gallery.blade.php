@@ -126,5 +126,5 @@
 <!-- Internal Gallery js -->
 <script src="{{URL::asset('assets/admin/plugins/gallery/lightgallery-all.min.js')}}"></script>
 <script src="{{URL::asset('assets/admin/plugins/gallery/jquery.mousewheel.min.js')}}"></script>
-<script src="{{URL::asset('assets/js/gallery.js')}}"></script>
+<script src="{{URL::asset('assets/admin/js/gallery.js')}}"></script>
 @endsection

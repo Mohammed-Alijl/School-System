@@ -202,5 +202,5 @@
 <script src="{{URL::asset('assets/admin/plugins/sweet-alert/jquery.sweet-alert.js')}}"></script>
 <!-- Sweet-alert js  -->
 <script src="{{URL::asset('assets/admin/plugins/sweet-alert/sweetalert.min.js')}}"></script>
-<script src="{{URL::asset('assets/js/sweet-alert.js')}}"></script>
+<script src="{{URL::asset('assets/admin/js/sweet-alert.js')}}"></script>
 @endsection

@@ -127,7 +127,7 @@
 <script src="{{URL::asset('assets/admin/plugins/jqvmap/maps/jquery.vmap.germany.js')}}"></script>
 <script src="{{URL::asset('assets/admin/plugins/jqvmap/maps/jquery.vmap.russia.js')}}"></script>
 <script src="{{URL::asset('assets/admin/plugins/jqvmap/maps/jquery.vmap.france.js')}}"></script>
-<script src="{{URL::asset('assets/js/vector-map.js')}}"></script>
+<script src="{{URL::asset('assets/admin/js/vector-map.js')}}"></script>
 <!-- Internal Vector-sampledata js -->
-<script src="{{URL::asset('assets/js/jquery.vmap.sampledata.js')}}"></script>
+<script src="{{URL::asset('assets/admin/js/jquery.vmap.sampledata.js')}}"></script>
 @endsection

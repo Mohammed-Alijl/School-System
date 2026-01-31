@@ -175,5 +175,5 @@
 <script src="{{URL::asset('assets/admin/plugins/select2/js/select2.min.js')}}"></script>
 <!--Internal Echart Plugin -->
 <script src="{{URL::asset('assets/admin/plugins/echart/echart.js')}}"></script>
-<script src="{{URL::asset('assets/js/echarts.js')}}"></script>
+<script src="{{URL::asset('assets/admin/js/echarts.js')}}"></script>
 @endsection
