@@ -19,7 +19,7 @@ class DashboardController extends Controller
         }
         else
         {
-            return view('404');
+            return view('admin.404');
         }
 
      //   return view($id);
