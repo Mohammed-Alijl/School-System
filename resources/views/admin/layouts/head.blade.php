@@ -9,10 +9,18 @@
 <!--  Sidebar css -->
 <link href="{{URL::asset('assets/admin/plugins/sidebar/sidebar.css')}}" rel="stylesheet">
 <!-- Sidemenu css -->
-<link rel="stylesheet" href="{{URL::asset('assets/admin/css-rtl/sidemenu.css')}}">
+@if (App::getLocale() == 'ar')
+    <link rel="stylesheet" href="{{URL::asset('assets/admin/css-rtl/sidemenu.css')}}">
+@else
+    <link rel="stylesheet" href="{{URL::asset('assets/admin/css/sidemenu.css')}}">
+@endif
 @yield('css')
 <!--- Style css -->
-<link href="{{URL::asset('assets/admin/css-rtl/style.css')}}" rel="stylesheet">
+@if (App::getLocale() == 'ar')
+    <link href="{{URL::asset('assets/admin/css-rtl/style.css')}}" rel="stylesheet">
+@else
+    <link href="{{URL::asset('assets/admin/css/style.css')}}" rel="stylesheet">
+@endif
 <!--- Dark-mode css -->
 <link href="{{URL::asset('assets/admin/css-rtl/style-dark.css')}}" rel="stylesheet">
 <!---Skinmodes css-->

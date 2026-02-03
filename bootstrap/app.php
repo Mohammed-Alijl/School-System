@@ -3,6 +3,7 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use Illuminate\Http\Request;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -11,7 +12,7 @@ return Application::configure(basePath: dirname(__DIR__))
         commands: __DIR__.'/../routes/console.php',
         health: '/up',
         then: function () {
-            Route::middleware(['web'])
+            Route::middleware('web')
                 ->prefix("admin")
                 ->name('admin.')
                 ->group(base_path('routes/admin.php'));
@@ -19,7 +20,19 @@ return Application::configure(basePath: dirname(__DIR__))
         }
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        //
+        $middleware->redirectGuestsTo(function (Request $request) {
+            if ($request->is('admin') || $request->is('admin/*')) {
+                return route('admin.login');
+            }
+            return route('login');
+        });
+
+        $middleware->redirectUsersTo(function (Request $request) {
+            if (Auth::guard('admin')->check()) {
+                return route('admin.dashboard');
+            }
+            return route('landing-page');
+        });
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
