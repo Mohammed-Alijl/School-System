@@ -59,10 +59,7 @@
 @endsection
 @section('js')
     <script src="{{URL::asset('assets/admin/plugins/parsleyjs/parsley.min.js')}}"></script>
-
-    @if(App::getLocale() == 'ar')
-        <script src="{{URL::asset('assets/admin/plugins/parsleyjs/i18n/ar.js')}}"></script>
-    @endif
+    <script src="{{URL::asset('assets/admin/plugins/parsleyjs/i18n/' . LaravelLocalization::getCurrentLocale() . '.js')}}"></script>
 
     <script src="{{URL::asset('assets/admin/js/form-validation.js')}}"></script>
     <script>
