@@ -21,13 +21,13 @@ class AdminAuthController extends Controller
 
             return response()->json([
                 'status' => true,
-                'message' => 'Login Successful',
+                'message' => __('admin.login_success'),
                 'redirect' => route('admin.dashboard')
             ]);
         }
         return response()->json([
             'status' => false,
-            'message' => 'Do Not Match Our Record',
+            'message' => __('auth.failed'),
         ], 401);
     }
 

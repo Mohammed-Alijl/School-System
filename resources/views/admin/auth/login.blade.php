@@ -22,28 +22,29 @@
                         <div class="row">
                             <div class="col-md-10 col-lg-10 col-xl-9 mx-auto">
                                 <div class="card-sigin">
-                                    <div class="mb-5 d-flex"> <a href="#"><img src="{{URL::asset('assets/admin/img/brand/favicon.png')}}" class="sign-favicon ht-40" alt="logo"></a><h1 class="main-logo1 ml-1 mr-0 my-auto tx-28">Learn To Earn</h1></div>
+                                    <div class="mb-5 d-flex"> <a href="#"><img src="{{URL::asset('assets/admin/img/brand/favicon.png')}}" class="sign-favicon ht-40" alt="logo"></a><h1 class="main-logo1 ml-1 mr-0 my-auto tx-28">
+                                        {{__('admin.global.brand')}}</h1></div>
                                     <div class="card-sigin">
                                         <div class="main-signup-header">
-                                            <h2>Welcome back!</h2>
-                                            <h5 class="font-weight-semibold mb-4">Please sign in to continue.</h5>
+                                            <h2>{{__('admin.login.welcome')}}</h2>
+                                            <h5 class="font-weight-semibold mb-4">{{__('admin.login.subtitle')}}</h5>
                                             <form action="{{route('admin.login.store')}}" id="loginForm" method="post" data-parsley-validate="">
                                                 @csrf
                                                 <div class="form-group">
-                                                    <label id="email">Email</label>
-                                                    <input class="form-control" id="email" required placeholder="Enter your email" type="email" name="email" autocomplete="off" maxlength="30">
+                                                    <label id="email">{{__('admin.login.email')}}</label>
+                                                    <input class="form-control" id="email" required placeholder="{{__('admin.login.email_placeholder')}}" type="email" name="email" autocomplete="off" maxlength="30">
                                                     <small class="text-danger" id="error-message"></small>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="password">Password</label>
-                                                    <input class="form-control" id="password" required placeholder="Enter your password" type="password" name="password" minlength="8" maxlength="30">
+                                                    <label for="password">{{__('admin.login.password')}}</label>
+                                                    <input class="form-control" id="password" required placeholder="{{__('admin.login.password_placeholder')}}" type="password" name="password" minlength="8" maxlength="30">
                                                 </div><button type="submit" id="loginBtn" class="btn btn-main-primary btn-block">
                                                     <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" style="display:none;" id="btnSpinner"></span>
-                                                    <span id="btnText">Sign In</span>
+                                                    <span id="btnText">{{__('admin.login.submit')}}</span>
                                                 </button>
                                             </form>
                                             <div class="main-signin-footer mt-5">
-                                                <p><a href="{{route('admin.password.request')}}">Forgot password ? Click Here</a></p>
+                                                <p><a href="{{route('admin.password.request')}}">{{__('admin.login.forgot_password')}}</a></p>
                                             </div>
                                         </div>
                                     </div>
@@ -58,8 +59,12 @@
 @endsection
 @section('js')
     <script src="{{URL::asset('assets/admin/plugins/parsleyjs/parsley.min.js')}}"></script>
-    <script src="{{URL::asset('assets/admin/js/form-validation.js')}}"></script>
 
+    @if(App::getLocale() == 'ar')
+        <script src="{{URL::asset('assets/admin/plugins/parsleyjs/i18n/ar.js')}}"></script>
+    @endif
+
+    <script src="{{URL::asset('assets/admin/js/form-validation.js')}}"></script>
     <script>
         $(document).ready(function() {
             $('#loginForm').on('submit', function(e) {
@@ -89,7 +94,7 @@
                         },
                         error: function(xhr) {
                             var errors = xhr.responseJSON;
-                            var errorMsg = 'Do Not Match Our credentials';
+                            var errorMsg = "{{__('auth.failed')}}";
 
                             if (xhr.status === 422) {
                                 $.each(errors.errors, function(key, value) {
