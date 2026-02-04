@@ -13,6 +13,7 @@
         "guzzlehttp/guzzle": "*",
         "laravel/framework": "^12.0",
         "laravel/tinker": "^2.10.1",
+        "mcamara/laravel-localization": "*",
         "symfony/http-client": "*",
         "symfony/mailgun-mailer": "*"
     },
