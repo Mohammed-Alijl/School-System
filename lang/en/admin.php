@@ -3,6 +3,10 @@
 return [
     'global' => [
         'brand' => 'Learn To Earn',
+        'email' => 'Email',
+        'email_placeholder' => 'Enter Your Email',
+        'password' => 'Password',
+        'password_placeholder' => 'Enter Your Password',
     ],
   'login' => [
       'welcome' => 'Welcome back!',
@@ -16,4 +20,8 @@ return [
       'forgot_password' => 'Forgot password? Click Here',
       'login_success' => 'Login Successful',
   ],
+    'forgot_password' => [
+        'title' => 'Forgot Password!',
+        'subtitle' => 'Please Enter Your Email',
+    ]
 ];

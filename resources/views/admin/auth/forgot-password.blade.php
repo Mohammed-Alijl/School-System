@@ -21,17 +21,18 @@
                     <div class="container p-0">
                         <div class="row">
                             <div class="col-md-10 col-lg-10 col-xl-9 mx-auto">
-                                <div class="mb-5 d-flex"> <a href="#"><img src="{{URL::asset('assets/admin/img/brand/favicon.png')}}" class="sign-favicon ht-40" alt="logo"></a><h1 class="main-logo1 ml-1 mr-0 my-auto tx-28">Learn To Earn</h1></div>
+                                <div class="mb-5 d-flex"> <a href="#"><img src="{{URL::asset('assets/admin/img/brand/favicon.png')}}" class="sign-favicon ht-40" alt="logo"></a><h1 class="main-logo1 ml-1 mr-0 my-auto tx-28">
+                                    {{__('admin.global.brand')}}</h1></div>
                                 <div class="main-card-signin d-md-flex bg-white">
                                     <div class="wd-100p">
                                         <div class="main-signin-header">
-                                            <h2>Forgot Password!</h2>
-                                            <h4>Please Enter Your Email</h4>
+                                            <h2>{{__('admin.forgot_password.title')}}</h2>
+                                            <h4>{{__('admin.forgot_password.subtitle')}}</h4>
                                             <form action="{{ route('admin.password.email') }}" method="post" data-parsley-validate="">
                                                 @csrf
                                                 <div class="form-group">
-                                                    <label for="email">Email</label>
-                                                    <input class="form-control" id="email" placeholder="Enter your email" type="email" required name="email" autocomplete="off" value="{{old('email')}}">
+                                                    <label for="email">{{__('admin.global.email')}}</label>
+                                                    <input class="form-control" id="email" placeholder="{{__('admin.global.email_placeholder')}}" type="email" required name="email" autocomplete="off" value="{{old('email')}}">
                                                     <small class="text-danger">
                                                         @error('email')
                                                         {{ $message }}
@@ -54,5 +55,6 @@
 @endsection
 @section('js')
     <script src="{{URL::asset('assets/admin/plugins/parsleyjs/parsley.min.js')}}"></script>
+    <script src="{{URL::asset('assets/admin/plugins/parsleyjs/i18n/' . LaravelLocalization::getCurrentLocale() . '.js')}}"></script>
     <script src="{{URL::asset('assets/admin/js/form-validation.js')}}"></script>
 @endsection
