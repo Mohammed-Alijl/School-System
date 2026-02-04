@@ -7,6 +7,7 @@ return [
         'email_placeholder' => 'Enter Your Email',
         'password' => 'Password',
         'password_placeholder' => 'Enter Your Password',
+        'send' => 'Send',
     ],
   'login' => [
       'welcome' => 'Welcome back!',

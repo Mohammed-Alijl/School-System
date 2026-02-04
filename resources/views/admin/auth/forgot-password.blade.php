@@ -40,7 +40,7 @@
                                                     </small>
                                                     <small class="text-success">{{session('status')}}</small>
                                                 </div>
-                                                <button class="btn btn-main-primary btn-block">Send</button>
+                                                <button class="btn btn-main-primary btn-block">{{__('admin.global.send')}}</button>
                                             </form>
                                         </div>
                                     </div>

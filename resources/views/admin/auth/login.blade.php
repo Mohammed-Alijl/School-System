@@ -31,13 +31,13 @@
                                             <form action="{{route('admin.login.store')}}" id="loginForm" method="post" data-parsley-validate="">
                                                 @csrf
                                                 <div class="form-group">
-                                                    <label id="email">{{__('admin.login.email')}}</label>
-                                                    <input class="form-control" id="email" required placeholder="{{__('admin.login.email_placeholder')}}" type="email" name="email" autocomplete="off" maxlength="30">
+                                                    <label id="email">{{__('admin.global.email')}}</label>
+                                                    <input class="form-control" id="email" required placeholder="{{__('admin.global.email_placeholder')}}" type="email" name="email" autocomplete="off" maxlength="30">
                                                     <small class="text-danger" id="error-message"></small>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="password">{{__('admin.login.password')}}</label>
-                                                    <input class="form-control" id="password" required placeholder="{{__('admin.login.password_placeholder')}}" type="password" name="password" minlength="8" maxlength="30">
+                                                    <label for="password">{{__('admin.global.password')}}</label>
+                                                    <input class="form-control" id="password" required placeholder="{{__('admin.global.password_placeholder')}}" type="password" name="password" minlength="8" maxlength="30">
                                                 </div><button type="submit" id="loginBtn" class="btn btn-main-primary btn-block">
                                                     <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" style="display:none;" id="btnSpinner"></span>
                                                     <span id="btnText">{{__('admin.login.submit')}}</span>
