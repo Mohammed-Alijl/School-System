@@ -28,9 +28,9 @@ return [
         'password_confirmation' => 'تأكيد كلمة المرور',
         'confirm_error' => 'كلمة السر والتأكيد غي متطابقتين',
         'reset' => 'اعادة تعيين',
-        'message.reset.subject' => 'Admin Password Reset Link',
-        'message.reset.body' => 'You are receiving this email because we received a password reset request for your admin account.',
-        'message.reset.action' => 'Reset Admin Password',
-        'message.reset.footer' => 'If you did not request a password reset, no further action is required.',
+        'message.reset.subject' => 'اعادة تعيين كلمة المرور',
+        'message.reset.body' => 'انت تتلفى هذا الايميل بناء على طلب وصلنا لمحاولة اعادة تعيين كلمة المرور.',
+        'message.reset.action' => 'أعد تعيين كلمة المرور',
+        'message.reset.footer' => 'اذا لم تقم بطلب اعادة تعيين كلمة المرور, غفط لا تقم بأي شئ.',
     ]
 ];
