@@ -22,15 +22,15 @@
                             <div class="col-md-10 col-lg-10 col-xl-9 mx-auto">
                                 <div class="mb-5 d-flex">
                                     <a href="#"><img src="{{URL::asset('assets/admin/img/brand/favicon.png')}}" class="sign-favicon ht-40" alt="logo"></a>
-                                    <h1 class="main-logo1 ml-1 mr-0 my-auto tx-28">Learn To Earn</h1>
+                                    <h1 class="main-logo1 ml-1 mr-0 my-auto tx-28">{{__('admin.global.brand')}}</h1>
                                 </div>
 
                                 <div class="main-card-signin d-md-flex">
                                     <div class="wd-100p">
                                         <div class="main-signin-header">
                                             <div class="">
-                                                <h2>Welcome back!</h2>
-                                                <h4 class="text-left">Reset Your Password</h4>
+                                                <h2>{{__('admin.reset_password.welcome')}}</h2>
+                                                <h4 class="text-left">{{__('admin.reset_password.title')}}</h4>
 
                                                 @if ($errors->any())
                                                     <div class="alert alert-danger">
@@ -48,16 +48,16 @@
                                                     <input type="hidden" name="token" value="{{ $request->route('token') }}">
 
                                                     <div class="form-group text-left">
-                                                        <label>Email</label>
+                                                        <label>{{__('admin.global.email')}}</label>
                                                         <input class="form-control" name="email" type="email"
                                                                value="{{ old('email', $request->email) }}"
                                                                readonly required>
                                                     </div>
 
                                                     <div class="form-group text-left">
-                                                        <label>New Password</label>
+                                                        <label>{{__('admin.reset_password.new_password')}}</label>
                                                         <input id="password" class="form-control"
-                                                               placeholder="Enter your password"
+                                                               placeholder="{{__('admin.global.password')}}"
                                                                type="password" name="password"
                                                                required minlength="8"
                                                                data-parsley-errors-container="#password-error">
@@ -65,18 +65,18 @@
                                                     </div>
 
                                                     <div class="form-group text-left">
-                                                        <label>Confirm Password</label>
+                                                        <label>{{__('admin.reset_password.password_confirmation')}}</label>
                                                         <input class="form-control"
-                                                               placeholder="Confirm Password"
+                                                               placeholder="{{__('admin.reset_password.password_confirmation')}}"
                                                                type="password" name="password_confirmation"
                                                                required
                                                                data-parsley-equalto="#password"
-                                                               data-parsley-error-message="Passwords do not match"
+                                                               data-parsley-error-message="{{__('admin.reset_password.confirm_error')}}"
                                                                data-parsley-errors-container="#confirm-error">
                                                         <div id="confirm-error"></div>
                                                     </div>
 
-                                                    <button type="submit" class="btn ripple btn-main-primary btn-block">Reset Password</button>
+                                                    <button type="submit" class="btn ripple btn-main-primary btn-block">{{__('admin.reset_password.reset')}}</button>
                                                 </form>
                                             </div>
                                         </div>
@@ -93,5 +93,6 @@
 
 @section('js')
     <script src="{{URL::asset('assets/admin/plugins/parsleyjs/parsley.min.js')}}"></script>
+    <script src="{{URL::asset('assets/admin/plugins/parsleyjs/i18n/' . LaravelLocalization::getCurrentLocale() . '.js')}}"></script>
     <script src="{{URL::asset('assets/admin/js/form-validation.js')}}"></script>
 @endsection

@@ -24,5 +24,17 @@ return [
     'forgot_password' => [
         'title' => 'Forgot Password!',
         'subtitle' => 'Please Enter Your Email',
+    ],
+     'reset_password' => [
+        'welcome' => 'Welcome back!',
+        'title' => 'Reset Your Password',
+        'new_password' => 'New Password',
+        'password_confirmation' => 'Confirm Password',
+        'confirm_error' => 'Passwords do not match',
+        'reset' => 'Reset',
+        'message.subject' => 'Admin Password Reset Link',
+        'message.body' => 'You are receiving this email because we received a password reset request for your admin account.',
+        'message.action' => 'Reset Admin Password',
+        'message.footer' => 'If you did not request a password reset, no further action is required.',
     ]
 ];

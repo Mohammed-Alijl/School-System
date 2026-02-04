@@ -20,5 +20,17 @@ return [
     'forgot_password' => [
         'title' => 'نسيت كلمة المرور!',
         'subtitle' => 'لا داعي للقلق, أدخل البريد الالكتروني',
+    ],
+    'reset_password' => [
+        'welcome' => 'أهلاً بعودتك!',
+        'title' => 'اعادة تعيين كلمة المرور',
+        'new_password' => 'كلمة مرور جديدة',
+        'password_confirmation' => 'تأكيد كلمة المرور',
+        'confirm_error' => 'كلمة السر والتأكيد غي متطابقتين',
+        'reset' => 'اعادة تعيين',
+        'message.reset.subject' => 'Admin Password Reset Link',
+        'message.reset.body' => 'You are receiving this email because we received a password reset request for your admin account.',
+        'message.reset.action' => 'Reset Admin Password',
+        'message.reset.footer' => 'If you did not request a password reset, no further action is required.',
     ]
 ];

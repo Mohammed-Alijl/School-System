@@ -39,10 +39,10 @@ class ResetPasswordNotification extends Notification
             'email' => $notifiable->getEmailForPasswordReset(),
         ], false));
         return (new MailMessage)
-            ->subject('Admin Password Reset Link')
-            ->line('You are receiving this email because we received a password reset request for your admin account.')
-            ->action('Reset Admin Password', $url)
-            ->line('If you did not request a password reset, no further action is required.');
+            ->subject(__('admin.reset_password.message.subject'))
+            ->line(__('admin.reset_password.message.body'))
+            ->action('__(admin.reset_password.message.action)', $url)
+            ->line(__('admin.reset_password.message.footer'));
     }
 
     /**
