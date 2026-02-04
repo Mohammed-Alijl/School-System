@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Notifications\Admin\AdminVerifyEmail;
 use App\Notifications\Admin\ResetPasswordNotification;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;

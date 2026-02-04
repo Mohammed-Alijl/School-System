@@ -39,6 +39,9 @@ Route::middleware('auth:admin')->group(function () {
 
 Route::middleware(['auth:admin','throttle:admin'])->group(function () {
 
-    Route::get('/', function () { return view('admin.index');})->name('dashboard');
+    Route::middleware(['admin.verified'])->group(function () {
+        Route::get('/', function () { return view('admin.index');})->name('dashboard');
+    });
+
     Route::post('logout', [AdminAuthController::class, 'destroy'])->name('logout');
 });

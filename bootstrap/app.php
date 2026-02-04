@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\Admin\EmailIsVerified;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -33,6 +34,10 @@ return Application::configure(basePath: dirname(__DIR__))
             }
             return route('landing-page');
         });
+
+        $middleware->alias([
+            'admin.verified' => EmailIsVerified::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
