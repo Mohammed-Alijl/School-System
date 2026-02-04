@@ -15,7 +15,7 @@ return view('admin.auth.forgot-password');
 
 public function store(Request $request)
 {
-$request->validate(['email' => ['required', 'email','exists:users,email']]);
+$request->validate(['email' => ['required', 'email','exists:admins,email']]);
 $status = Password::broker('admins')->sendResetLink(
 $request->only('email')
 );
