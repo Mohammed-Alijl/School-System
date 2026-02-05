@@ -22,15 +22,15 @@
                             <div class="col-md-10 col-lg-10 col-xl-9 mx-auto">
                                 <div class="mb-5 d-flex">
                                     <a href="#"><img src="{{URL::asset('assets/admin/img/brand/favicon.png')}}" class="sign-favicon ht-40" alt="logo"></a>
-                                    <h1 class="main-logo1 ml-1 mr-0 my-auto tx-28">Learn To Earn</h1>
+                                    <h1 class="main-logo1 ml-1 mr-0 my-auto tx-28">{{__('admin.global.brand')}}</h1>
                                 </div>
 
                                 <div class="main-card-signin d-md-flex">
                                     <div class="wd-100p">
                                         <div class="main-signin-header">
-                                            <h2>Verify Your Email</h2>
+                                            <h2>{{__('admin.verify_email.title')}}</h2>
                                             <h6 class="text-muted mb-4">
-                                                Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you?
+                                                {{__('admin.verify_email.subtitle')}}
                                             </h6>
 
                                             @if (session('status') == 'verification-link-sent')
@@ -38,14 +38,14 @@
                                                     <button aria-label="Close" class="close" data-dismiss="alert" type="button">
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
-                                                    <strong>Sent!</strong> A new verification link has been sent to your email.
+                                                    <strong>{{__('admin.verify_email.sent')}}</strong> {{__('admin.verify_email.sent_description')}}
                                                 </div>
                                             @endif
 
                                             <form method="POST" action="{{ route('admin.verification.send') }}">
                                                 @csrf
                                                 <button type="submit" class="btn btn-main-primary btn-block">
-                                                    Resend Verification Email
+                                                    {{__('admin.verify_email.resend')}}
                                                 </button>
                                             </form>
 
@@ -53,7 +53,7 @@
                                                 <form method="POST" action="{{ route('admin.logout') }}">
                                                     @csrf
                                                     <button type="submit" class="btn btn-link text-danger pl-0">
-                                                        Log Out
+                                                        {{__('admin.global.logout')}}
                                                     </button>
                                                 </form>
                                             </div>

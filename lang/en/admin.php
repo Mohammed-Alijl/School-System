@@ -8,6 +8,7 @@ return [
         'password' => 'Password',
         'password_placeholder' => 'Enter Your Password',
         'send' => 'Send',
+        'logout' => 'Logout',
     ],
   'login' => [
       'welcome' => 'Welcome back!',
@@ -32,9 +33,24 @@ return [
         'password_confirmation' => 'Confirm Password',
         'confirm_error' => 'Passwords do not match',
         'reset' => 'Reset',
-        'message.subject' => 'Admin Password Reset Link',
-        'message.body' => 'You are receiving this email because we received a password reset request for your admin account.',
-        'message.action' => 'Reset Admin Password',
-        'message.footer' => 'If you did not request a password reset, no further action is required.',
-    ]
+         'message' => [
+             'subject' => 'Admin Password Reset Link',
+             'body' => 'You are receiving this email because we received a password reset request for your admin account.',
+             'action' => 'Reset Admin Password',
+             'footer' => 'If you did not request a password reset, no further action is required.',
+         ],
+    ],
+    'verify_email' => [
+      'title' => 'Verify Your Email',
+      'subtitle' => 'Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you?',
+      'sent' => 'Sent!',
+      'sent_description' => 'A new verification link has been sent to your email.',
+      'resend' => 'Resend Verification Email',
+      'message' => [
+            'subject' => 'Verify Your Admin Email Address',
+            'body' => 'Please click the button below to verify your email address.',
+            'action' => 'Verify Email Address',
+            'footer' => 'If you did not create an account, no further action is required.',
+        ],
+    ],
 ];

@@ -40,8 +40,8 @@ class AdminVerifyEmail extends Notification
         $verificationUrl = $this->verificationUrl($notifiable);
 
         return (new MailMessage)
-            ->subject('Verify Your Admin Email Address')
-            ->line('Please click the button below to verify your email address.')
+            ->subject(__('admin.verify_email.message.subject'))
+            ->line('')
             ->action('Verify Email Address', $verificationUrl)
             ->line('If you did not create an account, no further action is required.');
     }
