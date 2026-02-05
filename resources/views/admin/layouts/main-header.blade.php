@@ -28,9 +28,6 @@
 									</a>
 									<div class="dropdown-menu dropdown-menu-left dropdown-menu-arrow" x-placement="bottom-end">
                                         @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-                                            @if(LaravelLocalization::getCurrentLocale() == $localeCode)
-                                                @continue
-                                            @endif
 										<a href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}" class="dropdown-item d-flex">
 											<span class="avatar ml-3 align-self-center bg-transparent"><img src='{{URL::asset("assets/admin/img/flags/$localeCode.jpg")}}' alt="img"></span>
 											<div class="d-flex">
