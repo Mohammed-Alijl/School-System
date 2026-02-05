@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\Auth\AdminAuthController;
 use App\Http\Controllers\Admin\Auth\NewPasswordController;
 use App\Http\Controllers\Admin\Auth\PasswordResetLinkController;
@@ -37,6 +38,7 @@ Route::group(
 
             Route::middleware(['admin.verified'])->group(function () {
                 Route::get('/', function () { return view('admin.index');})->name('dashboard');
+                Route::resource('admins', AdminController::class);
             });
 
             Route::post('logout', [AdminAuthController::class, 'destroy'])->name('logout');
