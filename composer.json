@@ -14,6 +14,7 @@
         "laravel/framework": "^12.0",
         "laravel/tinker": "^2.10.1",
         "mcamara/laravel-localization": "*",
+        "spatie/laravel-permission": "*",
         "spatie/laravel-translatable": "*",
         "symfony/http-client": "*",
         "symfony/mailgun-mailer": "*"
