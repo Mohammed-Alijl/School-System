@@ -33,6 +33,14 @@ class Admin extends Authenticatable implements MustVerifyEmail
         ];
     }
 
+    public function getImageUrlAttribute()
+    {
+        if (!empty($this->image_path)) {
+            return asset('storage/' . $this->image_path);
+        }
+        return asset('assets/admin/img/faces/admin.png');
+    }
+
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new ResetPasswordNotification($token));
