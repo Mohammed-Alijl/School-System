@@ -9,6 +9,8 @@ return [
         'password_placeholder' => 'Enter Your Password',
         'send' => 'Send',
         'logout' => 'Logout',
+        'active' => 'Active',
+        'disabled' => 'Disabled',
     ],
     'sidebar' => [
         'dashboard' => 'Dashboard',
@@ -86,5 +88,21 @@ return [
             'action' => 'Verify Email Address',
             'footer' => 'If you did not create an account, no further action is required.',
         ],
+    ],
+    'admins' => [
+        'fields' => [
+            'name' => "Name",
+            'email' => "Email",
+            'image' => "Image",
+            'status' => "Status",
+            'roles' => "Roles",
+            'created_at' => "Created At",
+            'updated_at' => "Updated At",
+        ],
+        'title' => 'Admins',
+        'add' => "Add Admin",
+        'no_role' => "No Role",
+        'actions' => "Actions",
+        'search' => "Search...",
     ],
 ];

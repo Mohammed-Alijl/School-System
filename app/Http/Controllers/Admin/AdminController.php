@@ -13,7 +13,8 @@ class AdminController extends Controller
      */
     public function index()
     {
-        //
+        $admins = Admin::where('id', "!=", auth()->id())->latest()->get();
+        return view('admin.admins.index', compact('admins'));
     }
 
     /**

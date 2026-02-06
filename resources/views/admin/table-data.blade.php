@@ -477,7 +477,6 @@
 						</div>
 					</div>
 					<!--/div-->
-
 					<!--div-->
 					<div class="col-xl-12">
 						<div class="card">
