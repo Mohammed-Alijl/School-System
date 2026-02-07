@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\Auth\AdminAuthController;
 use App\Http\Controllers\Admin\Auth\NewPasswordController;
 use App\Http\Controllers\Admin\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Admin\Auth\VerifyEmailController;
+use App\Http\Controllers\RoleController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -39,6 +40,7 @@ Route::group(
             Route::middleware(['admin.verified'])->group(function () {
                 Route::get('/', function () { return view('admin.index');})->name('dashboard');
                 Route::resource('admins', AdminController::class)->except(['show','create','edit']);
+                Route::resource('roles', RoleController::class);
             });
 
             Route::post('logout', [AdminAuthController::class, 'destroy'])->name('logout');
