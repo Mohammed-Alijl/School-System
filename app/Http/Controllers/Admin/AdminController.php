@@ -6,64 +6,88 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Admin\StoreRequest;
 use App\Http\Requests\Admin\Admin\UpdateRequest;
 use App\Models\Admin;
-use Illuminate\Http\Request;
+use App\Services\AdminService;
+use Illuminate\Http\JsonResponse;
+use Spatie\Permission\Models\Role;
 
 class AdminController extends Controller
 {
+    public function __construct(protected AdminService $adminService)
+    {
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $admins = Admin::where('id', "!=", auth()->id())->latest()->get();
-        return view('admin.admins.index', compact('admins'));
+        // We get admins and roles (for the add/edit modals)
+        $admins = $this->adminService->getAll()->get();
+        $roles = Role::get();
+
+        return view('admin.admins.index', compact('admins', 'roles'));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Store a newly created resource in storage via AJAX.
      */
-    public function create()
+    public function store(StoreRequest $request): JsonResponse
     {
-        //
+        try {
+            $this->adminService->store($request->validated());
+
+            return response()->json([
+                'status' => 'success',
+                'message' => __('admin.admins.messages.success.add')
+            ], 200);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => __('admin.admins.messages.failed.add')
+            ], 500);
+        }
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Update the specified resource in storage via AJAX.
      */
-    public function store(StoreRequest $request)
+    public function update(UpdateRequest $request, Admin $admin): JsonResponse
     {
-        //
+        try {
+            $this->adminService->update($admin, $request->validated());
+
+            return response()->json([
+                'status' => 'success',
+                'message' => __('admin.admins.messages.success.update')
+            ], 200);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => __('admin.admins.messages.failed.update')
+            ], 500);
+        }
     }
 
     /**
-     * Display the specified resource.
+     * Remove the specified resource from storage via AJAX.
      */
-    public function show(Admin $admin)
+    public function destroy(Admin $admin): JsonResponse
     {
-        //
-    }
+        try {
+            $this->adminService->delete($admin->id);
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Admin $admin)
-    {
-        //
-    }
+            return response()->json([
+                'status' => 'success',
+                'message' => __('admin.admins.messages.success.delete')
+            ], 200);
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateRequest $request, Admin $admin)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Admin $admin)
-    {
-        //
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => __('admin.admins.messages.failed.delete')
+            ], 500);
+        }
     }
 }

@@ -104,5 +104,17 @@ return [
         'no_role' => "No Role",
         'actions' => "Actions",
         'search' => "Search...",
+        'messages' => [
+            'success' => [
+                'add' => 'Admin added successfully.',
+                'update' => 'Admin updated successfully.',
+                'delete' => 'Admin deleted successfully.',
+            ],
+            'failed' => [
+                'add' => 'Admin failed to add.',
+                'update' => 'Admin failed to update.',
+                'delete' => 'Admin failed to delete.',
+            ]
+        ]
     ],
 ];

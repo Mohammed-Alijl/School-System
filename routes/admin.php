@@ -38,7 +38,7 @@ Route::group(
 
             Route::middleware(['admin.verified'])->group(function () {
                 Route::get('/', function () { return view('admin.index');})->name('dashboard');
-                Route::resource('admins', AdminController::class);
+                Route::resource('admins', AdminController::class)->except(['show','create','edit']);
             });
 
             Route::post('logout', [AdminAuthController::class, 'destroy'])->name('logout');
