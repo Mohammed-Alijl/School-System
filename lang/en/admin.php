@@ -13,6 +13,9 @@ return [
         'disabled' => 'Disabled',
         'edit' => 'Edit',
         'delete' => 'Delete',
+        'all' => 'All',
+        'success' => 'Success',
+        'failed' => 'Failed',
     ],
     'sidebar' => [
         'dashboard' => 'Dashboard',
@@ -123,9 +126,23 @@ return [
         'title' => "Roles",
         'add' => "Add Role",
         'fields' => [
-            'name' => "Name",
+            'name' => "Role Name",
             'permissions_count' => "Permissions Count",
+            'name_placeholder' => "Ex: Manger"
         ],
         'actions' => "Actions",
-    ]
+        'select_all' => "Select All Permissions",
+        'messages' => [
+            'success' => [
+                'add' => 'Role added successfully.',
+                'update' => 'Role updated successfully.',
+                'delete' => 'Role deleted successfully.',
+            ],
+            'failed' => [
+                'add' => 'Role failed to add.',
+                'update' => 'Role failed to update.',
+                'delete' => 'Role failed to delete.',
+            ]
+        ]
+    ],
 ];

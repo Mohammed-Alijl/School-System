@@ -6,6 +6,7 @@
     <link href="{{ URL::asset('assets/admin/plugins/datatable/css/responsive.bootstrap4.min.css') }}" rel="stylesheet" />
     <link href="{{ URL::asset('assets/admin/plugins/datatable/css/jquery.dataTables.min.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('assets/admin/plugins/datatable/css/responsive.dataTables.min.css') }}" rel="stylesheet">
+    <link href="{{URL::asset('assets/admin/plugins/sweet-alert/sweetalert.css')}}" rel="stylesheet">
 @endsection
 @section('page-header')
     <div class="breadcrumb-header justify-content-between">
@@ -98,9 +99,9 @@
     <script src="{{ URL::asset('assets/admin/plugins/datatable/js/buttons.html5.min.js') }}"></script>
     <script src="{{ URL::asset('assets/admin/plugins/datatable/js/buttons.print.min.js') }}"></script>
     <script src="{{ URL::asset('assets/admin/plugins/datatable/js/buttons.colVis.min.js') }}"></script>
+    <script src="{{URL::asset('assets/admin/plugins/sweet-alert/sweetalert.min.js')}}"></script>
+    <script src="{{URL::asset('assets/admin/plugins/sweet-alert/jquery.sweet-alert.js')}}"></script>
     <script>
-
-
         $(document).ready(function() {
             var tableConfig = {
                 responsive: false,
@@ -127,6 +128,16 @@
             @endif
 
             $('#roles_table').DataTable(tableConfig);
+            @if (session('status') === 'success')
+            swal(
+                {
+                    title: '{{__('admin.global.success')}}',
+                    text: '{{session('message')}}',
+                    type: 'success',
+                    confirmButtonColor: '#57a94f'
+                }
+            )
+            @endif
         });
     </script>
 @endsection

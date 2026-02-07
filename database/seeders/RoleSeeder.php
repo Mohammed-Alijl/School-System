@@ -11,7 +11,7 @@ class RoleSeeder extends Seeder
     public function run()
     {
         $permissions = [
-            'admins'    => ['list', 'create', 'edit', 'delete', 'update_role'],
+            'admins'    => ['list', 'create', 'edit', 'delete', 'update role'],
             'students'  => ['list', 'create', 'edit', 'delete', 'graduate', 'promote'],
             'teachers'  => ['list', 'create', 'edit', 'delete'],
             'sections'  => ['list', 'create', 'edit', 'delete'],
@@ -21,7 +21,7 @@ class RoleSeeder extends Seeder
         foreach ($permissions as $module => $actions) {
             foreach ($actions as $action) {
                 Permission::create([
-                    'name' => $module . '_' . $action,
+                    'name' => $action . '_' . $module,
                     'guard_name' => 'admin'
                 ]);
             }
