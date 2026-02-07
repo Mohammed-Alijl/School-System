@@ -20,8 +20,8 @@ class RoleController extends Controller
     public function index()
     {
         $roles = $this->roleService->getAll();
-        $permissions = $this->roleService->getAllPermissions();
-        return view('admin.roles.index', compact('roles', 'permissions'));
+        $groupedPermissions = $this->roleService->getGroupedPermissions();
+        return view('admin.roles.index', compact('roles', 'groupedPermissions'));
     }
 
     /**

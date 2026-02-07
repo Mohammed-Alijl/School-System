@@ -11,6 +11,8 @@ return [
         'logout' => 'Logout',
         'active' => 'Active',
         'disabled' => 'Disabled',
+        'edit' => 'Edit',
+        'delete' => 'Delete',
     ],
     'sidebar' => [
         'dashboard' => 'Dashboard',
@@ -117,4 +119,13 @@ return [
             ]
         ]
     ],
+    'roles' => [
+        'title' => "Roles",
+        'add' => "Add Role",
+        'fields' => [
+            'name' => "Name",
+            'permissions_count' => "Permissions Count",
+        ],
+        'actions' => "Actions",
+    ]
 ];

@@ -21,7 +21,7 @@ class RoleSeeder extends Seeder
         foreach ($permissions as $module => $actions) {
             foreach ($actions as $action) {
                 Permission::create([
-                    'name' => $module . '.' . $action,
+                    'name' => $module . '_' . $action,
                     'guard_name' => 'admin'
                 ]);
             }
