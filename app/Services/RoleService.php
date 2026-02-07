@@ -8,11 +8,35 @@ use Spatie\Permission\Models\Permission;
 class RoleService
 {
     /**
-     * get Roles with permissions eager loading
+     * get Roles with permissions count
      */
     public function getAll()
     {
-        return Role::with('permissions')->get();
+        return Role::withCount('permissions')->get();
+    }
+
+    /**
+     * Get permissions grouped by his permissions
+     * [
+     * 'admins' => [PermissionObj, PermissionObj],
+     * 'products' => [PermissionObj, ...],
+     * ]
+     */
+    public function getGroupedPermissions()
+    {
+        $permissions = Permission::get();
+        $grouped = [];
+
+        foreach ($permissions as $permission) {
+            $parts = explode('_', $permission->name, 2);
+
+            $action = $parts[0];
+            $model = $parts[1] ?? 'other';
+
+            $grouped[$model][] = $permission;
+        }
+
+        return $grouped;
     }
 
     /**
@@ -27,7 +51,7 @@ class RoleService
     {
         $role = Role::create(['name' => $data['name']]);
 
-        if (isset($data['permissions'])) {
+        if (!empty($data['permissions'])) {
             $role->syncPermissions($data['permissions']);
         }
 
@@ -37,7 +61,7 @@ class RoleService
     public function update($role, array $data)
     {
         $role->update(['name' => $data['name']]);
-        if (isset($data['permissions'])) {
+        if (!empty($data['permissions'])) {
             $role->syncPermissions($data['permissions']);
         }
 
