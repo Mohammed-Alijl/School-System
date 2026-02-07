@@ -49,7 +49,9 @@ class RoleController extends Controller
      */
     public function show(Role $role)
     {
-        //
+        $groupedPermissions = $this->roleService->getGroupedPermissions();
+        $rolePermissions = $role->permissions->pluck('name')->toArray();
+        return view('admin.roles.show', compact('role', 'groupedPermissions','rolePermissions'));
     }
 
     /**
