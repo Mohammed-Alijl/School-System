@@ -57,9 +57,11 @@ class RoleController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Role $role)
     {
-        //
+        $groupedPermissions = $this->roleService->getGroupedPermissions();
+        $rolePermissions = $role->permissions->pluck('name')->toArray();
+        return view('admin.roles.edit', compact('role', 'groupedPermissions','rolePermissions'));
     }
 
     /**
@@ -67,7 +69,12 @@ class RoleController extends Controller
      */
     public function update(UpdateRequest $request, Role $role)
     {
-        //
+        try {
+            $this->roleService->update($role,$request->validated());
+            return redirect()->route('admin.roles.index')->with(['status' => 'success', 'message' => __('admin.roles.messages.success.update')]);
+        } catch (\Exception $e) {
+            return redirect()->route('admin.roles.index')->withErrors(['status' => 'failed', 'message' => __('admin.roles.messages.failed.update')]);
+        }
     }
 
     /**
