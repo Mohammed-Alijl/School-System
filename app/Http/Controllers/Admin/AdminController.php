@@ -8,12 +8,24 @@ use App\Http\Requests\Admin\Admin\UpdateRequest;
 use App\Models\Admin;
 use App\Services\AdminService;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 use Spatie\Permission\Models\Role;
 
-class AdminController extends Controller
+class AdminController extends Controller implements HasMiddleware
 {
     public function __construct(protected AdminService $adminService)
     {
+    }
+
+    public static function middleware(): array
+    {
+        return [
+            new Middleware('permission:view_admins', only: ['index']),
+            new Middleware('permission:create_admins', only: ['store']),
+            new Middleware('permission:edit_admins', only: ['update']),
+            new Middleware('permission:delete_admins', only: ['destroy']),
+        ];
     }
 
     /**

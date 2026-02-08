@@ -11,11 +11,14 @@ class RoleSeeder extends Seeder
     public function run()
     {
         $permissions = [
-            'admins'    => ['list', 'create', 'edit', 'delete', 'update role'],
-            'students'  => ['list', 'create', 'edit', 'delete', 'graduate', 'promote'],
-            'teachers'  => ['list', 'create', 'edit', 'delete'],
-            'sections'  => ['list', 'create', 'edit', 'delete'],
-            'invoices'  => ['list', 'create', 'edit', 'delete', 'print'],
+            'admins'    => ['view', 'create', 'edit', 'delete'],
+            'roles'     => ['view', 'create', 'edit', 'delete'],
+            'grades'    => ['view', 'create', 'edit', 'delete'],
+            'classrooms'=> ['view', 'create', 'edit', 'delete'],
+            'sections'  => ['view', 'create', 'edit', 'delete'],
+            'students'  => ['view', 'create', 'edit', 'delete', 'graduate', 'promote'],
+            'teachers'  => ['view', 'create', 'edit', 'delete'],
+            'invoices'  => ['view', 'create', 'edit', 'delete', 'print'],
         ];
 
         foreach ($permissions as $module => $actions) {

@@ -6,13 +6,26 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Role\StoreRequest;
 use App\Http\Requests\Admin\Role\UpdateRequest;
 use App\Services\RoleService;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 use Spatie\Permission\Models\Role;
 
-class RoleController extends Controller
+class RoleController extends Controller implements HasMiddleware
 {
     public function __construct(protected RoleService $roleService)
     {
     }
+
+    public static function middleware(): array
+    {
+        return [
+            new Middleware('permission:view_roles', only: ['index','show']),
+            new Middleware('permission:create_roles', only: ['create','store']),
+            new Middleware('permission:edit_roles', only: ['edit','update']),
+            new Middleware('permission:delete_roles', only: ['destroy']),
+        ];
+    }
+
 
     /**
      * Display a listing of the resource.
