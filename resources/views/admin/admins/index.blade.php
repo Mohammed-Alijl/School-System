@@ -8,6 +8,10 @@
     <link href="{{ URL::asset('assets/admin/plugins/datatable/css/responsive.bootstrap4.min.css') }}" rel="stylesheet" />
     <link href="{{ URL::asset('assets/admin/plugins/datatable/css/jquery.dataTables.min.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('assets/admin/plugins/datatable/css/responsive.dataTables.min.css') }}" rel="stylesheet">
+    <link href="{{URL::asset('assets/admin/plugins/select2/css/select2.min.css')}}" rel="stylesheet">
+    <link href="{{URL::asset('assets/admin/plugins/sweet-alert/sweetalert.css')}}" rel="stylesheet">
+    <!---Internal Fileupload css-->
+    <link href="{{URL::asset('assets/admin/plugins/fileuploads/css/fileupload.css')}}" rel="stylesheet" type="text/css"/>
 @endsection
 
 @section('page-header')
@@ -112,16 +116,37 @@
     </div>
     </div>
 
-{{--    @include('admin.admins.add_modal')--}}
+    @include('admin.admins.add_modal')
 {{--    @include('admin.admins.edit_modal')--}}
 
 @endsection
 
 @section('js')
+    <!--Internal  Datepicker js -->
+    <script src="{{URL::asset('assets/admin/plugins/jquery-ui/ui/widgets/datepicker.js')}}"></script>
+    <!--Internal  jquery.maskedinput js -->
+    <script src="{{URL::asset('assets/admin/plugins/jquery.maskedinput/jquery.maskedinput.js')}}"></script>
+    <!--Internal  spectrum-colorpicker js -->
+    <script src="{{URL::asset('assets/admin/plugins/spectrum-colorpicker/spectrum.js')}}"></script>
+    <!-- Internal Select2.min js -->
+    <script src="{{URL::asset('assets/admin/plugins/select2/js/select2.min.js')}}"></script>
+    <!--Internal  jquery-simple-datetimepicker js -->
+    <script src="{{URL::asset('assets/admin/plugins/amazeui-datetimepicker/js/amazeui.datetimepicker.min.js')}}"></script>
+    <!-- Ionicons js -->
+    <script src="{{URL::asset('assets/admin/plugins/jquery-simple-datetimepicker/jquery.simple-dtpicker.js')}}"></script>
+    <!-- Internal form-elements js -->
+    <script src="{{URL::asset('assets/admin/js/form-elements.js')}}"></script>
+    <!--Internal Fileuploads js-->
+    <script src="{{URL::asset('assets/admin/plugins/fileuploads/js/fileupload.js')}}"></script>
+    <script src="{{URL::asset('assets/admin/plugins/fileuploads/js/file-upload.js')}}"></script>
+    <script src="{{URL::asset('assets/admin/plugins/sweet-alert/sweetalert.min.js')}}"></script>
+    <script src="{{URL::asset('assets/admin/plugins/sweet-alert/jquery.sweet-alert.js')}}"></script>
+    <script src="{{URL::asset('assets/admin/plugins/parsleyjs/parsley.min.js')}}"></script>
+    <script src="{{URL::asset('assets/admin/plugins/parsleyjs/i18n/' . LaravelLocalization::getCurrentLocale() . '.js')}}"></script>
+
     @include('admin.layouts.scripts.datatable_config')
     <script>
         $(document).ready(function() {
-
             $('#admins_table').DataTable(globalTableConfig);
 
             // Edit Modal
@@ -156,6 +181,90 @@
                 var url = "{{ route('admin.admins.destroy', ':id') }}";
                 url = url.replace(':id', id);
                 $('#deleteForm').attr('action', url);
+            });
+        });
+
+        $(document).ready(function() {
+
+            $('.select2').select2({
+                placeholder: '{{__("admin.global.select")}}',
+                width: '100%'
+            });
+
+            $('#addForm').on('submit', function(e) {
+                e.preventDefault();
+                var form = $(this);
+                var parsleyInstance = form.parsley();
+                parsleyInstance.validate();
+
+                if (!parsleyInstance.isValid()) {
+                    return;
+                }
+
+                var actionUrl = form.attr('action');
+                var btn = $('#submit-btn');
+                var spinner = $('#spinner');
+                var btnText = $('#btn-text');
+
+                var formData = new FormData(this);
+                btn.attr('disabled', true);
+                spinner.removeClass('d-none');
+                btnText.text('{{__("admin.global.loading")}}...');
+
+                $('.error-text').text('');
+                $('input, select').removeClass('is-invalid');
+
+                $.ajax({
+                    url: actionUrl,
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                    success: function(response) {
+                        if(response.status === 'success') {
+                            swal({
+                                title: "{{__('admin.global.success')}}",
+                                text: response.message,
+                                type: "success",
+                                timer: 2000,
+                                showConfirmButton: false
+                            });
+
+                            setTimeout(function(){
+                                location.reload();
+                            }, 2000);
+                        } else {
+                            btn.attr('disabled', false);
+                            spinner.addClass('d-none');
+                            btnText.text('{{__("admin.global.save")}}');
+                        }
+                    },
+                    error: function(xhr) {
+                        btn.attr('disabled', false);
+                        spinner.addClass('d-none');
+                        btnText.text('{{__("admin.global.save")}}');
+
+                        if (xhr.status === 422) {
+                            var errors = xhr.responseJSON.errors;
+
+                            $.each(errors, function(key, val) {
+                                var input = form.find('[name="'+key+'"]');
+                                if(input.length === 0) {
+                                    input = form.find('[name="'+key+'[]"]');
+                                }
+                                input.addClass('is-invalid');
+
+                                $('.'+key+'_error').text(val[0]);
+                            });
+
+                            // swal("{{__('admin.global.error_title')}}", "{{__('admin.global.validation_error')}}", "error");
+                        } else {
+                            swal("Error!", "Something went wrong (Server Error).", "error");
+                            console.log(xhr.responseText);
+                        }
+                    }
+                });
             });
         });
     </script>

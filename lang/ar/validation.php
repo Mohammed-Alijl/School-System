@@ -225,6 +225,7 @@ return [
         'time' => 'الوقت',
         'available' => 'متاح',
         'size' => 'الحجم',
+        'roles_name' => 'اسم الدور',
     ],
 
 ];

@@ -15,6 +15,8 @@ return [
         'delete' => 'حذف',
         'cancel' => 'اغلاق',
         'ok' => 'حسنا',
+        'save' => "حفظ",
+        'close' => "اغلاق",
         'deleted' => 'تم الحذف!',
         'all' => 'الكل',
         'success' => 'نجاح',
@@ -23,7 +25,8 @@ return [
         'warning_body' => 'أتريد حذف هذا بالفعل!',
         'error_title' => 'خطأ',
         'loading' => 'تحميل...',
-
+        'select' => 'اختر',
+        'choose_file' => 'اختر ملف',
     ],
     'sidebar' => [
         'dashboard' => 'لوحة التحكم',
@@ -103,6 +106,8 @@ return [
         'fields' => [
             'name' => "الاسم",
             'email' => "البريد الإلكتروني",
+            'password' => "كلمة المرور",
+            'confirm_password' => "تأكيد كلمة المرور",
             'image' => "الصورة",
             'status' => "الحالة",
             'roles' => "الأدوار",

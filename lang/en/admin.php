@@ -15,6 +15,8 @@ return [
         'delete' => 'Delete',
         'cancel' => 'Cancel',
         'ok' => "ok",
+        'save' => "Save",
+        'close' => "Close",
         'deleted' => 'Deleted!',
         'all' => 'All',
         'success' => 'Success',
@@ -23,6 +25,8 @@ return [
         'warning_body' => 'Are you sure you want to delete this?',
         'error_title' => 'Error',
         'loading' => 'Loading...',
+        'select' => 'Select',
+        'choose_file' => 'Choose File',
     ],
     'sidebar' => [
         'dashboard' => 'Dashboard',
@@ -105,6 +109,8 @@ return [
         'fields' => [
             'name' => "Name",
             'email' => "Email",
+            'password' => "Password",
+            'confirm_password' => "Password Confirmation",
             'image' => "Image",
             'status' => "Status",
             'roles' => "Roles",
