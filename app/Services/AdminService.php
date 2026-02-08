@@ -55,7 +55,7 @@ class AdminService
         return $admin;
     }
 
-    public function deleteAdmin($id)
+    public function delete($id)
     {
         $admin = Admin::findOrFail($id);
 
