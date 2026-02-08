@@ -39,9 +39,15 @@ class RoleController extends Controller
     {
         try {
             $this->roleService->store($request->validated());
-            return redirect()->route('admin.roles.index')->with(['status' => 'success', 'message' => __('admin.roles.messages.success.add')]);
+            return response()->json([
+                'status' => 'success',
+                'message' => __('admin.roles.messages.success.add')
+            ]);
         } catch (\Exception $e) {
-            return redirect()->route('admin.roles.index')->withErrors(['status' => 'failed', 'message' => __('admin.roles.messages.failed.add')]);
+            return response()->json([
+                'status' => 'failed',
+                'message' => __('admin.roles.messages.failed.add')
+            ]);
         }
     }
 

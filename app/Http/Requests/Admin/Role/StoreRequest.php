@@ -22,7 +22,7 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|unique:roles,name',
+            'name' => 'required|string|unique:roles,name|min:3|max:50',
             'permissions' => 'required|array',
             'permissions.*' => 'exists:permissions,name',
         ];

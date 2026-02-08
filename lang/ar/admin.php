@@ -22,6 +22,7 @@ return [
         'warning_title' => 'هل انت متأكد!',
         'warning_body' => 'أتريد حذف هذا بالفعل!',
         'error_title' => 'خطأ',
+        'loading' => 'تحميل...',
 
     ],
     'sidebar' => [

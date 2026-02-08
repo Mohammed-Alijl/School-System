@@ -22,6 +22,7 @@ return [
         'warning_title' => 'Are you sure?',
         'warning_body' => 'Are you sure you want to delete this?',
         'error_title' => 'Error',
+        'loading' => 'Loading...',
     ],
     'sidebar' => [
         'dashboard' => 'Dashboard',
