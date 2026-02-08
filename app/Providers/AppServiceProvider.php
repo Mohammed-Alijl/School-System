@@ -43,7 +43,7 @@ class AppServiceProvider extends ServiceProvider
 
         // Let Super Admin Have All Permissions
         Gate::before(function ($user, $ability) {
-            if ($user->hasRole('Super Admin') && $user->guard_name == 'admin') {
+            if ($user->hasRole('Super Admin')) {
                 return true;
             }
         });
