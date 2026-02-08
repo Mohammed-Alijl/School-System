@@ -82,6 +82,22 @@ class RoleController extends Controller
      */
     public function destroy(Role $role)
     {
-        //
+        try {
+            if($this->roleService->delete($role))
+                    return response()->json([
+                        'status' => 'success',
+                        'message' => __('admin.roles.messages.success.delete')
+                    ], 200);
+            else
+                return response()->json([
+                    'status' => 'error',
+                    'message' => __('admin.roles.messages.failed.used')
+                ], 422);
+        }catch (\Exception $e){
+            return response()->json([
+                'status' => 'error',
+                'message' => __('admin.roles.messages.failed.delete')
+            ], 500);
+        }
     }
 }

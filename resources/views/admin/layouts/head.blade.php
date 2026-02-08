@@ -8,6 +8,7 @@
 <link href="{{URL::asset('assets/admin/plugins/mscrollbar/jquery.mCustomScrollbar.css')}}" rel="stylesheet"/>
 <!--  Sidebar css -->
 <link href="{{URL::asset('assets/admin/plugins/sidebar/sidebar.css')}}" rel="stylesheet">
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <!-- Sidemenu css -->
 @if (App::getLocale() == 'ar')
     <link rel="stylesheet" href="{{URL::asset('assets/admin/css-rtl/sidemenu.css')}}">

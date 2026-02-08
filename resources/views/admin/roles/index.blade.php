@@ -61,11 +61,10 @@
                                            href="{{route('admin.roles.edit',$role->id)}}">
                                             <i class="las la-pen"></i> {{__('admin.global.edit')}}
                                         </a>
-                                        <a class="modal-effect btn btn-sm btn-danger"
-                                           data-effect="effect-scale"
-                                           data-toggle="modal"
-                                           href="#deleteModal"
+                                        <a class="modal-effect btn btn-sm btn-danger delete-item"
+                                           href="#"
                                            data-id="{{ $role->id }}"
+                                           data-url="{{ route('admin.roles.destroy', $role->id) }}"
                                            data-name="{{ $role->name }}">
                                             <i class="las la-trash"></i> {{__('admin.global.delete')}}
                                         </a>
@@ -99,8 +98,7 @@
     <script src="{{ URL::asset('assets/admin/plugins/datatable/js/buttons.html5.min.js') }}"></script>
     <script src="{{ URL::asset('assets/admin/plugins/datatable/js/buttons.print.min.js') }}"></script>
     <script src="{{ URL::asset('assets/admin/plugins/datatable/js/buttons.colVis.min.js') }}"></script>
-    <script src="{{URL::asset('assets/admin/plugins/sweet-alert/sweetalert.min.js')}}"></script>
-    <script src="{{URL::asset('assets/admin/plugins/sweet-alert/jquery.sweet-alert.js')}}"></script>
+    @include('admin.layouts.scripts.delete_script')
     <script>
         $(document).ready(function() {
             var tableConfig = {
@@ -126,6 +124,7 @@
                 }
             };
             @endif
+
 
             $('#roles_table').DataTable(tableConfig);
             @if (session('status') === 'success')

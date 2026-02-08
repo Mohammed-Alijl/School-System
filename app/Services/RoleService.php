@@ -70,6 +70,8 @@ class RoleService
 
     public function delete($role)
     {
+        if ($role->users()->count() > 0)
+            return false;
         $role->delete();
         return true;
     }

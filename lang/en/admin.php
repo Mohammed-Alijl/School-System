@@ -13,9 +13,15 @@ return [
         'disabled' => 'Disabled',
         'edit' => 'Edit',
         'delete' => 'Delete',
+        'cancel' => 'Cancel',
+        'ok' => "ok",
+        'deleted' => 'Deleted!',
         'all' => 'All',
         'success' => 'Success',
         'failed' => 'Failed',
+        'warning_title' => 'Are you sure?',
+        'warning_body' => 'Are you sure you want to delete this?',
+        'error_title' => 'Error',
     ],
     'sidebar' => [
         'dashboard' => 'Dashboard',
@@ -142,6 +148,7 @@ return [
                 'add' => 'Role failed to add.',
                 'update' => 'Role failed to update.',
                 'delete' => 'Role failed to delete.',
+                'used' => "Can't Delete This Roles Is In Used"
             ]
         ]
     ],
