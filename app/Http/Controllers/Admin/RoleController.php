@@ -60,6 +60,9 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
+        if ($role->name === $this->roleService::SUPER_ADMIN_NAME) {
+            return redirect()->route('admin.roles.index');
+        }
         $groupedPermissions = $this->roleService->getGroupedPermissions();
         $rolePermissions = $role->permissions->pluck('name')->toArray();
         return view('admin.roles.edit', compact('role', 'groupedPermissions','rolePermissions'));
@@ -98,7 +101,7 @@ class RoleController extends Controller
             return response()->json([
                 'status' => 'error',
                 'message' => __('admin.roles.messages.failed.delete')
-            ], 500);
+            ], 403);
         }
     }
 }

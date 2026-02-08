@@ -97,10 +97,23 @@
                     title: '{{__('admin.global.success')}}',
                     text: '{{session('message')}}',
                     type: 'success',
-                    confirmButtonColor: '#57a94f'
+                    confirmButtonColor: '#57a94f',
+                    confirmButtonText: '{{__('admin.global.ok')}}'
                 }
             )
             @endif
+
+            @error('message')
+            swal(
+                {
+                    title: '{{__('admin.global.failed')}}',
+                    text: '{{$message}}',
+                    type: 'error',
+                    confirmButtonColor: '#57a94f',
+                    confirmButtonText: '{{__('admin.global.ok')}}'
+                }
+            )
+            @enderror
         });
     </script>
 @endsection

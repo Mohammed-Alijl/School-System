@@ -2,17 +2,19 @@
 
 namespace App\Services;
 
+use Exception;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
 class RoleService
 {
+    const SUPER_ADMIN_NAME = 'Super Admin';
     /**
      * get Roles with permissions count
      */
     public function getAll()
     {
-        return Role::withCount('permissions')->get();
+        return Role::where('name', '!=', self::SUPER_ADMIN_NAME)->withCount('permissions')->get();
     }
 
     /**
@@ -49,6 +51,10 @@ class RoleService
 
     public function store(array $data)
     {
+        if (strtolower($data['name']) === strtolower(self::SUPER_ADMIN_NAME)) {
+            throw new Exception("You cannot create a role with this name.");
+        }
+
         $role = Role::create(['name' => $data['name']]);
 
         if (!empty($data['permissions'])) {
@@ -60,6 +66,9 @@ class RoleService
 
     public function update($role, array $data)
     {
+        if ($role->name === self::SUPER_ADMIN_NAME) {
+            throw new Exception( __('admin.roles.messages.failed.update'));
+        }
         $role->update(['name' => $data['name']]);
         if (!empty($data['permissions'])) {
             $role->syncPermissions($data['permissions']);
@@ -70,9 +79,14 @@ class RoleService
 
     public function delete($role)
     {
+        if ($role->name === self::SUPER_ADMIN_NAME) {
+            throw new Exception(__('admin.roles.messages.failed.delete'));
+        }
+
         if ($role->users()->count() > 0)
             return false;
+
         $role->delete();
-        return true;
+            return true;
     }
 }
