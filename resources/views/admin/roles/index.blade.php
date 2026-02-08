@@ -18,10 +18,13 @@
         </div>
         <div class="d-flex my-xl-auto right-content">
             <div class="pr-1 mb-3 mb-xl-0">
-                <a class="modal-effect btn btn-primary-gradient btn-with-icon btn-block"
-                   href="{{route('admin.roles.create')}}">
-                    <i class="fas fa-plus-circle"></i> {{ __('admin.roles.add') }}
-                </a>
+                {{-- 🔥 حماية زر الإضافة --}}
+                @can('create_roles')
+                    <a class="modal-effect btn btn-primary-gradient btn-with-icon btn-block"
+                       href="{{route('admin.roles.create')}}">
+                        <i class="fas fa-plus-circle"></i> {{ __('admin.roles.add') }}
+                    </a>
+                @endcan
             </div>
         </div>
     </div>
@@ -41,7 +44,9 @@
                                 <th>#</th>
                                 <th>{{__('admin.roles.fields.name')}}</th>
                                 <th>{{__('admin.roles.fields.permissions_count')}}</th>
-                                <th>{{__('admin.roles.actions')}}</th>
+                                @if(auth()->user()->can('edit_roles') || auth()->user()->can('delete_roles'))
+                                    <th>{{__('admin.roles.actions')}}</th>
+                                @endif
                             </tr>
                             </thead>
                             <tbody>
@@ -49,26 +54,41 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>
-                                        <a href="{{route('admin.roles.show',$role->id)}}">{{ $role->name }}</a>
+                                        @can('view_roles')
+                                            <a href="{{route('admin.roles.show',$role->id)}}">{{ $role->name }}</a>
+                                        @else
+                                            {{ $role->name }}
+                                        @endcan
                                     </td>
                                     <td>
                                         <span class="badge badge-primary">{{ $role->permissions_count }}</span>
                                     </td>
+                                    @if(auth()->user()->can('edit_roles') || auth()->user()->can('delete_roles'))
                                     <td>
-                                        <a class="modal-effect btn btn-sm btn-info"
-                                           data-effect="effect-scale"
-                                           data-permissions="{{ $role->permissions()->pluck('name') }}"
-                                           href="{{route('admin.roles.edit',$role->id)}}">
-                                            <i class="las la-pen"></i> {{__('admin.global.edit')}}
-                                        </a>
-                                        <a class="modal-effect btn btn-sm btn-danger delete-item"
-                                           href="#"
-                                           data-id="{{ $role->id }}"
-                                           data-url="{{ route('admin.roles.destroy', $role->id) }}"
-                                           data-name="{{ $role->name }}">
-                                            <i class="las la-trash"></i> {{__('admin.global.delete')}}
-                                        </a>
+                                        @if($role->name !== 'Super Admin')
+                                            @can('edit_roles')
+                                                <a class="modal-effect btn btn-sm btn-info"
+                                                   data-effect="effect-scale"
+                                                   data-permissions="{{ $role->permissions()->pluck('name') }}"
+                                                   href="{{route('admin.roles.edit',$role->id)}}">
+                                                    <i class="las la-pen"></i> {{__('admin.global.edit')}}
+                                                </a>
+                                            @endcan
+
+                                            @can('delete_roles')
+                                                <a class="modal-effect btn btn-sm btn-danger delete-item"
+                                                   href="#"
+                                                   data-id="{{ $role->id }}"
+                                                   data-url="{{ route('admin.roles.destroy', $role->id) }}"
+                                                   data-name="{{ $role->name }}">
+                                                    <i class="las la-trash"></i> {{__('admin.global.delete')}}
+                                                </a>
+                                            @endcan
+                                        @else
+                                            <span class="text-muted"><i class="las la-lock"></i></span>
+                                        @endif
                                     </td>
+                                    @endif
                                 </tr>
                             @endforeach
                             </tbody>
