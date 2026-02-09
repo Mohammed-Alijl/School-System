@@ -1,0 +1,23 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
+class grade extends Model
+{
+    use HasFactory, SoftDeletes;
+    protected $fillable = [
+        'name',
+        'notes',
+        'status',
+        'sort_order'
+    ];
+
+    public function scopeActive($query)
+    {
+        return $query->where('status', 1)->orderBy('sort_order', 'asc');
+    }
+}
