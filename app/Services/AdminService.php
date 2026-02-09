@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Admin;
 use App\Traits\UploadImageTrait;
+use Exception;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Arr;
 
@@ -35,6 +36,8 @@ class AdminService
 
     public function update($admin, array $data)
     {
+        if($admin->roles()->has('Super Admin'))
+            throw new Exception( __('admin.admins.messages.failed.update'));
         if (!empty($data['password'])) {
             $data['password'] = Hash::make($data['password']);
         } else {
@@ -55,9 +58,10 @@ class AdminService
         return $admin;
     }
 
-    public function delete($id)
+    public function delete($admin)
     {
-        $admin = Admin::findOrFail($id);
+        if($admin->roles()->has('Super Admin'))
+            throw new Exception( __('admin.admins.messages.failed.delete'));
 
         if ($admin->image_path) {
             $this->deleteImage($admin->image_path);

@@ -87,7 +87,7 @@ class AdminController extends Controller implements HasMiddleware
     public function destroy(Admin $admin): JsonResponse
     {
         try {
-            $this->adminService->delete($admin->id);
+            $this->adminService->delete($admin);
 
             return response()->json([
                 'status' => 'success',
