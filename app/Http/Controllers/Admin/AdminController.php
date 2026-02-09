@@ -7,14 +7,14 @@ use App\Http\Requests\Admin\Admin\StoreRequest;
 use App\Http\Requests\Admin\Admin\UpdateRequest;
 use App\Models\Admin;
 use App\Services\AdminService;
+use App\Services\RoleService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
-use Spatie\Permission\Models\Role;
 
 class AdminController extends Controller implements HasMiddleware
 {
-    public function __construct(protected AdminService $adminService)
+    public function __construct(protected AdminService $adminService, protected RoleService $roleService)
     {
     }
 
@@ -33,9 +33,8 @@ class AdminController extends Controller implements HasMiddleware
      */
     public function index()
     {
-        // We get admins and roles (for the add/edit modals)
-        $admins = $this->adminService->getAll()->get();
-        $roles = Role::get();
+        $admins = $this->adminService->getAll();
+        $roles = $this->roleService->getAll();
 
         return view('admin.admins.index', compact('admins', 'roles'));
     }

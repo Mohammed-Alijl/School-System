@@ -13,7 +13,7 @@ class AdminService
 
     public function getAll()
     {
-        return Admin::where('id', '!=', auth()->id())->latest();
+        return Admin::where('id', '!=', auth()->id())->latest()->get();
     }
 
     public function store(array $data)
