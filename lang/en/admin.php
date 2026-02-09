@@ -163,4 +163,18 @@ return [
             ]
         ]
     ],
+    'grades' => [
+        'messages' => [
+            'success' => [
+                'add' => 'Grade added successfully.',
+                'update' => 'Grade updated successfully.',
+                'delete' => 'Grade deleted successfully.',
+            ],
+            'failed' => [
+                'add' => 'Grade failed to add.',
+                'update' => 'Grade failed to update.',
+                'delete' => 'Grade failed to delete.',
+            ]
+        ]
+    ]
 ];
