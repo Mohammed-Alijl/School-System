@@ -36,7 +36,7 @@ class AdminService
 
     public function update($admin, array $data)
     {
-        if($admin->roles()->has('Super Admin'))
+        if($admin->hasRole('Super Admin'))
             throw new Exception( __('admin.admins.messages.failed.update'));
         if (!empty($data['password'])) {
             $data['password'] = Hash::make($data['password']);
@@ -60,7 +60,7 @@ class AdminService
 
     public function delete($admin)
     {
-        if($admin->roles()->has('Super Admin'))
+        if($admin->hasRole('Super Admin'))
             throw new Exception( __('admin.admins.messages.failed.delete'));
 
         if ($admin->image_path) {
