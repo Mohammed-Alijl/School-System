@@ -322,7 +322,7 @@
                                 form.find('.'+key+'_error').text(val[0]);
                             });
                         } else {
-                            swal("Error!", "Something went wrong.", "error");
+                            swal("{{__('admin.global.error_title')}}", "{{__('admin.admins.messages.failed.update')}}", "error");
                         }
                     }
                 });
