@@ -8,14 +8,25 @@ use App\Http\Requests\Admin\Grade\UpdateRequest;
 use App\Models\grade;
 use App\Services\GradeService;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 
-class GradeController extends Controller
+class GradeController extends Controller implements HasMiddleware
 {
 
     public function __construct(protected GradeService $gradeService)
     {
     }
 
+    public static function middleware(): array
+    {
+        return [
+            new Middleware('permission:view_grades', only: ['index']),
+            new Middleware('permission:create_grades', only: ['create']),
+            new Middleware('permission:edit_grades', only: ['update']),
+            new Middleware('permission:delete_grades', only: ['destroy']),
+        ];
+    }
     /**
      * Display a listing of the resource.
      */

@@ -41,6 +41,7 @@ Route::group(
                 Route::get('/', function () { return view('admin.index');})->name('dashboard');
                 Route::resource('admins', AdminController::class)->except(['show','create','edit']);
                 Route::resource('roles', RoleController::class);
+                Route::resource('grades', \App\Http\Controllers\Admin\GradeController::class)->except(['show','create','edit']);
             });
 
             Route::post('logout', [AdminAuthController::class, 'destroy'])->name('logout');
