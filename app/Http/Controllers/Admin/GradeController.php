@@ -5,9 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Grade\StoreRequest;
 use App\Http\Requests\Admin\Grade\UpdateRequest;
-use App\Models\grade;
+use App\Models\Grade;
 use App\Services\GradeService;
-use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
 
@@ -32,7 +31,8 @@ class GradeController extends Controller implements HasMiddleware
      */
     public function index()
     {
-        return $this->gradeService->getAll();
+        $grades = $this->gradeService->getAll();
+        return view('admin.grades.index', compact('grades'));
     }
 
     /**

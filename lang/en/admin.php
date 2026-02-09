@@ -30,6 +30,7 @@ return [
         'optional' => 'Optional',
         'save_changes' => 'Save Changes',
         'protected' => 'Protected',
+        'actions' => 'Actions',
     ],
     'sidebar' => [
         'dashboard' => 'Dashboard',
@@ -164,6 +165,17 @@ return [
         ]
     ],
     'grades' => [
+        'title' => "Grades",
+        'add' => "Add Grade",
+        'delete' => "Delete Grade",
+        'edit' => "Edit Grade",
+        'no_notes' => "No Notes",
+        'fields' => [
+            'name' => "Grade Name",
+            'notes' => "Notes",
+            'status' => "Status",
+            'sort_order' => "Sort Order",
+        ],
         'messages' => [
             'success' => [
                 'add' => 'Grade added successfully.',

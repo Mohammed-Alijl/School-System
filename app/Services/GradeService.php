@@ -2,10 +2,7 @@
 
 namespace App\Services;
 
-use App\Models\grade;
-use Exception;
-use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
+use App\Models\Grade;
 
 class GradeService
 {
@@ -41,7 +38,7 @@ class GradeService
 
     public function delete($grade)
     {
-        if ($grade->classroms()->count() > 0)
+        if ($grade->classroms->count() > 0)
             return false;
 
         $grade->delete();
