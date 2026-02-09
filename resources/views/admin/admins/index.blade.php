@@ -8,9 +8,9 @@
     <link href="{{ URL::asset('assets/admin/plugins/datatable/css/responsive.bootstrap4.min.css') }}" rel="stylesheet" />
     <link href="{{ URL::asset('assets/admin/plugins/datatable/css/jquery.dataTables.min.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('assets/admin/plugins/datatable/css/responsive.dataTables.min.css') }}" rel="stylesheet">
+
     <link href="{{URL::asset('assets/admin/plugins/select2/css/select2.min.css')}}" rel="stylesheet">
     <link href="{{URL::asset('assets/admin/plugins/sweet-alert/sweetalert.css')}}" rel="stylesheet">
-    <!---Internal Fileupload css-->
     <link href="{{URL::asset('assets/admin/plugins/fileuploads/css/fileupload.css')}}" rel="stylesheet" type="text/css"/>
 @endsection
 
@@ -24,12 +24,14 @@
         </div>
         <div class="d-flex my-xl-auto right-content">
             <div class="pr-1 mb-3 mb-xl-0">
+                @can('create_admins')
                 <a class="modal-effect btn btn-primary-gradient btn-with-icon btn-block"
                    data-effect="effect-scale"
                    data-toggle="modal"
                    href="#addModal">
                     <i class="fas fa-plus-circle"></i> {{ __('admin.admins.add') }}
                 </a>
+                @endcan
             </div>
         </div>
     </div>
@@ -51,7 +53,7 @@
                                 <th class="wd-20p border-bottom-0">{{ __('admin.admins.fields.email') }}</th>
                                 <th class="wd-10p border-bottom-0">{{ __('admin.admins.fields.status') }}</th>
                                 <th class="wd-15p border-bottom-0">{{ __('admin.admins.fields.roles') }}</th>
-                                @if(auth()->user()->can('edit_admins') || auth()->user()->can('delete_admins'))
+                                @if(auth()->user()->canAny(['edit_admins', 'delete_admins']))
                                     <th class="wd-20p border-bottom-0">{{ __('admin.admins.actions') }}</th>
                                 @endif
                             </tr>
@@ -67,51 +69,48 @@
                                     <td class="align-content-center">{{ $admin->email }}</td>
                                     <td class="align-content-center">
                                         @if ($admin->status)
-                                            <span class="label text-success d-flex">
-                                                    {{ __('admin.global.active') }}
-                                                </span>
+                                            <span class="label text-success d-flex">{{ __('admin.global.active') }}</span>
                                         @else
-                                            <span class="label text-danger d-flex">
-                                                    {{ __('admin.global.disabled') }}
-                                                </span>
+                                            <span class="label text-danger d-flex">{{ __('admin.global.disabled') }}</span>
                                         @endif
                                     </td>
                                     <td class="align-content-center">
-                                            @foreach ($admin->roles_name as $name)
-                                                <span class="badge badge-primary">{{ $name }}</span>
-                                            @endforeach
+                                        @foreach ($admin->roles_name as $role)
+                                            <span class="badge badge-primary">{{ $role }}</span>
+                                        @endforeach
                                     </td>
-                                    @if(auth()->user()->can('edit_admins') || auth()->user()->can('delete_admins'))
-                                    <td class="align-content-center">
-                                        @if(! $admin->hasRole('Super Admin'))
-                                        @can('edit_admins')
-                                        <a class="modal-effect btn btn-sm btn-info"
-                                           data-effect="effect-scale"
-                                           data-toggle="modal"
-                                           href="#editModal"
-                                           data-id="{{ $admin->id }}"
-                                           data-name="{{ $admin->name }}"
-                                           data-email="{{ $admin->email }}"
-                                           data-status="{{ $admin->status }}"
-                                           data-roles='@json($admin->roles->pluck("name"))'
-                                           data-image='{{ $admin->image_path  }}'
-                                           title="{{ __('admin.actions.edit') }}">
-                                            <i class="las la-pen"></i> {{__('admin.global.edit')}}
-                                        </a>
-                                        @endcan
-                                        @can('delete_admins')
-                                        <a class="modal-effect btn btn-sm btn-danger delete-item"
-                                           href="#"
-                                           data-id="{{ $admin->id }}"
-                                           data-url="{{ route('admin.admins.destroy', $admin->id) }}"
-                                           data-name="{{ $admin->name }}">
-                                            <i class="las la-trash"></i> {{__('admin.global.delete')}}
-                                        </a>
-                                        @endcan
-                                        @else
-                                            <span class="text-muted"><i class="las la-lock"></i></span> {{__('admin.global.protected')}}
-                                        @endif
-                                    </td>
+
+                                    @if(auth()->user()->canAny(['edit_admins', 'delete_admins']))
+                                        <td class="align-content-center">
+                                            @if(! $admin->hasRole('Super Admin'))
+                                                @can('edit_admins')
+                                                    <a class="modal-effect btn btn-sm btn-info"
+                                                       data-effect="effect-scale"
+                                                       data-toggle="modal"
+                                                       href="#editModal"
+                                                       data-id="{{ $admin->id }}"
+                                                       data-name="{{ $admin->name }}"
+                                                       data-email="{{ $admin->email }}"
+                                                       data-status="{{ $admin->status }}"
+                                                       data-roles='@json($admin->roles->pluck("name"))'
+                                                       title="{{ __('admin.actions.edit') }}">
+                                                        <i class="las la-pen"></i> {{__('admin.global.edit')}}
+                                                    </a>
+                                                @endcan
+
+                                                @can('delete_admins')
+                                                    <a class="modal-effect btn btn-sm btn-danger delete-item"
+                                                       href="#"
+                                                       data-id="{{ $admin->id }}"
+                                                       data-url="{{ route('admin.admins.destroy', $admin->id) }}"
+                                                       data-name="{{ $admin->name }}">
+                                                        <i class="las la-trash"></i> {{__('admin.global.delete')}}
+                                                    </a>
+                                                @endcan
+                                            @else
+                                                <span class="text-muted"><i class="las la-lock"></i></span> {{__('admin.global.protected')}}
+                                            @endif
+                                        </td>
                                     @endif
                                 </tr>
                             @endforeach
@@ -131,21 +130,7 @@
 @endsection
 
 @section('js')
-    <!--Internal  Datepicker js -->
-    <script src="{{URL::asset('assets/admin/plugins/jquery-ui/ui/widgets/datepicker.js')}}"></script>
-    <!--Internal  jquery.maskedinput js -->
-    <script src="{{URL::asset('assets/admin/plugins/jquery.maskedinput/jquery.maskedinput.js')}}"></script>
-    <!--Internal  spectrum-colorpicker js -->
-    <script src="{{URL::asset('assets/admin/plugins/spectrum-colorpicker/spectrum.js')}}"></script>
-    <!-- Internal Select2.min js -->
     <script src="{{URL::asset('assets/admin/plugins/select2/js/select2.min.js')}}"></script>
-    <!--Internal  jquery-simple-datetimepicker js -->
-    <script src="{{URL::asset('assets/admin/plugins/amazeui-datetimepicker/js/amazeui.datetimepicker.min.js')}}"></script>
-    <!-- Ionicons js -->
-    <script src="{{URL::asset('assets/admin/plugins/jquery-simple-datetimepicker/jquery.simple-dtpicker.js')}}"></script>
-    <!-- Internal form-elements js -->
-    <script src="{{URL::asset('assets/admin/js/form-elements.js')}}"></script>
-    <!--Internal Fileuploads js-->
     <script src="{{URL::asset('assets/admin/plugins/fileuploads/js/fileupload.js')}}"></script>
     <script src="{{URL::asset('assets/admin/plugins/fileuploads/js/file-upload.js')}}"></script>
     <script src="{{URL::asset('assets/admin/plugins/parsleyjs/parsley.min.js')}}"></script>
@@ -153,8 +138,8 @@
 
     @include('admin.layouts.scripts.datatable_config')
     @include('admin.layouts.scripts.delete_script')
-    <script>
 
+    <script>
         $(document).ready(function() {
             $('#admins_table').DataTable(globalTableConfig);
 
@@ -163,24 +148,22 @@
                 width: '100%'
             });
 
-            $('#addForm').on('submit', function(e) {
-                e.preventDefault();
-                var form = $(this);
+            function submitFormViaAjax(form, modalId, btnSelector, btnTextSelector) {
                 var parsleyInstance = form.parsley();
                 parsleyInstance.validate();
 
-                if (!parsleyInstance.isValid()) {
-                    return;
-                }
+                if (!parsleyInstance.isValid()) return;
 
                 var actionUrl = form.attr('action');
-                var btn = $('#submit-btn');
-                var spinner = $('#spinner');
-                var btnText = $('#btn-text');
+                var formData = new FormData(form[0]);
 
-                var formData = new FormData(this);
+                var btn = $(btnSelector);
+                var spinner = btn.find('.spinner-border');
+                var btnText = $(btnTextSelector);
+                var originalText = btnText.text();
+
                 btn.attr('disabled', true);
-                spinner.removeClass('d-none');
+                if(spinner.length) spinner.removeClass('d-none');
                 btnText.text('{{__("admin.global.loading")}}...');
 
                 $('.error-text').text('');
@@ -195,6 +178,8 @@
                     headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                     success: function(response) {
                         if(response.status === 'success') {
+                            if(modalId) $(modalId).modal('hide');
+
                             swal({
                                 title: "{{__('admin.global.success')}}",
                                 text: response.message,
@@ -206,55 +191,51 @@
                             setTimeout(function(){
                                 location.reload();
                             }, 2000);
-                        } else {
-                            btn.attr('disabled', false);
-                            spinner.addClass('d-none');
-                            btnText.text('{{__("admin.global.save")}}');
                         }
                     },
                     error: function(xhr) {
                         btn.attr('disabled', false);
-                        spinner.addClass('d-none');
-                        btnText.text('{{__("admin.global.save")}}');
+                        if(spinner.length) spinner.addClass('d-none');
+                        btnText.text(originalText);
 
                         if (xhr.status === 422) {
                             var errors = xhr.responseJSON.errors;
-
                             $.each(errors, function(key, val) {
                                 var input = form.find('[name="'+key+'"]');
-                                if(input.length === 0) {
-                                    input = form.find('[name="'+key+'[]"]');
-                                }
+                                if(input.length === 0) input = form.find('[name="'+key+'[]"]');
+
                                 input.addClass('is-invalid');
-
-                                $('.'+key+'_error').text(val[0]);
+                                form.find('.'+key+'_error').text(val[0]);
                             });
-
-                            // swal("{{__('admin.global.error_title')}}", "{{__('admin.global.validation_error')}}", "error");
                         } else {
-                            swal("Error!", "Something went wrong (Server Error).", "error");
-                            console.log(xhr.responseText);
+                            swal("{{__('admin.global.error_title')}}", "{{__('admin.admins.messages.failed.update')}}", "error");
+                            console.error(xhr.responseText);
                         }
                     }
                 });
+            }
+
+            $('#addForm').on('submit', function(e) {
+                e.preventDefault();
+                submitFormViaAjax($(this), '#addModal', '#submit-btn', '#btn-text');
             });
 
+            $('#editForm').on('submit', function(e) {
+                e.preventDefault();
+                submitFormViaAjax($(this), '#editModal', '#update-btn', '#update-btn-text');
+            });
 
             $('#editModal').on('show.bs.modal', function(event) {
                 var button = $(event.relatedTarget);
-
-                var id = button.data('id');
-                var name = button.data('name');
-                var email = button.data('email');
-                var status = button.data('status');
-                var roles = button.data('roles');
-
                 var modal = $(this);
 
+                var id = button.data('id');
+                var roles = button.data('roles');
+
                 modal.find('.modal-body #id').val(id);
-                modal.find('.modal-body #name').val(name);
-                modal.find('.modal-body #email').val(email);
-                modal.find('.modal-body #status').val(status);
+                modal.find('.modal-body #name').val(button.data('name'));
+                modal.find('.modal-body #email').val(button.data('email'));
+                modal.find('.modal-body #status').val(button.data('status'));
                 modal.find('.modal-body #roles').val(roles).trigger('change');
 
                 var url = "{{ route('admin.admins.update', ':id') }}";
@@ -263,78 +244,8 @@
 
                 $('.error-text').text('');
                 $('input').removeClass('is-invalid');
-                modal.find('#edit_password').val(''); // تفريغ الباسورد
+                modal.find('#edit_password').val('');
                 modal.find('input[name="password_confirmation"]').val('');
-
-            });
-
-            $('#editForm').on('submit', function(e) {
-                e.preventDefault();
-
-                var form = $(this);
-                var parsleyInstance = form.parsley();
-                parsleyInstance.validate();
-
-                if (!parsleyInstance.isValid()) {
-                    return;
-                }
-
-                var actionUrl = form.attr('action');
-                var formData = new FormData(this);
-
-                var btn = $('#update-btn');
-                var spinner = $('#update-spinner');
-                var btnText = $('#update-btn-text');
-
-                btn.attr('disabled', true);
-                spinner.removeClass('d-none');
-                btnText.text('{{__("admin.global.loading")}}...');
-
-                $('.error-text').text('');
-                $('input, select').removeClass('is-invalid');
-
-                $.ajax({
-                    url: actionUrl,
-                    type: 'POST',
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-                    success: function(response) {
-                        if(response.status === 'success') {
-                            $('#editModal').modal('hide');
-                            swal({
-                                title: "{{__('admin.global.success')}}",
-                                text: response.message,
-                                type: "success",
-                                timer: 2000,
-                                showConfirmButton: false
-                            });
-                            setTimeout(function(){
-                                location.reload();
-                            }, 2000);
-                        }
-                    },
-                    error: function(xhr) {
-                        btn.attr('disabled', false);
-                        spinner.addClass('d-none');
-                        btnText.text('{{__("admin.global.save_changes")}}');
-
-                        if (xhr.status === 422) {
-                            var errors = xhr.responseJSON.errors;
-                            $.each(errors, function(key, val) {
-                                var input = form.find('[name="'+key+'"]');
-                                if(input.length === 0) {
-                                    input = form.find('[name="'+key+'[]"]');
-                                }
-                                input.addClass('is-invalid');
-                                form.find('.'+key+'_error').text(val[0]);
-                            });
-                        } else {
-                            swal("{{__('admin.global.error_title')}}", "{{__('admin.admins.messages.failed.update')}}", "error");
-                        }
-                    }
-                });
             });
         });
     </script>
