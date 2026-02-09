@@ -8,28 +8,36 @@
     <form action=""
     method="POST"
           class="ajax-form"
-          data-modal-id="#editModal">
+          data-modal-id="#editModal"
+          data-parsley-validate="">
         @csrf
         @method('PUT')
         <div class="modal-body">
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label>{{__('admin.grades.fields.name')}} <span class="text-danger">*</span></label>
-                        <input type="text" name="name" class="form-control" placeholder="{{__('admin.grades.fields.name')}}" required minlength="3" maxlength="30" autocomplete="off">
-                        <span class="text-danger error-text name_error"></span>
+                        <label>{{__('admin.grades.fields.name_ar')}} <span class="text-danger">*</span></label>
+                        <input type="text" name="name[ar]" id="name_ar" class="form-control" placeholder="{{__('admin.grades.fields.name')}}" required minlength="3" maxlength="30" autocomplete="off">
+                        <span class="text-danger error-text name_ar_error"></span>
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <label>{{__('admin.grades.fields.sort_order')}}</label>
-                    <input type="number" name="sort_order" class="form-control" min="0" max="1000">
+                    <div class="form-group">
+                        <label>{{__('admin.grades.fields.name_en')}} <span class="text-danger">*</span></label>
+                        <input type="text" name="name[en]" id="name_en" class="form-control" placeholder="{{__('admin.grades.fields.name')}}" required minlength="3" maxlength="30" autocomplete="off">
+                        <span class="text-danger error-text name_en_error"></span>
+                    </div>
                 </div>
             </div>
 
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-6">
+                    <label>{{__('admin.grades.fields.sort_order')}}</label>
+                    <input type="number" name="sort_order" class="form-control" value="0" min="0" max="1000">
+                </div>
+                <div class="col-md-6">
                     <div class="form-group">
-                        <label>{{ __('admin.grades.fields.status') }} <span class="text-danger">*</span></label>
+                        <label>{{ __('admin.admins.fields.status') }} <span class="text-danger">*</span></label>
                         <select name="status" class="form-control" required>
                             <option value="1" selected>{{ __('admin.global.active') }}</option>
                             <option value="0">{{ __('admin.global.disabled') }}</option>
@@ -52,6 +60,7 @@
             <button type="submit" class="btn btn-primary">
                 <span class="spinner-border spinner-border-sm d-none"></span> {{__('admin.global.save')}}
             </button>
+            <button class="btn btn-secondary" data-dismiss="modal" type="button">{{__('admin.global.cancel')}}</button>
         </div>
 
     </form>

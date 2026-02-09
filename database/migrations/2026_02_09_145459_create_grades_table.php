@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('grades', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
+            $table->json('name');
             $table->text('notes')->nullable();
             $table->boolean('status')->default(1);
             $table->integer('sort_order')->default(0);

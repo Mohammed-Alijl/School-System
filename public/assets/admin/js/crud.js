@@ -57,6 +57,15 @@ $(document).ready(function() {
                         var input = form.find('[name="'+key+'"]');
                         if(input.length === 0) input = form.find('[name="'+key+'[]"]');
 
+                        if(input.length === 0) {
+                            var spatieName = key.replace('.', '[').replace(/(\.[^.]+)$/, ']') + ']';
+                            var parts = key.split('.');
+                            if(parts.length > 1) {
+                                spatieName = parts[0] + '[' + parts[1] + ']';
+                                input = form.find('[name="'+spatieName+'"]');
+                            }
+                        }
+
                         input.addClass('is-invalid');
                         form.find('.'+key+'_error').text(val[0]);
                     });

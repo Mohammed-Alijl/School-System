@@ -172,6 +172,8 @@ return [
         'no_notes' => "No Notes",
         'fields' => [
             'name' => "Grade Name",
+            'name_ar' => "Grade Name (Arabic)",
+            'name_en' => "Grade Name (English)",
             'notes' => "Notes",
             'status' => "Status",
             'sort_order' => "Sort Order",

@@ -22,7 +22,9 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'       => 'required|string|max:255|unique:grades,name',
+            'name' => 'array|required',
+            'name.en'    => 'required|string|max:255|unique:grades,name->en',
+            'name.ar'    => 'required|unique:grades,name->ar',
             'notes'      => 'nullable|string',
             'status'     => 'required|boolean',
             'sort_order' => 'nullable|integer|min:0',

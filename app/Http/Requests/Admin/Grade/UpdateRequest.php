@@ -22,7 +22,9 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'       => 'required|string|max:255|unique:grades,name,' . $this->grade->id,
+            'name' => 'array|required',
+            'name.en'    => 'required|string|max:255|unique:grades,name->en,' . $this->grade->id,
+            'name.ar'    => 'required|unique:grades,name->ar,' . $this->grade->id,
             'notes'      => 'nullable|string',
             'status'     => 'required|boolean',
             'sort_order' => 'nullable|integer|min:0',
