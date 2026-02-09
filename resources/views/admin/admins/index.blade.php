@@ -90,6 +90,8 @@
                                            data-name="{{ $admin->name }}"
                                            data-email="{{ $admin->email }}"
                                            data-status="{{ $admin->status }}"
+                                           data-roles='@json($admin->roles->pluck("name"))'
+                                           data-image='{{ $admin->image_path  }}'
                                            title="{{ __('admin.actions.edit') }}">
                                             <i class="las la-pen"></i>
                                         </a>
@@ -117,7 +119,7 @@
     </div>
 
     @include('admin.admins.add_modal')
-{{--    @include('admin.admins.edit_modal')--}}
+    @include('admin.admins.edit_modal')
 
 @endsection
 
@@ -146,45 +148,9 @@
 
     @include('admin.layouts.scripts.datatable_config')
     <script>
+
         $(document).ready(function() {
             $('#admins_table').DataTable(globalTableConfig);
-
-            // Edit Modal
-            $('#editModal').on('show.bs.modal', function(event) {
-                var button = $(event.relatedTarget)
-                var id = button.data('id')
-                var name = button.data('name')
-                var email = button.data('email')
-                var status = button.data('status')
-
-                var modal = $(this)
-                modal.find('.modal-body #id').val(id);
-                modal.find('.modal-body #name').val(name);
-                modal.find('.modal-body #email').val(email);
-                modal.find('.modal-body #status').val(status);
-
-                var url = "{{ route('admin.admins.update', ':id') }}";
-                url = url.replace(':id', id);
-                $('#editForm').attr('action', url);
-            });
-
-            // Delete Modal Logic
-            $('#deleteModal').on('show.bs.modal', function(event) {
-                var button = $(event.relatedTarget)
-                var id = button.data('id')
-                var name = button.data('name')
-
-                var modal = $(this)
-                modal.find('.modal-body #id').val(id);
-                modal.find('.modal-body #name').val(name);
-
-                var url = "{{ route('admin.admins.destroy', ':id') }}";
-                url = url.replace(':id', id);
-                $('#deleteForm').attr('action', url);
-            });
-        });
-
-        $(document).ready(function() {
 
             $('.select2').select2({
                 placeholder: '{{__("admin.global.select")}}',
@@ -262,6 +228,104 @@
                         } else {
                             swal("Error!", "Something went wrong (Server Error).", "error");
                             console.log(xhr.responseText);
+                        }
+                    }
+                });
+            });
+
+
+            $('#editModal').on('show.bs.modal', function(event) {
+                var button = $(event.relatedTarget);
+
+                var id = button.data('id');
+                var name = button.data('name');
+                var email = button.data('email');
+                var status = button.data('status');
+                var roles = button.data('roles');
+
+                var modal = $(this);
+
+                modal.find('.modal-body #id').val(id);
+                modal.find('.modal-body #name').val(name);
+                modal.find('.modal-body #email').val(email);
+                modal.find('.modal-body #status').val(status);
+                modal.find('.modal-body #roles').val(roles).trigger('change');
+
+                var url = "{{ route('admin.admins.update', ':id') }}";
+                url = url.replace(':id', id);
+                $('#editForm').attr('action', url);
+
+                $('.error-text').text('');
+                $('input').removeClass('is-invalid');
+                modal.find('#edit_password').val(''); // تفريغ الباسورد
+                modal.find('input[name="password_confirmation"]').val('');
+
+            });
+
+            $('#editForm').on('submit', function(e) {
+                e.preventDefault();
+
+                var form = $(this);
+                var parsleyInstance = form.parsley();
+                parsleyInstance.validate();
+
+                if (!parsleyInstance.isValid()) {
+                    return;
+                }
+
+                var actionUrl = form.attr('action');
+                var formData = new FormData(this);
+
+                var btn = $('#update-btn');
+                var spinner = $('#update-spinner');
+                var btnText = $('#update-btn-text');
+
+                btn.attr('disabled', true);
+                spinner.removeClass('d-none');
+                btnText.text('{{__("admin.global.loading")}}...');
+
+                $('.error-text').text('');
+                $('input, select').removeClass('is-invalid');
+
+                $.ajax({
+                    url: actionUrl,
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                    success: function(response) {
+                        if(response.status === 'success') {
+                            $('#editModal').modal('hide');
+                            swal({
+                                title: "{{__('admin.global.success')}}",
+                                text: response.message,
+                                type: "success",
+                                timer: 2000,
+                                showConfirmButton: false
+                            });
+                            setTimeout(function(){
+                                location.reload();
+                            }, 2000);
+                        }
+                    },
+                    error: function(xhr) {
+                        btn.attr('disabled', false);
+                        spinner.addClass('d-none');
+                        btnText.text('{{__("admin.global.save_changes")}}');
+
+                        if (xhr.status === 422) {
+                            var errors = xhr.responseJSON.errors;
+                            $.each(errors, function(key, val) {
+                                var input = form.find('[name="'+key+'"]');
+                                if(input.length === 0) {
+                                    input = form.find('[name="'+key+'[]"]');
+                                }
+                                input.addClass('is-invalid');
+                                form.find('.'+key+'_error').text(val[0]);
+                            });
+                        } else {
+                            swal("Error!", "Something went wrong.", "error");
                         }
                     }
                 });

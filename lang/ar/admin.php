@@ -27,6 +27,8 @@ return [
         'loading' => 'تحميل...',
         'select' => 'اختر',
         'choose_file' => 'اختر ملف',
+        'optional' => 'اختياري',
+        'save_changes' => 'حفظ التغيرات',
     ],
     'sidebar' => [
         'dashboard' => 'لوحة التحكم',
@@ -116,6 +118,7 @@ return [
         ],
         'title' => 'المشرفين',
         'add' => "إضافة مشرف",
+        'edit' => "تعديل المشرف",
         'no_role' => "لا يوجد دور",
         'actions' => "العمليات",
         'search' => "بحث...",

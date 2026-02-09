@@ -27,6 +27,8 @@ return [
         'loading' => 'Loading...',
         'select' => 'Select',
         'choose_file' => 'Choose File',
+        'optional' => 'Optional',
+        'save_changes' => 'Save Changes',
     ],
     'sidebar' => [
         'dashboard' => 'Dashboard',
@@ -119,6 +121,7 @@ return [
         ],
         'title' => 'Admins',
         'add' => "Add Admin",
+        'edit' => "Edit Admin",
         'no_role' => "No Role",
         'actions' => "Actions",
         'search' => "Search...",
