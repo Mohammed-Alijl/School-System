@@ -29,6 +29,7 @@ return [
         'choose_file' => 'Choose File',
         'optional' => 'Optional',
         'save_changes' => 'Save Changes',
+        'protected' => 'Protected',
     ],
     'sidebar' => [
         'dashboard' => 'Dashboard',

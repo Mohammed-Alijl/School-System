@@ -51,7 +51,9 @@
                                 <th class="wd-20p border-bottom-0">{{ __('admin.admins.fields.email') }}</th>
                                 <th class="wd-10p border-bottom-0">{{ __('admin.admins.fields.status') }}</th>
                                 <th class="wd-15p border-bottom-0">{{ __('admin.admins.fields.roles') }}</th>
-                                <th class="wd-20p border-bottom-0">{{ __('admin.admins.actions') }}</th>
+                                @if(auth()->user()->can('edit_admins') || auth()->user()->can('delete_admins'))
+                                    <th class="wd-20p border-bottom-0">{{ __('admin.admins.actions') }}</th>
+                                @endif
                             </tr>
                             </thead>
                             <tbody>
@@ -81,7 +83,10 @@
                                             @endforeach
                                         @endif
                                     </td>
+                                    @if(auth()->user()->can('edit_admins') || auth()->user()->can('delete_admins'))
                                     <td class="align-content-center">
+                                        @if(!in_array("Super Admin",$admin->roles->pluck('name')->toArray()))
+                                        @can('edit_admins')
                                         <a class="modal-effect btn btn-sm btn-info"
                                            data-effect="effect-scale"
                                            data-toggle="modal"
@@ -95,7 +100,8 @@
                                            title="{{ __('admin.actions.edit') }}">
                                             <i class="las la-pen"></i> {{__('admin.global.edit')}}
                                         </a>
-
+                                        @endcan
+                                        @can('delete_admins')
                                         <a class="modal-effect btn btn-sm btn-danger delete-item"
                                            href="#"
                                            data-id="{{ $admin->id }}"
@@ -103,7 +109,12 @@
                                            data-name="{{ $admin->name }}">
                                             <i class="las la-trash"></i> {{__('admin.global.delete')}}
                                         </a>
+                                        @endcan
+                                        @else
+                                            <span class="text-muted"><i class="las la-lock"></i></span> {{__('admin.global.protected')}}
+                                        @endif
                                     </td>
+                                    @endif
                                 </tr>
                             @endforeach
                             </tbody>

@@ -29,6 +29,7 @@ return [
         'choose_file' => 'اختر ملف',
         'optional' => 'اختياري',
         'save_changes' => 'حفظ التغيرات',
+        'protected' => 'مقفل للحماية',
     ],
     'sidebar' => [
         'dashboard' => 'لوحة التحكم',
