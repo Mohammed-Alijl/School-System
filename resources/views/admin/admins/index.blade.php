@@ -77,15 +77,13 @@
                                         @endif
                                     </td>
                                     <td class="align-content-center">
-                                        @if (!empty($admin->getRoleNames()))
-                                            @foreach ($admin->getRoleNames() as $role)
-                                                <span class="badge badge-primary">{{ $role }}</span>
+                                            @foreach ($admin->roles_name as $name)
+                                                <span class="badge badge-primary">{{ $name }}</span>
                                             @endforeach
-                                        @endif
                                     </td>
                                     @if(auth()->user()->can('edit_admins') || auth()->user()->can('delete_admins'))
                                     <td class="align-content-center">
-                                        @if(!in_array("Super Admin",$admin->roles->pluck('name')->toArray()))
+                                        @if(! $admin->hasRole('Super Admin'))
                                         @can('edit_admins')
                                         <a class="modal-effect btn btn-sm btn-info"
                                            data-effect="effect-scale"
