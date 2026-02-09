@@ -93,17 +93,15 @@
                                            data-roles='@json($admin->roles->pluck("name"))'
                                            data-image='{{ $admin->image_path  }}'
                                            title="{{ __('admin.actions.edit') }}">
-                                            <i class="las la-pen"></i>
+                                            <i class="las la-pen"></i> {{__('admin.global.edit')}}
                                         </a>
 
-                                        <a class="modal-effect btn btn-sm btn-danger"
-                                           data-effect="effect-scale"
-                                           data-toggle="modal"
-                                           href="#deleteModal"
+                                        <a class="modal-effect btn btn-sm btn-danger delete-item"
+                                           href="#"
                                            data-id="{{ $admin->id }}"
-                                           data-name="{{ $admin->name }}"
-                                           title="{{ __('admin.actions.delete') }}">
-                                            <i class="las la-trash"></i>
+                                           data-url="{{ route('admin.admins.destroy', $admin->id) }}"
+                                           data-name="{{ $admin->name }}">
+                                            <i class="las la-trash"></i> {{__('admin.global.delete')}}
                                         </a>
                                     </td>
                                 </tr>
@@ -141,12 +139,11 @@
     <!--Internal Fileuploads js-->
     <script src="{{URL::asset('assets/admin/plugins/fileuploads/js/fileupload.js')}}"></script>
     <script src="{{URL::asset('assets/admin/plugins/fileuploads/js/file-upload.js')}}"></script>
-    <script src="{{URL::asset('assets/admin/plugins/sweet-alert/sweetalert.min.js')}}"></script>
-    <script src="{{URL::asset('assets/admin/plugins/sweet-alert/jquery.sweet-alert.js')}}"></script>
     <script src="{{URL::asset('assets/admin/plugins/parsleyjs/parsley.min.js')}}"></script>
     <script src="{{URL::asset('assets/admin/plugins/parsleyjs/i18n/' . LaravelLocalization::getCurrentLocale() . '.js')}}"></script>
 
     @include('admin.layouts.scripts.datatable_config')
+    @include('admin.layouts.scripts.delete_script')
     <script>
 
         $(document).ready(function() {
