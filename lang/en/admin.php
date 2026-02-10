@@ -215,6 +215,8 @@ return [
                 'add' => 'Class Room failed to add.',
                 'update' => 'Class Room failed to update.',
                 'delete' => 'Class Room failed to delete.',
+                'restore' => 'Class Room failed to restore.',
+                'archive' => 'Class Room failed to archive.',
             ],
             'error' => [
                 'name_ar_unique' => 'The Class Role Name In Arabic Is Already Exists',
