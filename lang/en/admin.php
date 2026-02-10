@@ -190,5 +190,36 @@ return [
                 'delete' => 'Grade failed to delete.',
             ]
         ]
-    ]
+    ],
+    'classrooms' => [
+        'title' => "Class Room",
+        'add' => "Add Room",
+        'delete' => "Delete Room",
+        'edit' => "Edit Room",
+        'no_notes' => "No Notes",
+        'fields' => [
+            'name' => "Class Room Name",
+            'name_ar' => "Class Room Name (Arabic)",
+            'name_en' => "Class Room Name (English)",
+            'notes' => "Notes",
+            'status' => "Status",
+            'sort_order' => "Sort Order",
+        ],
+        'messages' => [
+            'success' => [
+                'add' => 'Class Room added successfully.',
+                'update' => 'Class Room updated successfully.',
+                'delete' => 'Class Room deleted successfully.',
+            ],
+            'failed' => [
+                'add' => 'Class Room failed to add.',
+                'update' => 'Class Room failed to update.',
+                'delete' => 'Class Room failed to delete.',
+            ],
+            'error' => [
+                'name_ar_unique' => 'The Class Role Name In Arabic Is Already Exists',
+                'name_en_unique' => 'The Class Role Name In English Is Already Exists',
+            ]
+        ]
+    ],
 ];
