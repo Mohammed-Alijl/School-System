@@ -193,14 +193,15 @@ return [
     ],
     'classrooms' => [
         'title' => "Class Room",
-        'add' => "Add Room",
-        'delete' => "Delete Room",
-        'edit' => "Edit Room",
+        'add' => "Add Class",
+        'delete' => "Delete Class",
+        'edit' => "Edit Class",
         'no_notes' => "No Notes",
         'fields' => [
             'name' => "Class Room Name",
             'name_ar' => "Class Room Name (Arabic)",
             'name_en' => "Class Room Name (English)",
+            'grade' => "Grade",
             'notes' => "Notes",
             'status' => "Status",
             'sort_order' => "Sort Order",

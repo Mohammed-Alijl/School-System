@@ -39,7 +39,7 @@ class ClassroomController extends Controller implements HasMiddleware
         try {
             $classrooms = $this->classroomService->getAll();
             $grades = $this->gradeService->getAll();
-            return view('admin.classroom.index', compact('classrooms', 'grades'));
+            return view('admin.classrooms.index', compact('classrooms', 'grades'));
         }catch (\Exception $ex){
             return response()->json([
                 'status' => 'error',
