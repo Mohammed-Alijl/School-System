@@ -5,6 +5,8 @@ use App\Http\Controllers\Admin\Auth\AdminAuthController;
 use App\Http\Controllers\Admin\Auth\NewPasswordController;
 use App\Http\Controllers\Admin\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Admin\Auth\VerifyEmailController;
+use App\Http\Controllers\Admin\ClassroomController;
+use App\Http\Controllers\Admin\GradeController;
 use App\Http\Controllers\Admin\RoleController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -41,7 +43,13 @@ Route::group(
                 Route::get('/', function () { return view('admin.index');})->name('dashboard');
                 Route::resource('admins', AdminController::class)->except(['show','create','edit']);
                 Route::resource('roles', RoleController::class);
-                Route::resource('grades', \App\Http\Controllers\Admin\GradeController::class)->except(['show','create','edit']);
+                Route::resource('grades', GradeController::class)->except(['show','create','edit']);
+                Route::resource('classrooms', ClassroomController::class)->except(['show','create','edit']);
+                Route::prefix('classrooms')->name('.classroom')->group(function () {
+                   Route::get('archive',[ClassroomController::class,'archive'])->name('archive');
+                   Route::post('restore/{id}',[ClassroomController::class, 'restore'])->name('restore');
+                   Route::delete('force-delete/{id}',[ClassroomController::class, 'forceDelete'])->name('forceDelete');
+                });
             });
 
             Route::post('logout', [AdminAuthController::class, 'destroy'])->name('logout');

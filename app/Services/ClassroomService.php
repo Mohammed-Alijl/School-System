@@ -62,7 +62,7 @@ class ClassroomService
 
     public function forceDelete($id)
     {
-            $classroom = ClassRoom::withTrashed()->findOrFail($id);
+            $classroom = ClassRoom::withTrashed()->find($id);
 
             if (!$classroom) {
                 throw new \Exception(__('admin.classrooms.messages.failed.delete'));

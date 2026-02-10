@@ -210,6 +210,8 @@ return [
                 'add' => 'Class Room added successfully.',
                 'update' => 'Class Room updated successfully.',
                 'delete' => 'Class Room deleted successfully.',
+                'restore' => 'Class Room restored successfully.',
+                'archive' => 'Class Room archived successfully.',
             ],
             'failed' => [
                 'add' => 'Class Room failed to add.',
