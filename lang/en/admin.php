@@ -228,8 +228,45 @@ return [
                 'archive' => 'Class Room failed to archive.',
             ],
             'error' => [
-                'name_ar_unique' => 'The Class Role Name In Arabic Is Already Exists',
-                'name_en_unique' => 'The Class Role Name In English Is Already Exists',
+                'name_ar_unique' => 'The Class Name In Arabic Is Already Exists',
+                'name_en_unique' => 'The Class Name In English Is Already Exists',
+            ]
+        ]
+    ],
+    'sections' => [
+        'title' => "Section",
+        'add' => "Add Section",
+        'delete' => "Delete Section",
+        'edit' => "Edit Section",
+        'archived' => "Archived Section",
+        'no_notes' => "No Notes",
+        'fields' => [
+            'name' => "Section Name",
+            'name_ar' => "Section Name (Arabic)",
+            'name_en' => "Section Name (English)",
+            'grade' => "Grade",
+            'notes' => "Notes",
+            'status' => "Status",
+            'sort_order' => "Sort Order",
+        ],
+        'messages' => [
+            'success' => [
+                'add' => 'Section added successfully.',
+                'update' => 'Section updated successfully.',
+                'delete' => 'Section deleted successfully.',
+                'restore' => 'Section restored successfully.',
+                'archive' => 'Section archived successfully.',
+            ],
+            'failed' => [
+                'add' => 'Section failed to add.',
+                'update' => 'Section failed to update.',
+                'delete' => 'Section failed to delete.',
+                'restore' => 'Section failed to restore.',
+                'archive' => 'Section failed to archive.',
+            ],
+            'error' => [
+                'name_ar_unique' => 'The Section Name In Arabic Is Already Exists',
+                'name_en_unique' => 'The Section Name In English Is Already Exists',
             ]
         ]
     ],
