@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Translatable\HasTranslations;
 
@@ -22,5 +23,14 @@ class Grade extends Model
     public function scopeActive($query)
     {
         return $query->where('status', 1)->orderBy('sort_order', 'asc');
+    }
+
+
+    //===============================================================
+    //======================== RELATIONSHIPS ========================
+    //===============================================================
+    public function classrooms(): HasMany
+    {
+        return $this->hasMany(ClassRoom::class);
     }
 }

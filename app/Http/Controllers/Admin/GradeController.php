@@ -87,7 +87,7 @@ class GradeController extends Controller implements HasMiddleware
             return response()->json([
                 'status' => 'error',
                 'message' => __('admin.grades.messages.failed.delete')
-            ]);
+            ],500);
         }
     }
 }

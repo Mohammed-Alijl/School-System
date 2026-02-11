@@ -38,8 +38,8 @@ class GradeService
 
     public function delete($grade)
     {
-        if ($grade->classroms->count() > 0)
-            return false;
+        if ($grade->classrooms->count())
+            throw new \Exception(__('admin.grades.messages.failed.delete'));
 
         $grade->delete();
         return true;
