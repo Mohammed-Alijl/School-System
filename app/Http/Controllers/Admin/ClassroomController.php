@@ -111,7 +111,7 @@ class ClassroomController extends Controller implements HasMiddleware
     {
         try {
             $classrooms = $this->classroomService->archive();
-            return view('admin.classrooms.archive', compact('classrooms'));
+            return view('admin.classrooms.archived', compact('classrooms'));
         } catch (\Exception $ex){
             return response()->json([
                 'status' => 'error',
