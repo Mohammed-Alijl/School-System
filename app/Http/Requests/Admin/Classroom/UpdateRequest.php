@@ -26,13 +26,13 @@ class UpdateRequest extends FormRequest
             'name' => 'required|array',
             'name.ar' => [
                 'required','string','max:30',
-                Rule::unique('classrooms', 'name->ar')->where(function ($query) {
+                Rule::unique('class_rooms', 'name->ar')->where(function ($query) {
                     return $query->where('grade_id', $this->grade_id);
                 })->ignore($this->classroom->id),
             ],
             'name.en' => [
                 'required','string','max:30',
-                Rule::unique('classrooms', 'name->en')->where(function ($query) {
+                Rule::unique('class_rooms', 'name->en')->where(function ($query) {
                     return $query->where('grade_id', $this->grade_id);
                 })->ignore($this->classroom->id),
             ],
@@ -47,7 +47,7 @@ class UpdateRequest extends FormRequest
     {
         return [
             'name.ar.unique' => __("admin.classrooms.messages.error.name_ar_unique"),
-            'name.en.unique' => '__("admin.classrooms.messages.error.name_en_unique")',
+            'name.en.unique' => __("admin.classrooms.messages.error.name_en_unique"),
         ];
     }
 }

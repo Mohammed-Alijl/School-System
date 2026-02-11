@@ -38,7 +38,7 @@ class ClassroomController extends Controller implements HasMiddleware
     {
         try {
             $classrooms = $this->classroomService->getAll();
-            $grades = $this->gradeService->getAll();
+            $grades = $this->gradeService->getActive();
             return view('admin.classrooms.index', compact('classrooms', 'grades'));
         }catch (\Exception $ex){
             return response()->json([
@@ -54,7 +54,7 @@ class ClassroomController extends Controller implements HasMiddleware
     public function store(StoreRequest $request)
     {
         try {
-            $this->gradeService->store($request->validated());
+            $this->classroomService->store($request->validated());
             return response()->json([
                 'status' => 'success',
                 'message' => __('admin.classrooms.messages.success.add')

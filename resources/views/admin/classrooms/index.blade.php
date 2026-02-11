@@ -112,7 +112,7 @@
     </div>
     </div>
 
-{{--    @include('admin.classrooms.add_modal')--}}
+    @include('admin.classrooms.add_modal')
 {{--    @include('admin.classrooms.edit_modal')--}}
 
 @endsection
