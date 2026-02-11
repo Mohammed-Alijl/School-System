@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\Auth\VerifyEmailController;
 use App\Http\Controllers\Admin\ClassroomController;
 use App\Http\Controllers\Admin\GradeController;
 use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\SectionController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -50,6 +51,7 @@ Route::group(
                    Route::post('restore/{id}',[ClassroomController::class, 'restore'])->name('.restore');
                    Route::delete('force-delete/{id}',[ClassroomController::class, 'forceDelete'])->name('.forceDelete');
                 });
+                Route::resource('sections', SectionController::class)->except(['show','create','edit']);
             });
 
             Route::post('logout', [AdminAuthController::class, 'destroy'])->name('logout');
