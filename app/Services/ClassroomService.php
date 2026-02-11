@@ -37,7 +37,8 @@ class ClassroomService
     {
         if (!$classroom->grade->status)
             throw new \Exception(__('admin.classrooms.messages.failed.archive'));
-
+        $classroom->status = 0;
+        $classroom->save();
         $classroom->delete();
         return true;
     }
