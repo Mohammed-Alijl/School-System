@@ -17,6 +17,13 @@ class ClassroomService
         return $classrooms;
     }
 
+    /**
+     * get all active classrooms
+     */
+    public function getActive()
+    {
+        return ClassRoom::active()->get();
+    }
 
     public function store(array $data)
     {
@@ -71,6 +78,10 @@ class ClassroomService
 
             $classroom->forceDelete();
             return true;
+    }
+
+    public function getGradeClassrooms($id) {
+        return Classroom::where('grade_id', $id)->pluck('name', 'id');
     }
 
 }

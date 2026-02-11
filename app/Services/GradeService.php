@@ -14,6 +14,14 @@ class GradeService
         return Grade::all()->sortBy('sort_order');
     }
 
+    /**
+     * get all grades with classrooms
+     */
+    public function getAllWithClassrooms ()
+    {
+        return Grade::with('classrooms')->get()->sortBy('sort_order');
+    }
+
 
     /**
      * get all active grades

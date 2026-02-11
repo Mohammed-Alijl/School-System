@@ -16,6 +16,12 @@ class ClassRoom extends Model
     public $translatable = ['name'];
 
 
+    //======================== SCOPES ========================
+    public function scopeActive($query)
+    {
+        return $query->where('status', 1)->orderBy('sort_order', 'asc');
+    }
+
     //===============================================================
     //======================== RELATIONSHIPS ========================
     //===============================================================
