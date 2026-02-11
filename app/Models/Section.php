@@ -17,7 +17,8 @@ class Section extends Model
         'notes',
         'status',
         'sort_order',
-        'classroom_id'
+        'classroom_id',
+        'section_id'
     ];
 
     public $translatable = ['name'];
@@ -31,6 +32,10 @@ class Section extends Model
 
 
     //======================== RELATIONSHIPS ========================
+    public function grades(): BelongsTo
+    {
+        return $this->belongsTo(Grade::class);
+    }
     public function classroom(): BelongsTo
     {
         return $this->belongsTo(ClassRoom::class,'classroom_id','id');

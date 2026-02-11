@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('sections', function (Blueprint $table) {
             $table->id();
             $table->json('name');
+            $table->foreignId('grade_id')->constrained('grades')->cascadeOnDelete();
             $table->foreignId('classroom_id')->constrained('class_rooms')->cascadeOnDelete();
             $table->boolean('status')->default(1);
             $table->integer('sort_order')->default(0);
