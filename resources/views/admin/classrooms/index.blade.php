@@ -23,16 +23,24 @@
             </div>
         </div>
         <div class="d-flex my-xl-auto right-content">
-            <div class="pr-1 mb-3 mb-xl-0">
-                @can('create_classrooms')
+            @can('view-archived_classrooms')
+                 <div class="pr-1 mb-3 mb-xl-0">
+                    <a class="modal-effect btn btn-warning-gradient btn-with-icon btn-block"
+                       href="{{route('admin.classrooms.archived')}}">
+                        <i class="fas fa-book ml-2"></i>  {{__('admin.classrooms.archived') }}
+                    </a>
+            </div>
+            @endcan
+            @can('create_classrooms')
+                  <div class="pr-1 mb-3 mb-xl-0">
                 <a class="modal-effect btn btn-primary-gradient btn-with-icon btn-block"
                    data-effect="effect-scale"
                    data-toggle="modal"
                    href="#addModal">
-                    <i class="fas fa-plus-circle"></i> {{ __('admin.classrooms.add') }}
+                    <i class="fas fa-plus-circle ml-2"></i> {{ __('admin.classrooms.add') }}
                 </a>
-                @endcan
             </div>
+            @endcan
         </div>
     </div>
 @endsection
@@ -95,7 +103,7 @@
                                                data-id="{{ $classroom->id }}"
                                                data-url="{{ route('admin.classrooms.destroy', $classroom->id) }}"
                                                data-name="{{ $classroom->name }}">
-                                                <i class="las la-trash"></i> {{__('admin.global.delete')}}
+                                                <i class="las la-trash"></i> {{__('admin.global.archive')}}
                                             </a>
                                         @endcan
                                     </td>

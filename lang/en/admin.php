@@ -31,6 +31,8 @@ return [
         'save_changes' => 'Save Changes',
         'protected' => 'Protected',
         'actions' => 'Actions',
+        'archive' => 'Archive',
+        'restore' => "Restore Class",
     ],
     'sidebar' => [
         'dashboard' => 'Dashboard',
@@ -196,6 +198,7 @@ return [
         'add' => "Add Class",
         'delete' => "Delete Class",
         'edit' => "Edit Class",
+        'archived' => "Archived Classes",
         'no_notes' => "No Notes",
         'fields' => [
             'name' => "Class Room Name",
