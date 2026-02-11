@@ -42,7 +42,7 @@ class SectionController extends Controller implements HasMiddleware
         try {
             $sections = $this->sectionService->getAll();
             $grades = $this->gradeService->getAllWithClassrooms();
-            return view('admin.classrooms.index', compact('sections', 'grades'));
+            return view('admin.sections.index', compact('sections', 'grades'));
         } catch (\Exception $ex) {
             return response()->json([
                 'status' => 'error',

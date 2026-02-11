@@ -246,6 +246,7 @@ return [
             'name_en' => "Section Name (English)",
             'grade' => "Grade",
             'notes' => "Notes",
+            'classroom' => "Classroom",
             'status' => "Status",
             'sort_order' => "Sort Order",
         ],
