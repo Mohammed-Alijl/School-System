@@ -24,8 +24,12 @@ class GradeController extends Controller implements HasMiddleware
             new Middleware('permission:create_grades', only: ['create']),
             new Middleware('permission:edit_grades', only: ['update']),
             new Middleware('permission:delete_grades', only: ['destroy']),
+            new Middleware('permission:view-archived_grades', only: ['archive']),
+            new Middleware('permission:restore_grades', only: ['restore']),
+            new Middleware('permission:force-delete_grades', only: ['forceDelete']),
         ];
     }
+
     /**
      * Display a listing of the resource.
      */
@@ -45,14 +49,15 @@ class GradeController extends Controller implements HasMiddleware
             return response()->json([
                 'status' => 'success',
                 'message' => __('admin.grades.messages.success.add')
-            ],200);
-        }catch (\Exception $ex){
+            ], 200);
+        } catch (\Exception $ex) {
             return response()->json([
                 'status' => 'error',
                 'message' => __('admin.grades.messages.failed.add')
-            ],500);
+            ], 500);
         }
     }
+
     /**
      * Update the specified resource in storage.
      */
@@ -63,12 +68,12 @@ class GradeController extends Controller implements HasMiddleware
             return response()->json([
                 'status' => 'success',
                 'message' => __('admin.grades.messages.success.update')
-            ],200);
-        }catch (\Exception $ex){
+            ], 200);
+        } catch (\Exception $ex) {
             return response()->json([
                 'status' => 'error',
                 'message' => __('admin.grades.messages.failed.update')
-            ],500);
+            ], 500);
         }
     }
 
@@ -81,13 +86,59 @@ class GradeController extends Controller implements HasMiddleware
             $this->gradeService->delete($grade);
             return response()->json([
                 'status' => 'success',
+                'message' => __('admin.grades.messages.success.archive')
+            ], 200);
+        } catch (\Exception $ex) {
+            return response()->json([
+                'status' => 'error',
+                'message' => __('admin.grades.messages.failed.archive')
+            ], 500);
+        }
+    }
+
+    public function archive()
+    {
+        try {
+            $grades = $this->gradeService->archive();
+            return view('admin.grades.archived', compact('grades'));
+        } catch (\Exception $ex) {
+            return response()->json([
+                'status' => 'error',
+                'message' => __('admin.grades.messages.failed.archive')
+            ], 500);
+        }
+    }
+
+    public function restore($id)
+    {
+        try {
+            $this->gradeService->restore($id);
+            return response()->json([
+                'status' => 'success',
+                'message' => __('admin.grades.messages.success.restore')
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => __('admin.grades.messages.failed.restore')
+            ], 404);
+        }
+    }
+
+    public function forceDelete($id)
+    {
+        try {
+            $this->gradeService->forceDelete($id);
+
+            return response()->json([
+                'status' => 'success',
                 'message' => __('admin.grades.messages.success.delete')
-            ],200);
-        }catch (\Exception $ex){
+            ]);
+        } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
                 'message' => __('admin.grades.messages.failed.delete')
-            ],500);
+            ], 500);
         }
     }
 }

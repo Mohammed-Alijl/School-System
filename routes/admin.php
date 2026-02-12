@@ -45,6 +45,11 @@ Route::group(
                 Route::resource('admins', AdminController::class)->except(['show','create','edit']);
                 Route::resource('roles', RoleController::class);
                 Route::resource('grades', GradeController::class)->except(['show','create','edit']);
+                Route::prefix('grades')->name('grades.')->group(function () {
+                    Route::get('archive',[GradeController::class,'archive'])->name('archived');
+                    Route::post('restore/{id}',[GradeController::class, 'restore'])->name('restore');
+                    Route::delete('force-delete/{id}',[GradeController::class, 'forceDelete'])->name('forceDelete');
+                });
                 Route::resource('classrooms', ClassroomController::class)->except(['show','create','edit']);
                 Route::prefix('classrooms')->name('.classrooms')->group(function () {
                    Route::get('archive',[ClassroomController::class,'archive'])->name('.archived');

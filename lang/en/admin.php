@@ -193,6 +193,7 @@ return [
         'delete' => "Delete Grade",
         'edit' => "Edit Grade",
         'no_notes' => "No Notes",
+        'archived' => 'Archived Grades',
         'fields' => [
             'name' => "Grade Name",
             'name_ar' => "Grade Name (Arabic)",
@@ -205,12 +206,16 @@ return [
             'success' => [
                 'add' => 'Grade added successfully.',
                 'update' => 'Grade updated successfully.',
+                'archive' => 'Grade archived successfully.',
+                'restore' => 'Grade restored successfully.',
                 'delete' => 'Grade deleted successfully.',
             ],
             'failed' => [
                 'add' => 'Grade failed to add.',
                 'update' => 'Grade failed to update.',
                 'delete' => 'Grade failed to delete.',
+                'restore' => 'Grade failed to restore.',
+                'archive' => 'Grade failed to archive.',
             ]
         ]
     ],

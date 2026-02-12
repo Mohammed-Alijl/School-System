@@ -23,16 +23,24 @@
             </div>
         </div>
         <div class="d-flex my-xl-auto right-content">
+            @can('create_grades')
+                @can('view-archived_sections')
+                    <div class="pr-1 mb-3 mb-xl-0">
+                        <a class="modal-effect btn btn-warning-gradient btn-with-icon btn-block"
+                           href="{{route('admin.grades.archived')}}">
+                            <i class="fas fa-book ml-2"></i>  {{__('admin.grades.archived') }}
+                        </a>
+                    </div>
+                @endcan
             <div class="pr-1 mb-3 mb-xl-0">
-                @can('create_grades')
                 <a class="modal-effect btn btn-primary-gradient btn-with-icon btn-block"
                    data-effect="effect-scale"
                    data-toggle="modal"
                    href="#addModal">
                     <i class="fas fa-plus-circle"></i> {{ __('admin.grades.add') }}
                 </a>
-                @endcan
             </div>
+            @endcan
         </div>
     </div>
 @endsection

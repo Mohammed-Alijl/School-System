@@ -13,7 +13,7 @@ class RoleSeeder extends Seeder
         $permissions = [
             'admins'    => ['view', 'create', 'edit', 'delete'],
             'roles'     => ['view', 'create', 'edit', 'delete'],
-            'grades'    => ['view', 'create', 'edit', 'delete'],
+            'grades'    => ['view', 'create', 'edit', 'delete', 'view-archived', 'restore', 'force-delete'],
             'classrooms'=> ['view', 'create', 'edit', 'delete', 'view-archived', 'restore', 'force-delete'],
             'sections'  => ['view', 'create', 'edit', 'delete', 'view-archived', 'restore', 'force-delete'],
             'students'  => ['view', 'create', 'edit', 'delete', 'graduate', 'promote'],
