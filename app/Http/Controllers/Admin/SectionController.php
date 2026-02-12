@@ -24,13 +24,13 @@ class SectionController extends Controller implements HasMiddleware
     public static function middleware(): array
     {
         return [
-            new Middleware('permission:view_section', only: ['index']),
-            new Middleware('permission:create_section', only: ['store']),
-            new Middleware('permission:edit_section', only: ['update']),
-            new Middleware('permission:delete_section', only: ['destroy']),
-            new Middleware('permission:view-archived_section', only: ['archive']),
-            new Middleware('permission:restore_section', only: ['restore']),
-            new Middleware('permission:force-delete_section', only: ['forceDelete']),
+            new Middleware('permission:view_sections', only: ['index']),
+            new Middleware('permission:create_sections', only: ['store']),
+            new Middleware('permission:edit_sections', only: ['update']),
+            new Middleware('permission:delete_sections', only: ['destroy']),
+            new Middleware('permission:view-archived_sections', only: ['archive']),
+            new Middleware('permission:restore_sections', only: ['restore']),
+            new Middleware('permission:force-delete_sections', only: ['forceDelete']),
         ];
     }
 
