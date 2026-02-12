@@ -81,6 +81,7 @@
                                     <td>{{ $classroom->notes ?? __('admin.grades.no_notes') }}</td>
                                     @canany('edit_classrooms','delete_classrooms')
                                     <td>
+                                        @if($classroom->grade->status)
                                         @can('edit_classrooms')
                                         <a class="btn btn-info btn-sm edit-btn"
                                         href="#"
@@ -106,6 +107,9 @@
                                                 <i class="las la-trash"></i> {{__('admin.global.archive')}}
                                             </a>
                                         @endcan
+                                        @else
+                                            <span class="text-muted"><i class="las la-lock"></i></span> {{__('admin.global.disabled')}}
+                                        @endif
                                     </td>
                                     @endcanany
                                 </tr>
