@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Admin\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Auth\LoginRequest;
+use App\Models\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,6 +16,12 @@ class AdminAuthController extends Controller
 
     public function store(LoginRequest $request)
     {
+        if (!Admin::where('email',$request->email)->first()->status)
+            return response()->json([
+                'status' => false,
+                'message' => __('auth.failed'),
+            ], 401);
+
         if (auth()->guard('admin')->attempt(['email' => $request->email, 'password' => $request->password])) {
 
             $request->session()->regenerate();
