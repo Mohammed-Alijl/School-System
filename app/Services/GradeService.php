@@ -19,7 +19,7 @@ class GradeService
      */
     public function getAllWithClassrooms ()
     {
-        return Grade::with('classrooms')->get()->sortBy('sort_order');
+        return Grade::with('classrooms')->active()->get()->sortBy('sort_order');
     }
 
 
