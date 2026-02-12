@@ -80,33 +80,38 @@
                                             <span class="label text-danger d-flex">{{ __('admin.global.disabled') }}</span>
                                         @endif
                                     </td>
-                                    <td>{{ $grade->notes ?? __('admin.sections.no_notes') }}</td>
+                                    <td>{{ $section->notes ?? __('admin.sections.no_notes') }}</td>
                                     @canany('edit_sections','delete_sections')
-                                    <td>
-                                        @can('edit_sections')
-                                            <a class="btn btn-info btn-sm edit-btn"
-                                               href="#"
-                                               data-toggle="modal"
-                                               data-target="#editModal"
-                                               data-url="{{ route('admin.sections.update', $section->id) }}"
-                                               data-name_ar="{{ $section->getTranslation('name', 'ar') }}"
-                                               data-name_en="{{ $section->getTranslation('name', 'en') }}"
-                                               data-grade_id="{{ $section->grade_id }}"
-                                               data-classroom_id="{{ $section->classroom_id }}"
-                                               data-status="{{ $section->status }}">
-                                                <i class="las la-pen"></i> {{__('admin.global.edit')}}
-                                            </a>
-                                        @endcan
-                                        @can('delete_sections')
-                                            <a class="modal-effect btn btn-sm btn-danger delete-item"
-                                               href="#"
-                                               data-id="{{ $section->id }}"
-                                               data-url="{{ route('admin.sections.destroy', $section->id) }}"
-                                               data-name="{{ $section->name }}">
-                                                <i class="las la-trash"></i> {{__('admin.global.archive')}}
-                                            </a>
-                                        @endcan
-                                    </td>
+                                            <td>
+                                                @if($section->grade->status && $section->classroom->status)
+                                                @can('edit_sections')
+                                                    <a class="btn btn-info btn-sm edit-btn"
+                                                       href="#"
+                                                       data-toggle="modal"
+                                                       data-target="#editModal"
+                                                       data-url="{{ route('admin.sections.update', $section->id) }}"
+                                                       data-name_ar="{{ $section->getTranslation('name', 'ar') }}"
+                                                       data-name_en="{{ $section->getTranslation('name', 'en') }}"
+                                                       data-grade_id="{{ $section->grade_id }}"
+                                                       data-classroom_id="{{ $section->classroom_id }}"
+                                                       data-notes="{{ $section->notes }}"
+                                                       data-status="{{ $section->status }}">
+                                                        <i class="las la-pen"></i> {{__('admin.global.edit')}}
+                                                    </a>
+                                                @endcan
+                                                @can('delete_sections')
+                                                    <a class="modal-effect btn btn-sm btn-danger delete-item"
+                                                       href="#"
+                                                       data-id="{{ $section->id }}"
+                                                       data-url="{{ route('admin.sections.destroy', $section->id) }}"
+                                                       data-name="{{ $section->name }}">
+                                                        <i class="las la-trash"></i> {{__('admin.global.archive')}}
+                                                    </a>
+                                                @endcan
+                                                @else
+                                                    <span class="text-muted"><i class="las la-lock"></i></span> {{__('admin.global.disabled')}}
+                                                @endif
+                                            </td>
                                     @endcanany
                                 </tr>
                             @endforeach
@@ -121,7 +126,7 @@
     </div>
 
     @include('admin.sections.add_modal')
-{{--    @include('admin.sections.edit_modal')--}}
+    @include('admin.sections.edit_modal')
 
 @endsection
 
@@ -131,7 +136,7 @@
     <script src="{{URL::asset('assets/admin/plugins/fileuploads/js/file-upload.js')}}"></script>
     <script src="{{URL::asset('assets/admin/plugins/parsleyjs/parsley.min.js')}}"></script>
     <script src="{{URL::asset('assets/admin/plugins/parsleyjs/i18n/' . LaravelLocalization::getCurrentLocale() . '.js')}}"></script>
-{{--    <script src="{{URL::asset('assets/admin/js/crud.js')}}"></script>--}}
+    <script src="{{URL::asset('assets/admin/js/crud.js')}}"></script>
 
     @include('admin.layouts.scripts.datatable_config')
     @include('admin.layouts.scripts.delete_script')
