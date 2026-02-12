@@ -94,7 +94,7 @@
                                                data-grade_id="{{ $section->grade_id }}"
                                                data-classroom_id="{{ $section->classroom_id }}"
                                                data-status="{{ $section->status }}">
-                                                <i class="las la-pen"></i>
+                                                <i class="las la-pen"></i> {{__('admin.global.edit')}}
                                             </a>
                                         @endcan
                                         @can('delete_sections')
@@ -102,7 +102,7 @@
                                                href="#"
                                                data-id="{{ $section->id }}"
                                                data-url="{{ route('admin.sections.destroy', $section->id) }}"
-                                               data-name="{{ $classroom->name }}">
+                                               data-name="{{ $section->name }}">
                                                 <i class="las la-trash"></i> {{__('admin.global.archive')}}
                                             </a>
                                         @endcan
@@ -120,7 +120,7 @@
     </div>
     </div>
 
-{{--    @include('admin.sections.add_modal')--}}
+    @include('admin.sections.add_modal')
 {{--    @include('admin.sections.edit_modal')--}}
 
 @endsection
@@ -131,7 +131,7 @@
     <script src="{{URL::asset('assets/admin/plugins/fileuploads/js/file-upload.js')}}"></script>
     <script src="{{URL::asset('assets/admin/plugins/parsleyjs/parsley.min.js')}}"></script>
     <script src="{{URL::asset('assets/admin/plugins/parsleyjs/i18n/' . LaravelLocalization::getCurrentLocale() . '.js')}}"></script>
-    <script src="{{URL::asset('assets/admin/js/crud.js')}}"></script>
+{{--    <script src="{{URL::asset('assets/admin/js/crud.js')}}"></script>--}}
 
     @include('admin.layouts.scripts.datatable_config')
     @include('admin.layouts.scripts.delete_script')
@@ -143,6 +143,56 @@
             $('.select2').select2({
                 placeholder: '{{__("admin.global.select")}}',
                 width: '100%'
+            });
+
+
+
+            $('select[name="grade_id"]').on('change', function() {
+                var GradeId = $(this).val();
+                var classroomSelect = $(this).closest('form').find('select[name="classroom_id"]');
+
+                if (GradeId) {
+                    $.ajax({
+                        url: "{{ URL::to('admin/classes') }}/" + GradeId,
+                        type: "GET",
+                        dataType: "json",
+                        success: function(data) {
+                            classroomSelect.empty();
+                            classroomSelect.append('<option value="" selected disabled>-- اختر الصف --</option>');
+
+                            $.each(data, function(key, value) {
+
+                                classroomSelect.append('<option value="' + key + '">' + value + '</option>');
+                            });
+                        },
+                    });
+                } else {
+                    console.log('AJAX load did not work');
+                }
+            });
+
+            $(document).on('click', '.edit-btn', function() {
+                var gradeId = $(this).data('grade_id');
+                var classroomId = $(this).data('classroom_id');
+
+                var modal = $('#editModal');
+                var classroomSelect = modal.find('select[name="classroom_id"]');
+                classroomSelect.empty();
+
+                if(gradeId) {
+                    $.ajax({
+                        url: "{{ URL::to('admin/classes') }}/" + gradeId,
+                        type: "GET",
+                        dataType: "json",
+                        success: function(data) {
+                            $.each(data, function(key, value) {
+                                var select = (key == classroomId) ? 'selected' : '';
+                                classroomSelect.append('<option value="' + key + '" '+select+'>' + value + '</option>');
+                            });
+                            classroomSelect.trigger('change');
+                        }
+                    });
+                }
             });
         });
     </script>

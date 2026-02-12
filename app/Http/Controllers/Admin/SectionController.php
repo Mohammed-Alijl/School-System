@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\section\StoreRequest;
-use App\Http\Requests\Admin\section\UpdateRequest;
+use App\Http\Requests\Admin\Section\StoreRequest;
+use App\Http\Requests\Admin\Section\UpdateRequest;
 use App\Models\Section;
 use App\Services\ClassroomService;
 use App\Services\GradeService;
@@ -60,7 +60,7 @@ class SectionController extends Controller implements HasMiddleware
             $this->sectionService->store($request->validated());
             return response()->json([
                 'status' => 'success',
-                'message' => __('admin.classrooms.messages.success.add')
+                'message' => __('admin.sections.messages.success.add')
             ], 200);
         } catch (\Exception $ex) {
             return response()->json([

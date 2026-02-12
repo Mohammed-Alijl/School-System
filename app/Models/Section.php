@@ -17,6 +17,7 @@ class Section extends Model
         'notes',
         'status',
         'sort_order',
+        'grade_id',
         'classroom_id',
         'section_id'
     ];
@@ -32,7 +33,7 @@ class Section extends Model
 
 
     //======================== RELATIONSHIPS ========================
-    public function grades(): BelongsTo
+    public function grade(): BelongsTo
     {
         return $this->belongsTo(Grade::class);
     }
