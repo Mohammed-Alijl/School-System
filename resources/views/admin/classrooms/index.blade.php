@@ -78,7 +78,7 @@
                                             <span class="label text-danger d-flex">{{ __('admin.global.disabled') }}</span>
                                         @endif
                                     </td>
-                                    <td>{{ $grade->notes ?? __('admin.grades.no_notes') }}</td>
+                                    <td>{{ $classroom->notes ?? __('admin.grades.no_notes') }}</td>
                                     @canany('edit_classrooms','delete_classrooms')
                                     <td>
                                         @can('edit_classrooms')

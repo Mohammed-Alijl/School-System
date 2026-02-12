@@ -73,7 +73,7 @@ class ClassroomController extends Controller implements HasMiddleware
     public function update(UpdateRequest $request, ClassRoom $classroom)
     {
         try {
-            $this->gradeService->update($classroom, $request->validated());
+            $this->classroomService->update($classroom, $request->validated());
             return response()->json([
                 'status' => 'success',
                 'message' => __('admin.classrooms.messages.success.update')
