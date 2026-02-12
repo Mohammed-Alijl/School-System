@@ -114,7 +114,7 @@ class SectionController extends Controller implements HasMiddleware
     {
         try {
             $sections = $this->sectionService->archive();
-            return view('admin.classrooms.archived', compact('sections'));
+            return view('admin.sections.archived', compact('sections'));
         } catch (\Exception $ex) {
             return response()->json([
                 'status' => 'error',
@@ -129,12 +129,12 @@ class SectionController extends Controller implements HasMiddleware
             $this->sectionService->restore($id);
             return response()->json([
                 'status' => 'success',
-                'message' => __('admin.classrooms.messages.success.restore')
+                'message' => __('admin.sections.messages.success.restore')
             ]);
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => __('admin.classrooms.messages.failed.restore')
+                'message' => __('admin.sections.messages.failed.restore')
             ], 404);
         }
     }
@@ -146,12 +146,12 @@ class SectionController extends Controller implements HasMiddleware
 
             return response()->json([
                 'status' => 'success',
-                'message' => __('admin.classrooms.messages.success.delete')
+                'message' => __('admin.sections.messages.success.delete')
             ]);
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => __('admin.classrooms.messages.failed.delete')
+                'message' => __('admin.sections.messages.failed.delete')
             ], 500);
         }
     }

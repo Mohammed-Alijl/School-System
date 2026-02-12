@@ -26,7 +26,7 @@
             @can('view-archived_sections')
                  <div class="pr-1 mb-3 mb-xl-0">
                     <a class="modal-effect btn btn-warning-gradient btn-with-icon btn-block"
-                       href="{{route('admin..classrooms.archived')}}">
+                       href="{{route('admin.sections.archived')}}">
                         <i class="fas fa-book ml-2"></i>  {{__('admin.sections.archived') }}
                     </a>
             </div>
