@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\ClassroomController;
 use App\Http\Controllers\Admin\GradeController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\SectionController;
+use App\Http\Controllers\GuardianController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -58,11 +59,12 @@ Route::group(
                 });
                 Route::resource('sections', SectionController::class)->except(['show','create','edit']);
                 Route::get('/classes/{id}', [SectionController::class, 'getClassrooms']);
-            });
-            Route::prefix('sections/')->name('sections.')->group(function () {
-                Route::get('archive',[SectionController::class,'archive'])->name('archived');
-                Route::post('restore/{id}',[SectionController::class, 'restore'])->name('restore');
-                Route::delete('force-delete/{id}',[SectionController::class, 'forceDelete'])->name('forceDelete');
+                Route::prefix('sections/')->name('sections.')->group(function () {
+                    Route::get('archive',[SectionController::class,'archive'])->name('archived');
+                    Route::post('restore/{id}',[SectionController::class, 'restore'])->name('restore');
+                    Route::delete('force-delete/{id}',[SectionController::class, 'forceDelete'])->name('forceDelete');
+                });
+                Route::resource('guardians',GuardianController::class)->except(['show','create','edit']);
             });
             Route::post('logout', [AdminAuthController::class, 'destroy'])->name('logout');
         });

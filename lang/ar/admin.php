@@ -292,7 +292,64 @@ return [
             ]
         ]
     ],
-
+    'guardians' => [
+        'title' => "أولياء الأمور",
+        'add' => "إضافة ولي أمر",
+        'delete' => "حذف ولي أمر",
+        'edit' => "تعديل بيانات ولي الأمر",
+        'archived' => "أرشيف أولياء الأمور",
+        'fields' => [
+            'email' => "البريد الإلكتروني",
+            'password' => "كلمة المرور",
+            'name_father' => "اسم الأب",
+            'name_father_ar' => "اسم الأب (بالعربية)",
+            'name_father_en' => "اسم الأب (باللغة الإنجليزية)",
+            'job_father' => "وظيفة الأب",
+            'job_father_ar' => "وظيفة الأب (بالعربية)",
+            'job_father_en' => "وظيفة الأب (باللغة الإنجليزية)",
+            'national_id_father' => "رقم هوية الأب",
+            'passport_id_father' => "رقم جواز سفر الأب",
+            'phone_father' => "رقم هاتف الأب",
+            'nationality_father_id' => "جنسية الأب",
+            'blood_type_father_id' => "فصيلة دم الأب",
+            'religion_father_id' => "ديانة الأب",
+            'address_father' => "عنوان الأب",
+            'name_mother' => "اسم الأم",
+            'name_mother_ar' => "اسم الأم (بالعربية)",
+            'name_mother_en' => "اسم الأم (باللغة الإنجليزية)",
+            'job_mother' => "وظيفة الأم",
+            'job_mother_ar' => "وظيفة الأم (بالعربية)",
+            'job_mother_en' => "وظيفة الأم (باللغة الإنجليزية)",
+            'national_id_mother' => "رقم هوية الأم",
+            'passport_id_mother' => "رقم جواز سفر الأم",
+            'phone_mother' => "رقم هاتف الأم",
+            'nationality_mother_id' => "جنسية الأم",
+            'blood_type_mother_id' => "فصيلة دم الأم",
+            'religion_mother_id' => "ديانة الأم",
+            'address_mother' => "عنوان الأم",
+        ],
+        'messages' => [
+            'success' => [
+                'add' => 'تم إضافة ولي الأمر بنجاح.',
+                'update' => 'تم تحديث بيانات ولي الأمر بنجاح.',
+                'delete' => 'تم حذف ولي الأمر بنجاح.',
+                'restore' => 'تم استعادة ولي الأمر بنجاح.',
+                'archive' => 'تم أرشفة ولي الأمر بنجاح.',
+            ],
+            'failed' => [
+                'add' => 'فشل إضافة ولي الأمر.',
+                'update' => 'فشل تحديث البيانات.',
+                'delete' => 'فشل الحذف.',
+                'restore' => 'فشل الاستعادة.',
+                'archive' => 'فشل الأرشفة.',
+            ],
+            'error' => [
+                'email_unique' => 'البريد الإلكتروني مسجل مسبقاً.',
+                'national_id_father_unique' => 'رقم هوية الأب مسجل مسبقاً.',
+                'national_id_mother_unique' => 'رقم هوية الأم مسجل مسبقاً.',
+            ]
+        ]
+    ],
 
 
 

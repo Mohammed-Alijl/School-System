@@ -294,4 +294,62 @@ return [
             ]
         ]
     ],
+    'guardians' => [
+        'title' => "Guardians",
+        'add' => "Add Guardian",
+        'delete' => "Delete Guardian",
+        'edit' => "Edit Guardian",
+        'archived' => "Archived Guardians",
+        'fields' => [
+            'email' => "Email Address",
+            'password' => "Password",
+            'name_father' => "Father's Name",
+            'name_father_ar' => "Father's Name (Arabic)",
+            'name_father_en' => "Father's Name (English)",
+            'job_father' => "Father's Job",
+            'job_father_ar' => "Father's Job (Arabic)",
+            'job_father_en' => "Father's Job (English)",
+            'national_id_father' => "Father's National ID",
+            'passport_id_father' => "Father's Passport ID",
+            'phone_father' => "Father's Phone",
+            'nationality_father_id' => "Father's Nationality",
+            'blood_type_father_id' => "Father's Blood Type",
+            'religion_father_id' => "Father's Religion",
+            'address_father' => "Father's Address",
+            'name_mother' => "Mother's Name",
+            'name_mother_ar' => "Mother's Name (Arabic)",
+            'name_mother_en' => "Mother's Name (English)",
+            'job_mother' => "Mother's Job",
+            'job_mother_ar' => "Mother's Job (Arabic)",
+            'job_mother_en' => "Mother's Job (English)",
+            'national_id_mother' => "Mother's National ID",
+            'passport_id_mother' => "Mother's Passport ID",
+            'phone_mother' => "Mother's Phone",
+            'nationality_mother_id' => "Mother's Nationality",
+            'blood_type_mother_id' => "Mother's Blood Type",
+            'religion_mother_id' => "Mother's Religion",
+            'address_mother' => "Mother's Address",
+        ],
+        'messages' => [
+            'success' => [
+                'add' => 'Guardian added successfully.',
+                'update' => 'Guardian updated successfully.',
+                'delete' => 'Guardian deleted successfully.',
+                'restore' => 'Guardian restored successfully.',
+                'archive' => 'Guardian archived successfully.',
+            ],
+            'failed' => [
+                'add' => 'Failed to add guardian.',
+                'update' => 'Failed to update guardian.',
+                'delete' => 'Failed to delete guardian.',
+                'restore' => 'Failed to restore guardian.',
+                'archive' => 'Failed to archive guardian.',
+            ],
+            'error' => [
+                'email_unique' => 'The Email Address is already registered.',
+                'national_id_father_unique' => 'The Father\'s National ID is already registered.',
+                'national_id_mother_unique' => 'The Mother\'s National ID is already registered.',
+            ]
+        ]
+    ],
 ];
