@@ -48,14 +48,23 @@ class AdminVerifyEmail extends Notification implements ShouldQueue
 
     protected function verificationUrl($notifiable)
     {
-        return URL::temporarySignedRoute(
-            'admin.verification.verify',
-            Carbon::now()->addMinutes(Config::get('auth.verification.expire', 60)),
-            [
-                'id' => $notifiable->getKey(),
-                'hash' => sha1($notifiable->getEmailForVerification()),
-            ]
-        );
+        $locale = 'en';
+        \Illuminate\Support\Facades\URL::forceRootUrl(config('app.url') . '/' . $locale);
+
+        try {
+            $url = \Illuminate\Support\Facades\URL::temporarySignedRoute(
+                'admin.verification.verify',
+                Carbon::now()->addMinutes(Config::get('auth.verification.expire', 60)),
+                [
+                    'id' => $notifiable->getKey(),
+                    'hash' => sha1($notifiable->getEmailForVerification()),
+                ]
+            );
+        } finally {
+            \Illuminate\Support\Facades\URL::forceRootUrl(config('app.url'));
+        }
+
+        return $url;
     }
 
     /**
