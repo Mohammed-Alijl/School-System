@@ -39,7 +39,7 @@
                                 <th class="wd-20p border-bottom-0">{{ __('admin.sections.fields.classroom') }}</th>
                                 <th class="wd-10p border-bottom-0">{{ __('admin.sections.fields.status') }}</th>
                                 <th class="wd-10p border-bottom-0">{{ __('admin.sections.fields.notes') }}</th>
-                                @canany('edit_sections','delete_sections')
+                                @canany('restore_sections','force-delete_sections')
                                     <th class="wd-20p border-bottom-0">{{ __('admin.global.actions') }}</th>
                                 @endcanany
                             </tr>
@@ -71,7 +71,7 @@
                                                     <i class="las la-store"></i> {{__('admin.global.restore')}}
                                                 </a>
                                             @endcan
-                                            @can('delete_sections')
+                                            @can('force-delete_sections')
                                                 <a class="modal-effect btn btn-sm btn-danger delete-item"
                                                    href="#"
                                                    data-id="{{ $section->id }}"
