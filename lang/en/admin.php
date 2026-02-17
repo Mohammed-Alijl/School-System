@@ -36,6 +36,13 @@ return [
         'actions' => 'Actions',
         'archive' => 'Archive',
         'restore' => "Restore",
+        'next' => "Next",
+        'previous' => "Previous",
+        'dropify' => [
+            'drag_drop' => 'Drag and drop a file here or click',
+            'replace' => 'Drag and drop or click to replace',
+            'error' => 'Ooops, something wrong appended.',
+        ],
     ],
     'sidebar' => [
         'dashboard' => 'Dashboard',
@@ -300,9 +307,14 @@ return [
         'delete' => "Delete Guardian",
         'edit' => "Edit Guardian",
         'archived' => "Archived Guardians",
+        'father_information' => "Father Information",
+        'mother_information' => "Mother Information",
+        'auth_and_attachments' => "Authentication & Attachments",
+        'attachments_help' => "Required Attachments: jpg, png, jpeg, png, pdf",
         'fields' => [
             'email' => "Email Address",
             'password' => "Password",
+            'password_confirmation' => "Password Confirmation",
             'name_father' => "Father's Name",
             'name_father_ar' => "Father's Name (Arabic)",
             'name_father_en' => "Father's Name (English)",
@@ -329,6 +341,8 @@ return [
             'blood_type_mother_id' => "Mother's Blood Type",
             'religion_mother_id' => "Mother's Religion",
             'address_mother' => "Mother's Address",
+            'attachments' => "Attachments",
+            'image' => "Image",
         ],
         'messages' => [
             'success' => [

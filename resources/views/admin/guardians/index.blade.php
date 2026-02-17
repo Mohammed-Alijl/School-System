@@ -3,7 +3,6 @@
 @section('title', __('admin.guardians.title'))
 
 @section('css')
-    {{-- نفس ملفات CSS المعتمدة --}}
     <link href="{{ URL::asset('assets/admin/plugins/datatable/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet" />
     <link href="{{ URL::asset('assets/admin/plugins/datatable/css/buttons.bootstrap4.min.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('assets/admin/plugins/datatable/css/responsive.bootstrap4.min.css') }}" rel="stylesheet" />
@@ -11,6 +10,14 @@
     <link href="{{ URL::asset('assets/admin/plugins/datatable/css/responsive.dataTables.min.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('assets/admin/plugins/select2/css/select2.min.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('assets/admin/plugins/sweet-alert/sweetalert.css') }}" rel="stylesheet">
+    {{--  File uploader css --}}
+    <link href="{{URL::asset('assets/admin/plugins/fileuploads/css/fileupload.css')}}" rel="stylesheet" type="text/css"/>
+    {{--  Fancy uploader css --}}
+    <link href="{{URL::asset('assets/admin/plugins/fancyuploder/fancy_fileupload.css')}}" rel="stylesheet" />
+    {{-- Internal  TelephoneInput css --}}
+    <link rel="stylesheet" href="{{URL::asset('assets/admin/plugins/telephoneinput/telephoneinput-rtl.css')}}">
+{{-- Internal  TelephoneInput css --}}
+    <link rel="stylesheet" href="{{URL::asset('assets/admin/plugins/telephoneinput/telephoneinput-rtl.css')}}">
 @endsection
 
 @section('page-header')
@@ -60,23 +67,20 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $guardian->email }}</td>
-                                    <td>{{ $guardian->name_father }}</td> {{-- Spatie بيجيب اللغة الحالية --}}
+                                    <td>{{ $guardian->name_father }}</td>
                                     <td>{{ $guardian->national_id_father }}</td>
                                     <td>{{ $guardian->phone_father }}</td>
                                     <td>{{ $guardian->name_mother }}</td>
                                     <td>
                                         @can('edit_guardians')
-                                            {{-- زر التعديل يحمل كل البيانات كـ Data Attributes --}}
                                             <a class="btn btn-info btn-sm edit-btn"
                                                href="#"
                                                data-toggle="modal"
                                                data-target="#editModal"
                                                data-url="{{ route('admin.guardians.update', $guardian->id) }}"
 
-                                               {{-- البيانات الأساسية --}}
                                                data-email="{{ $guardian->email }}"
 
-                                               {{-- بيانات الأب --}}
                                                data-name_father_ar="{{ $guardian->getTranslation('name_father', 'ar') }}"
                                                data-name_father_en="{{ $guardian->getTranslation('name_father', 'en') }}"
                                                data-national_id_father="{{ $guardian->national_id_father }}"
@@ -89,7 +93,6 @@
                                                data-religion_father_id="{{ $guardian->religion_father_id }}"
                                                data-address_father="{{ $guardian->address_father }}"
 
-                                               {{-- بيانات الأم --}}
                                                data-name_mother_ar="{{ $guardian->getTranslation('name_mother', 'ar') }}"
                                                data-name_mother_en="{{ $guardian->getTranslation('name_mother', 'en') }}"
                                                data-national_id_mother="{{ $guardian->national_id_mother }}"
@@ -127,14 +130,13 @@
     </div>
     </div>
 
-    {{-- تضمين المودالات (سنقوم بإنشائهم لاحقاً) --}}
-{{--    @include('admin.guardians.add_modal')--}}
+    @include('admin.guardians.add_modal')
 {{--    @include('admin.guardians.edit_modal')--}}
 
 @endsection
 
 @section('js')
-    {{-- مكتبات الـ JS --}}
+    {{--  Datatables JS  --}}
     <script src="{{ URL::asset('assets/admin/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ URL::asset('assets/admin/plugins/datatable/js/dataTables.dataTables.min.js') }}"></script>
     <script src="{{ URL::asset('assets/admin/plugins/datatable/js/dataTables.responsive.min.js') }}"></script>
@@ -143,32 +145,39 @@
     <script src="{{ URL::asset('assets/admin/plugins/datatable/js/dataTables.bootstrap4.js') }}"></script>
     <script src="{{ URL::asset('assets/admin/plugins/datatable/js/dataTables.buttons.min.js') }}"></script>
     <script src="{{ URL::asset('assets/admin/plugins/datatable/js/buttons.bootstrap4.min.js') }}"></script>
-
+    {{-- Select 2 JS --}}
     <script src="{{ URL::asset('assets/admin/plugins/select2/js/select2.min.js') }}"></script>
+    {{--  Parsley Validation Form JS  --}}
     <script src="{{ URL::asset('assets/admin/plugins/parsleyjs/parsley.min.js') }}"></script>
     <script src="{{ URL::asset('assets/admin/plugins/parsleyjs/i18n/' . LaravelLocalization::getCurrentLocale() . '.js') }}"></script>
-
-    {{-- الملف السحري --}}
+    <script src="{{URL::asset('assets/admin/plugins/parsleyjs/parsley.min.js')}}"></script>
+    {{-- Form-wizard JS --}}
+    <script src="{{URL::asset('assets/admin/plugins/jquery-steps/jquery.steps.min.js')}}"></script>
+    {{--  Main CRUD JS For Edit & Update  --}}
     <script src="{{ URL::asset('assets/admin/js/crud.js') }}"></script>
-
+    {{--  Dropify JS  --}}
+    <script src="{{URL::asset('assets/admin/plugins/fileuploads/js/fileupload.js')}}"></script>
+    <!--Internal Fancy uploader js-->
+    <script src="{{URL::asset('assets/admin/plugins/fancyuploder/jquery.ui.widget.js')}}"></script>
+    <script src="{{URL::asset('assets/admin/plugins/fancyuploder/jquery.fileupload.js')}}"></script>
+    <script src="{{URL::asset('assets/admin/plugins/fancyuploder/jquery.iframe-transport.js')}}"></script>
+    <script src="{{URL::asset('assets/admin/plugins/fancyuploder/jquery.fancy-fileupload.js')}}"></script>
+    <!--Telephone Input js-->
+    <script src="{{URL::asset('assets/admin/plugins/telephoneinput/telephoneinput.js')}}"></script>
     @include('admin.layouts.scripts.datatable_config')
     @include('admin.layouts.scripts.delete_script')
+    @include('admin.layouts.scripts.restore_script')
 
     <script>
         $(document).ready(function() {
-            // تهيئة الجدول
             $('#guardians_table').DataTable(globalTableConfig);
 
-            // تهيئة Select2 داخل المودال
             $('.select2').select2({
                 placeholder: '{{__("admin.global.select")}}',
                 width: '100%',
-                dropdownParent: $('.modal') // هام جداً عشان البحث يشتغل داخل المودال
+                dropdownParent: $('.modal')
             });
-
-            // ملاحظة: بما أنه لا يوجد Cascading Dropdowns (مثل Grade -> Class)
-            // لا نحتاج لكود JS إضافي هنا، ملف crud.js سيتكفل بتعبئة البيانات في زر التعديل
-            // لأننا وضعنا كل شيء في data-attributes
         });
     </script>
+    @stack('scripts')
 @endsection

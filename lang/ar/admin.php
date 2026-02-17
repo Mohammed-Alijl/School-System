@@ -36,6 +36,13 @@ return [
         'actions' => 'العمليات',
         'archive' => 'أرشفة',
         'restore' => "استعادة",
+        'next' => "التالي",
+        'previous' => "السابق",
+        'dropify' => [
+            'drag_drop' => 'اسحب و افلت الملف او انقر هنا',
+            'replace' => 'اسحب وافلت الملف للاستبدال او انقر هنا',
+            'error' => 'للأسف, حدث خطأ ما.',
+        ],
     ],
     'sidebar' => [
         'dashboard' => 'لوحة التحكم',
@@ -298,9 +305,14 @@ return [
         'delete' => "حذف ولي أمر",
         'edit' => "تعديل بيانات ولي الأمر",
         'archived' => "أرشيف أولياء الأمور",
+        'father_information' => "معلومات الأب",
+        'mother_information' => "معلومات الأم",
+        'auth_and_attachments' => "معلومات الحساب و المرفقات",
+        'attachments_help' => "الوثائق المطلوبة: jpg, png, jpeg, png, pdf",
         'fields' => [
             'email' => "البريد الإلكتروني",
             'password' => "كلمة المرور",
+            'password_confirmation' => "تأكيد كلمة المرور",
             'name_father' => "اسم الأب",
             'name_father_ar' => "اسم الأب (بالعربية)",
             'name_father_en' => "اسم الأب (باللغة الإنجليزية)",
@@ -327,6 +339,8 @@ return [
             'blood_type_mother_id' => "فصيلة دم الأم",
             'religion_mother_id' => "ديانة الأم",
             'address_mother' => "عنوان الأم",
+            'attachments' => "المرفقات",
+            'image' => "الصورة الشحصية",
         ],
         'messages' => [
             'success' => [
