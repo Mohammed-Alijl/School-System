@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Gender;
 use App\Models\Nationality;
 use App\Models\Religion;
 use App\Models\TypeBlood;
@@ -69,6 +70,22 @@ class LookupsSeeder extends Seeder
             Nationality::firstOrCreate(
                 ['name->en' => $nationality['en']],
                 ['name' => $nationality]
+            );
+        }
+
+        // ==========================================
+        // 4. Gender
+        // ==========================================
+        $genders = [
+            ['en' => 'Male', 'ar' => 'ذكر'],
+            ['en' => 'Female', 'ar' => 'أنثر'],
+            ['en' => 'Other', 'ar' => 'أخرى'],
+        ];
+
+        foreach ($genders as $gender) {
+            Gender::firstOrCreate(
+                ['name->en' => $gender['en']],
+                ['name' => $gender]
             );
         }
     }
