@@ -366,4 +366,61 @@ return [
             ]
         ]
     ],
+    'students' => [
+        'title' => "Students",
+        'add' => "Add Student",
+        'edit' => "Edit Student",
+        'delete' => "Delete Student",
+        'archived' => "Archived Students",
+        'student_information' => "Student Information",
+        'academic_information' => "Academic Information",
+        'personal_information' => "Personal Information",
+
+        'fields' => [
+            'name' => "Student Name",
+            'name_ar' => "Student Name (Arabic)",
+            'name_en' => "Student Name (English)",
+            'student_code' => "Student Code / Academic No.",
+            'email' => "Email",
+            'password' => "Password",
+            'password_confirmation' => "Password Confirmation",
+            'national_id' => "National ID",
+            'date_of_birth' => "Date of Birth",
+
+            'grade' => "Educational Grade",
+            'classroom' => "Classroom",
+            'section' => "Section",
+            'academic_year' => "Academic Year",
+
+            'guardian' => "Guardian",
+            'blood_type' => "Blood Type",
+            'nationality' => "Nationality",
+            'religion' => "Religion",
+            'gender' => "Gender",
+
+            'status' => "Status",
+            'active' => "Active",
+            'inactive' => "Inactive",
+
+            'image' => "Personal Photo",
+            'attachments' => "Attachments",
+        ],
+
+        'messages' => [
+            'success' => [
+                'add' => 'Student added successfully.',
+                'update' => 'Student updated successfully.',
+                'delete' => 'Student deleted successfully.',
+                'restore' => 'Student restored successfully.',
+                'archive' => 'Student archived successfully.',
+            ],
+            'failed' => [
+                'add' => 'Failed to add student.',
+                'update' => 'Failed to update student.',
+                'delete' => 'Failed to delete student.',
+                'restore' => 'Failed to restore student.',
+                'archive' => 'Failed to archive student.',
+            ],
+        ]
+    ],
 ];
