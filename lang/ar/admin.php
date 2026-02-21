@@ -373,6 +373,8 @@ return [
         'student_information' => "بيانات الطالب",
         'academic_information' => "البيانات الأكاديمية",
         'personal_information' => "البيانات الشخصية",
+        'guardian_info' => "معلومات الوصي",
+        'student_code_help' => "تم توليد هذا الرقم الدراسي خصيصا لطالب الجديد",
         'fields' => [
             'name' => "اسم الطالب",
             'name_ar' => "اسم الطالب (بالعربية)",

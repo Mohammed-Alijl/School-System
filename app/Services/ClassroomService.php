@@ -81,7 +81,7 @@ class ClassroomService
     }
 
     public function getGradeClassrooms($id) {
-        return Classroom::where('grade_id', $id)->pluck('name', 'id');
+        return Classroom::active()->where('grade_id', $id)->pluck('name', 'id');
     }
 
 }

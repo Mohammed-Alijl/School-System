@@ -11,7 +11,10 @@
 
     <link href="{{URL::asset('assets/admin/plugins/select2/css/select2.min.css')}}" rel="stylesheet">
     <link href="{{URL::asset('assets/admin/plugins/sweet-alert/sweetalert.css')}}" rel="stylesheet">
-    <link href="{{URL::asset('assets/admin/plugins/fileuploads/css/fileupload.css')}}" rel="stylesheet" type="text/css"/>
+
+    <!-- Krajee Bootstrap FileInput CSS -->
+    <link href="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-fileinput@5.5.2/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.min.css" rel="stylesheet">
 @endsection
 
 @section('page-header')
@@ -135,7 +138,7 @@
     </div>
     </div>
 
-{{--    @include('admin.students.add_modal')--}}
+    @include('admin.students.add_modal')
 {{--    @include('admin.students.edit_modal')--}}
 
 @endsection
@@ -146,6 +149,7 @@
     <script src="{{URL::asset('assets/admin/plugins/fileuploads/js/file-upload.js')}}"></script>
     <script src="{{URL::asset('assets/admin/plugins/parsleyjs/parsley.min.js')}}"></script>
     <script src="{{URL::asset('assets/admin/plugins/parsleyjs/i18n/' . LaravelLocalization::getCurrentLocale() . '.js')}}"></script>
+    <script src="{{URL::asset('assets/admin/plugins/jquery.maskedinput/jquery.maskedinput.js')}}"></script>
     <script src="{{URL::asset('assets/admin/js/crud.js')}}"></script>
 
     @include('admin.layouts.scripts.datatable_config')
@@ -159,7 +163,7 @@
                 placeholder: '{{trans("admin.global.select")}}',
                 width: '100%'
             });
-            @stack('js')
         });
     </script>
+    @stack('scripts')
 @endsection

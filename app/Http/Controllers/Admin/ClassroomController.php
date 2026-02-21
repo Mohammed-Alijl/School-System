@@ -146,4 +146,13 @@ class ClassroomController extends Controller implements HasMiddleware
             return response()->json(['status' => 'error', 'message' => $e->getMessage()], 500);
         }
     }
+
+    public function getByGrade(Request $request)
+    {
+        $classrooms = $this->classroomService->getGradeClassrooms($request->grade_id);
+        return response()->json([
+            'success' => true,
+            'data' => $classrooms
+        ]);
+    }
 }

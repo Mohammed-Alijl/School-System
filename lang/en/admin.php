@@ -375,6 +375,8 @@ return [
         'student_information' => "Student Information",
         'academic_information' => "Academic Information",
         'personal_information' => "Personal Information",
+        'guardian_info' => "Guardian Information",
+        'student_code_help' => "This Number Is Auto Generated For the New Student",
 
         'fields' => [
             'name' => "Student Name",

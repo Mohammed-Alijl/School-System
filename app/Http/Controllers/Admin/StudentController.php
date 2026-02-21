@@ -145,4 +145,20 @@ class StudentController extends Controller implements HasMiddleware
         $sections = Section::where('classroom_id', $classroom_id)->pluck('name', 'id');
         return response()->json($sections);
     }
+
+    public function getNextStudentCode() {
+        try {
+            $student_code = $this->studentService->getNextStudentCode();
+            return response()->json([
+                'status' => 'success',
+                'student_code' => $student_code
+            ]);
+
+        }catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ], 500);
+        }
+    }
 }

@@ -77,6 +77,9 @@ Route::group(
                     Route::post('restore/{id}',[StudentController::class, 'restore'])->name('restore');
                     Route::delete('force-delete/{id}',[StudentController::class, 'forceDelete'])->name('forceDelete');
                 });
+                Route::get('/classrooms/by-grade', [ClassroomController::class, 'getByGrade'])->name('classrooms.by-grade');
+                Route::get('/sections/by-classroom', [SectionController::class, 'getByClassroom'])->name('sections.by-classroom');
+                Route::get('/students/next-code', [StudentController::class, 'getNextStudentCode'])->name('students.next-code');
             });
             Route::post('logout', [AdminAuthController::class, 'destroy'])->name('logout');
         });

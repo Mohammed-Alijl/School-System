@@ -9,6 +9,7 @@ use App\Models\Section;
 use App\Services\ClassroomService;
 use App\Services\GradeService;
 use App\Services\SectionService;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
 
@@ -160,5 +161,13 @@ class SectionController extends Controller implements HasMiddleware
     {
         $classrooms = $this->classroomService->getGradeClassrooms($id);
         return response()->json($classrooms);
+    }
+
+    public function getByClassroom(Request $request) {
+        $sections = $this->sectionService->getClassroomSections($request->classroom_id);
+        return response()->json([
+            'success' => true,
+            'data' => $sections
+        ]);
     }
 }

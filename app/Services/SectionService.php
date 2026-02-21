@@ -75,4 +75,8 @@ class SectionService
             return true;
     }
 
+    public function getClassroomSections($id) {
+        return Section::active()->where('classroom_id', $id)->pluck('name', 'id');
+    }
+
 }

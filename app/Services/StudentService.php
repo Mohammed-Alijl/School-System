@@ -143,4 +143,21 @@ class StudentService
         $student->forceDelete();
         return true;
     }
+
+    public function getNextStudentCode()
+    {
+        $currentYear = date('Y');
+        $lastStudent = Student::where('student_code', 'like', $currentYear . '%')
+            ->orderBy('student_code', 'desc')
+            ->first();
+
+        if ($lastStudent) {
+            $lastSequence = (int) substr($lastStudent->student_code, 4);
+            $newSequence = str_pad($lastSequence + 1, 4, '0', STR_PAD_LEFT);
+        } else {
+            $newSequence = '0001';
+        }
+
+        return $currentYear . $newSequence;
+    }
 }
