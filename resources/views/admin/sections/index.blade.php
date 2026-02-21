@@ -152,28 +152,40 @@
 
 
 
-            $('select[name="grade_id"]').on('change', function() {
-                var GradeId = $(this).val();
-                var classroomSelect = $(this).closest('form').find('select[name="classroom_id"]');
+            /* ===============================
+            CASCADING DROPDOWNS
+            =============================== */
 
-                if (GradeId) {
-                    $.ajax({
-                        url: "{{ URL::to('admin/classes') }}/" + GradeId,
-                        type: "GET",
-                        dataType: "json",
-                        success: function(data) {
-                            classroomSelect.empty();
-                            classroomSelect.append('<option value="" selected disabled>-- اختر الصف --</option>');
+            $('select[name="grade_id"]').on('change', function () {
 
-                            $.each(data, function(key, value) {
+                let gradeId = $(this).val();
 
-                                classroomSelect.append('<option value="' + key + '">' + value + '</option>');
+                resetDropdown('select[name="classroom_id"]');
+
+                if (!gradeId) return;
+
+                $.ajax({
+                    url: "{{ route('admin.classrooms.by-grade') }}",
+                    type: "GET",
+                    data: { grade_id: gradeId },
+
+                    success: function (response) {
+
+                        if (response.success) {
+
+                            $.each(response.data, function (key, classroom) {
+
+                                $('select[name="classroom_id"]').append(
+                                    `<option value="${key}">${classroom}</option>`
+                                );
+
                             });
-                        },
-                    });
-                } else {
-                    console.log('AJAX load did not work');
-                }
+
+                        }
+
+                    }
+                });
+
             });
 
             $(document).on('click', '.edit-btn', function() {
@@ -186,19 +198,43 @@
 
                 if(gradeId) {
                     $.ajax({
-                        url: "{{ URL::to('admin/classes') }}/" + gradeId,
+                        url: "{{ route('admin.classrooms.by-grade') }}",
                         type: "GET",
-                        dataType: "json",
-                        success: function(data) {
-                            $.each(data, function(key, value) {
-                                var select = (key == classroomId) ? 'selected' : '';
-                                classroomSelect.append('<option value="' + key + '" '+select+'>' + value + '</option>');
-                            });
-                            classroomSelect.trigger('change');
+                        data: { grade_id: gradeId },
+
+                        success: function (response) {
+
+                            if (response.success) {
+
+                                $.each(response.data, function (key, classroom) {
+
+                                    $('select[name="classroom_id"]').append(
+                                        `<option value="${key}">${classroom}</option>`
+                                    );
+
+                                });
+
+                            }
+
                         }
                     });
                 }
             });
+
+            /* ===============================
+            HELPERS
+            =============================== */
+
+            function resetDropdown(selector) {
+
+                $(selector).html(`
+            <option value="" disabled selected>
+                -- {{ trans('admin.global.select') }} --
+            </option>
+        `);
+
+            }
+
         });
     </script>
 @endsection

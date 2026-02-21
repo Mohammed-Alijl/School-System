@@ -157,12 +157,6 @@ class SectionController extends Controller implements HasMiddleware
         }
     }
 
-    public function getClassrooms($id)
-    {
-        $classrooms = $this->classroomService->getGradeClassrooms($id);
-        return response()->json($classrooms);
-    }
-
     public function getByClassroom(Request $request) {
         $sections = $this->sectionService->getClassroomSections($request->classroom_id);
         return response()->json([
