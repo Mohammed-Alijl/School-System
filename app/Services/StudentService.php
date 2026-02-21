@@ -147,7 +147,7 @@ class StudentService
     public function getNextStudentCode()
     {
         $currentYear = date('Y');
-        $lastStudent = Student::where('student_code', 'like', $currentYear . '%')
+        $lastStudent = Student::withTrashed()->where('student_code', 'like', $currentYear . '%')
             ->orderBy('student_code', 'desc')
             ->first();
 

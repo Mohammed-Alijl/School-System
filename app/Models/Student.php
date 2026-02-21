@@ -57,7 +57,7 @@ class Student extends Authenticatable
         parent::boot();
         static::creating(function ($student) {
             $currentYear = date('Y');
-            $lastStudent = self::where('student_code', 'like', $currentYear . '%')
+            $lastStudent = self::withTrashed()->where('student_code', 'like', $currentYear . '%')
                 ->orderBy('student_code', 'desc')
                 ->first();
 
@@ -84,7 +84,7 @@ class Student extends Authenticatable
 
     public function classroom()
     {
-        return $this->belongsTo(Classroom::class, 'classroom_id');
+        return $this->belongsTo(ClassRoom::class);
     }
 
     public function section()

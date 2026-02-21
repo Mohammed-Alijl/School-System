@@ -97,7 +97,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>{{ trans('admin.students.fields.date_of_birth') }} <span class="text-danger">*</span></label>
-                                <input class="form-control" id="dateMask" placeholder="MM/DD/YYYY"
+                                <input class="form-control" id="dateMask" placeholder="DD-MM-YYYY"
                                        type="text" required name="date_of_birth">
                                 <span class="text-danger error-text date_of_birth_error"></span>
                             </div>
@@ -214,7 +214,7 @@
                                     <option value="" disabled selected>-- {{ trans('admin.global.select') }} --</option>
                                     @foreach($guardians as $guardian)
                                         <option value="{{ $guardian->id }}">
-                                            {{ $guardian->name_father['ar'] ?? $guardian->name_father['en'] }}
+                                            {{ $guardian->name_father }}
                                         </option>
                                     @endforeach
                                 </select>
@@ -523,7 +523,7 @@
 
             /* Date Mask */
 
-            $('#dateMask').mask('99/99/9999');
+            $('#dateMask').mask('99-99-9999');
 
         });
 

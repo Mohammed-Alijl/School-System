@@ -59,12 +59,12 @@
                             <thead>
                             <tr>
                                 <th class="wd-5p border-bottom-0">#</th>
-                                <th class="wd-20p border-bottom-0">{{ trans('admin.students.fields.student_code') }}</th>
-                                <th class="wd-20p border-bottom-0">{{ trans('admin.students.fields.name') }}</th>
-                                <th class="wd-20p border-bottom-0">{{ trans('admin.students.fields.guardian') }}</th>
-                                <th class="wd-20p border-bottom-0">{{ trans('admin.students.fields.grade') }}</th>
-                                <th class="wd-20p border-bottom-0">{{ trans('admin.students.fields.classroom') }}</th>
-                                <th class="wd-20p border-bottom-0">{{ trans('admin.students.fields.section') }}</th>
+                                <th class="wd-10p border-bottom-0">{{ trans('admin.students.fields.student_code') }}</th>
+                                <th class="wd-10p border-bottom-0">{{ trans('admin.students.fields.name') }}</th>
+                                <th class="wd-10p border-bottom-0">{{ trans('admin.students.fields.guardian') }}</th>
+                                <th class="wd-10p border-bottom-0">{{ trans('admin.students.fields.grade') }}</th>
+                                <th class="wd-10p border-bottom-0">{{ trans('admin.students.fields.classroom') }}</th>
+                                <th class="wd-10p border-bottom-0">{{ trans('admin.students.fields.section') }}</th>
                                 <th class="wd-10p border-bottom-0">{{ trans('admin.students.fields.status') }}</th>
                                 @canany('edit_students','delete_students')
                                     <th class="wd-20p border-bottom-0">{{ trans('admin.global.actions') }}</th>
@@ -77,6 +77,7 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $student->student_code }}</td>
                                     <td>{{ $student->name }}</td>
+                                    <td>{{ $student->guardian->name_father }}</td>
                                     <td>{{ $student->grade->name }}</td>
                                     <td>{{ $student->classroom->name }}</td>
                                     <td>{{ $student->section->name }}</td>
@@ -105,13 +106,13 @@
                                                        data-classroom_id="{{ $student->classroom_id }}"
                                                        data-section_id="{{ $student->section_id }}"
                                                        data-academic_year="{{ $student->academic_year }}"
-                                                       data-status="{{ $student->status }}">
-                                                       data-guardian_id="{{ $student->guardian_id }}">
-                                                       data-blood_type_id="{{ $student->blood_type_id }}">
-                                                       data-nationality_id="{{ $student->nationality_id }}">
-                                                       data-religion_id="{{ $student->religion_id }}">
-                                                       data-gender_id="{{ $student->gender_id }}">
-                                                       data-gender_id="{{ $student->admin_id }}">
+                                                       data-status="{{ $student->status }}"
+                                                       data-guardian_id="{{ $student->guardian_id }}"
+                                                       data-blood_type_id="{{ $student->blood_type_id }}"
+                                                       data-nationality_id="{{ $student->nationality_id }}"
+                                                       data-religion_id="{{ $student->religion_id }}"
+                                                       data-gender_id="{{ $student->gender_id }}"
+                                                       data-admin_id="{{ $student->admin_id }}">
                                                         <i class="las la-pen"></i> {{trans('admin.global.edit')}}
                                                     </a>
                                                 @endcan
