@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\GradeController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\SectionController;
 use App\Http\Controllers\Admin\StudentController;
+use App\Http\Controllers\Admin\StudentPromotionController;
 use App\Http\Controllers\GuardianController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -72,6 +73,8 @@ Route::group(
                 });
                 Route::resource('students',StudentController::class)->except(['show','create','edit']);
                 Route::prefix('students/')->name('students.')->group(function () {
+                    Route::get('promotions', [StudentPromotionController::class, 'index'])->name('promotions.index');
+                    Route::post('promotions', [StudentPromotionController::class, 'store'])->name('promotions.store');
                     Route::get('archive',[StudentController::class,'archive'])->name('archived');
                     Route::post('restore/{id}',[StudentController::class, 'restore'])->name('restore');
                     Route::delete('force-delete/{id}',[StudentController::class, 'forceDelete'])->name('forceDelete');

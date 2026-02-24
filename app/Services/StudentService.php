@@ -9,6 +9,7 @@ use App\Models\Nationality;
 use App\Models\TypeBlood;
 use App\Models\Religion;
 use App\Models\Gender;
+use App\Models\AcademicYear;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -29,6 +30,7 @@ class StudentService
             'blood_types'   => TypeBlood::all(),
             'religions'     => Religion::all(),
             'genders'       => Gender::all(),
+            'academicYears' => AcademicYear::orderBy('name')->get(),
         ];
     }
 

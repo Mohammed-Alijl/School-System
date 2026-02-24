@@ -116,4 +116,9 @@ class Student extends Authenticatable
     {
         return $this->belongsTo(Admin::class, 'admin_id');
     }
+
+    public function enrollments()
+    {
+        return $this->hasMany(StudentEnrollment::class);
+    }
 }

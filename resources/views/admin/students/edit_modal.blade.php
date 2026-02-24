@@ -197,8 +197,12 @@
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label>{{ trans('admin.students.fields.academic_year') }} <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" name="academic_year"
-                                       placeholder="2024-2025" required value="{{ date('Y') . '-' . (date('Y') + 1) }}">
+                                <select name="academic_year" class="form-control select2" required>
+                                    <option value="" disabled selected>-- {{ trans('admin.global.select') }} --</option>
+                                    @foreach($academicYears as $year)
+                                        <option value="{{ $year->name }}">{{ $year->name }}</option>
+                                    @endforeach
+                                </select>
                                 <span class="text-danger error-text academic_year_error"></span>
                             </div>
                         </div>

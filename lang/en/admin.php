@@ -425,4 +425,41 @@ return [
             ],
         ]
     ],
+    'promotions' => [
+        'title' => 'Student Promotions',
+        'filters' => 'Promotion Filters',
+        'load_students' => 'Load Students',
+        'promote' => 'Promote Students',
+        'no_students' => 'No students found for the selected criteria.',
+        'repeat_hint' => 'Students not selected will be marked as repeating for the new academic year.',
+        'fields' => [
+            'from_grade' => 'From Grade',
+            'from_classroom' => 'From Classroom',
+            'from_section' => 'From Section',
+            'from_academic_year' => 'From Academic Year',
+            'to_grade' => 'To Grade',
+            'to_classroom' => 'To Classroom',
+            'to_section' => 'To Section',
+            'to_academic_year' => 'To Academic Year',
+            'promote' => 'Promote',
+            'graduate' => 'Graduate',
+            'students' => 'Students',
+            'confirm_title' => 'Are you sure?',
+        ],
+        'messages' => [
+            'success' => [
+                'promote' => 'Processed successfully. Promoted: :promoted, Repeating: :repeating, Graduated: :graduated.',
+            ],
+            'failed' => [
+                'promote' => 'Failed to promote students.',
+                'same_place' => 'Please choose a different destination for promotion.',
+                'same_year' => 'Source and target academic year must be different.',
+                'mismatch' => 'Some selected students no longer match the selected class.',
+                'conflict' => 'A student cannot be promoted and graduated at the same time.',
+                'invalid_year' => 'The selected academic year is invalid.',
+                'already_enrolled' => 'Some students already have an enrollment for the target academic year.',
+                'unauthorized_graduate' => 'You are not authorized to graduate students.',
+            ],
+        ],
+    ],
 ];
