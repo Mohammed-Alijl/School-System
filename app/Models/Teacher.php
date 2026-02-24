@@ -10,6 +10,7 @@ class Teacher extends Model
 {
 
     protected $fillable = [
+        'teacher_code',
         'name',
         'email',
         'password',
@@ -17,9 +18,11 @@ class Teacher extends Model
         'address',
         'joining_date',
         'gender_id',
+        'blood_type_id',
+        'nationality_id',
+        'religion_id',
         'status',
         'image',
-        'attachments',
     ];
 
     protected $hidden = [
@@ -31,6 +34,24 @@ class Teacher extends Model
         'joining_date' => 'date',
     ];
 
+    protected static function booted()
+    {
+        static::creating(function ($teacher) {
+            $prefix = 'TCH-' . date('Y') . '-';
+            $lastTeacher = self::where('teacher_code', 'like', $prefix . '%')
+                ->orderBy('id', 'desc')
+                ->first();
+
+            if ($lastTeacher) {
+                $lastNumber = str_replace($prefix, '', $lastTeacher->teacher_code);
+                $nextNumber = str_pad((int)$lastNumber + 1, 4, '0', STR_PAD_LEFT);
+            } else {
+                $nextNumber = '0001';
+            }
+            $teacher->teacher_code = $prefix . $nextNumber;
+        });
+    }
+
     // ─── Relationships ────────────────────────────────────────────────────────
 
     public function gender(): BelongsTo {
@@ -41,7 +62,25 @@ class Teacher extends Model
         return $this->hasMany(TeacherAttachment::class,'teacher_id');
     }
 
+    public function nationality()
+    {
+        return $this->belongsTo(Nationality::class, 'nationality_id');
+    }
 
+    public function bloodType()
+    {
+        return $this->belongsTo(TypeBlood::class, 'blood_type_id');
+    }
+
+    public function religion()
+    {
+        return $this->belongsTo(Religion::class, 'religion_id');
+    }
+
+    public function addedBy()
+    {
+        return $this->belongsTo(Admin::class, 'admin_id');
+    }
 
     // ─── Scopes ───────────────────────────────────────────────────────────────
 
