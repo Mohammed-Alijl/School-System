@@ -9,7 +9,7 @@ class TeacherAttachment extends Model
 {
     protected $fillable = [
       'teacher_id',
-      'attachment',
+      'attachment_path',
     ];
 
     // ─── Relationships ─────────────────────────────────────────

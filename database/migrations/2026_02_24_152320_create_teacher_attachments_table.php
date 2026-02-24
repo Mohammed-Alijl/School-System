@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('teacher_attachments', function (Blueprint $table) {
             $table->id();
             $table->foreignId('teacher_id')->constrained('teachers');
-            $table->string('name');
+            $table->string('attachment_path');
             $table->timestamps();
         });
     }
