@@ -7,12 +7,12 @@ use App\Http\Controllers\Admin\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Admin\Auth\VerifyEmailController;
 use App\Http\Controllers\Admin\ClassroomController;
 use App\Http\Controllers\Admin\GradeController;
+use App\Http\Controllers\Admin\GuardianController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\SectionController;
 use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Admin\StudentPromotionController;
 use App\Http\Controllers\Admin\TeacherController;
-use App\Http\Controllers\GuardianController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
