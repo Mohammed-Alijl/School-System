@@ -156,4 +156,15 @@ class TeacherService
 
         return $prefix . $newSequence;
     }
+
+    public function deleteAttachment($id)
+    {
+        $attachment = TeacherAttachment::findOrFail($id);
+        
+        if (Storage::disk('public')->exists($attachment->attachment_path)) {
+            Storage::disk('public')->delete($attachment->attachment_path);
+        }
+        
+        return $attachment->delete();
+    }
 }

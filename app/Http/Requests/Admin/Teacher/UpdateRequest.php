@@ -24,10 +24,11 @@ class UpdateRequest extends FormRequest
         $teacher = $this->route('teacher');
 
         return [
-            'password'          => ['required', 'string', 'min:8', 'confirmed'],
+            'password'          => ['string', 'min:8', 'max:30', 'confirmed','nullable'],
             'name.ar'           => ['required', 'string', 'max:100', 'min:3'],
             'name.en'           => ['required', 'string', 'max:100', 'min:3'],
             'email'             => ['required', 'email', 'max:100', "unique:teachers,email,{$teacher->id}"],
+            'national_id'       => ['required', 'string', 'min:10', 'max:10', "unique:teachers,national_id,{$teacher->id}"],
             'phone'             => ['nullable', 'string', 'max:20'],
             'address'           => ['nullable', 'string', 'max:500'],
             'joining_date'      => ['required', 'date'],

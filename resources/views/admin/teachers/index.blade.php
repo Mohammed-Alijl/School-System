@@ -1,0 +1,222 @@
+@extends('admin.layouts.master')
+
+@section('title', trans('admin.teachers.title'))
+
+@section('css')
+    <link href="{{ URL::asset('assets/admin/plugins/datatable/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet" />
+    <link href="{{ URL::asset('assets/admin/plugins/datatable/css/buttons.bootstrap4.min.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('assets/admin/plugins/datatable/css/responsive.bootstrap4.min.css') }}" rel="stylesheet" />
+    <link href="{{ URL::asset('assets/admin/plugins/datatable/css/jquery.dataTables.min.css') }}" rel="stylesheet">
+
+    <link href="{{ URL::asset('assets/admin/plugins/datatable/css/responsive.dataTables.min.css') }}" rel="stylesheet">
+    <link href="{{URL::asset('assets/admin/plugins/select2/css/select2.min.css')}}" rel="stylesheet">
+    <link href="{{URL::asset('assets/admin/plugins/sweet-alert/sweetalert.css')}}" rel="stylesheet">
+
+    <!-- Krajee Bootstrap FileInput CSS -->
+    <link href="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-fileinput@5.5.2/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.min.css" rel="stylesheet">
+    
+    <!--Internal telephoneInput css-->
+    <link rel="stylesheet" href="{{URL::asset('assets/admin/plugins/telephoneinput/telephoneinput.css')}}">
+    <style>
+        /* Force Datepicker above everything including modals (Bootstrap modal z-index is 1050) */
+        .ui-datepicker { 
+            z-index: 999999 !important; 
+            position: absolute !important;
+        }
+        .ui-widget.ui-widget-content {
+            z-index: 999999 !important;
+        }
+        .modal-open .ui-datepicker {
+            z-index: 999999 !important;
+        }
+        .iti { width: 100%; display: block; }
+    </style>
+@endsection
+
+@section('page-header')
+    <div class="breadcrumb-header justify-content-between">
+        <div class="my-auto">
+            <div class="d-flex">
+                <h4 class="content-title mb-0 my-auto">{{ trans('admin.sidebar.users') }}</h4>
+                <span class="text-muted mt-1 tx-13 mr-2 mb-0">/ {{ trans('admin.teachers.title') }}</span>
+            </div>
+        </div>
+        <div class="d-flex my-xl-auto right-content">
+            @can('view-archived_teachers')
+                 <div class="pr-1 mb-3 mb-xl-0">
+                    <a class="modal-effect btn btn-warning-gradient btn-with-icon btn-block"
+                       href="{{route('admin.teachers.archived')}}">
+                        <i class="fas fa-book ml-2"></i>  {{trans('admin.teachers.archived') }}
+                    </a>
+            </div>
+            @endcan
+            @can('create_teachers')
+                  <div class="pr-1 mb-3 mb-xl-0">
+                <a class="modal-effect btn btn-primary-gradient btn-with-icon btn-block"
+                   data-effect="effect-scale"
+                   data-toggle="modal"
+                   href="#addModal">
+                    <i class="fas fa-plus-circle ml-2"></i> {{ trans('admin.teachers.add') }}
+                </a>
+            </div>
+            @endcan
+        </div>
+    </div>
+@endsection
+
+@section('content')
+    <div class="row row-sm">
+        <div class="col-xl-12">
+            <div class="card">
+                <div class="card-header pb-0"></div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table text-md-nowrap" id="teachers_table">
+                            <thead>
+                            <tr>
+                                <th class="wd-5p border-bottom-0">#</th>
+                                <th class="wd-5p border-bottom-0">{{ trans('admin.teachers.fields.image') }}</th>
+                                <th class="wd-10p border-bottom-0">{{ trans('admin.teachers.fields.teacher_code') }}</th>
+                                <th class="wd-15p border-bottom-0">{{ trans('admin.teachers.fields.name') }}</th>
+                                <th class="wd-15p border-bottom-0">{{ trans('admin.teachers.fields.email') }}</th>
+                                <th class="wd-10p border-bottom-0">{{ trans('admin.teachers.fields.national_id') }}</th>
+                                <th class="wd-15p border-bottom-0">{{ trans('admin.teachers.fields.phone') }}</th>
+                                <th class="wd-10p border-bottom-0">{{ trans('admin.teachers.fields.status') }}</th>
+                                @canany('edit_teachers','delete_teachers')
+                                    <th class="wd-15p border-bottom-0">{{ trans('admin.global.actions') }}</th>
+                                @endcanany
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($teachers as $teacher)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>
+                                        <img alt="avatar" class="avatar avatar-md brround bg-white" src="{{ $teacher->image_url}}">
+                                    </td>
+                                    <td>{{ $teacher->teacher_code }}</td>
+                                    <td>{{ $teacher->name }}</td>
+                                    <td>{{ $teacher->email }}</td>
+                                    <td>{{ $teacher->national_id }}</td>
+                                    <td>{{ $teacher->phone }}</td>
+                                    <td>
+                                        @if ($teacher->status)
+                                            <span class="label text-success d-flex">{{ trans('admin.global.active') }}</span>
+                                        @else
+                                            <span class="label text-danger d-flex">{{ trans('admin.global.disabled') }}</span>
+                                        @endif
+                                    </td>
+                                    @canany('edit_teachers','delete_teachers')
+                                            <td>
+                                                @can('edit_teachers')
+                                                    @php
+                                                        $attachmentUrls = [];
+                                                        $attachmentConfigs = [];
+
+                                                        if($teacher->attachments->count() > 0) {
+                                                            foreach($teacher->attachments as $attachment) {
+                                                                $filePath = $attachment->attachment_path;
+                                                                $fullUrl = asset('storage/' . $filePath);
+                                                                $attachmentUrls[] = $fullUrl;
+
+                                                                $fileName = basename($filePath);
+                                                                $extension = pathinfo($filePath, PATHINFO_EXTENSION);
+
+
+                                                                if(in_array($extension, ['jpg', 'jpeg', 'png', 'svg']))
+                                                                    $type = 'image';
+                                                                 elseif ($extension == 'pdf')
+                                                                    $type = 'pdf';
+                                                                 elseif (in_array($extension, ['doc', 'docx']))
+                                                                    $type = 'office';
+                                                                 else
+                                                                    $type = 'other';
+
+                                                                $attachmentConfigs[] = [
+                                                                    'caption' => $fileName,
+                                                                    'type' => $type,
+                                                                    'url' => route('admin.teachers.attachments.destroy', $attachment->id),
+                                                                    'key' => $attachment->id
+                                                                ];
+                                                            }
+                                                        }
+                                                    @endphp
+                                                    <a class="btn btn-info btn-sm edit-btn"
+                                                       href="#"
+                                                       data-toggle="modal"
+                                                       data-target="#editModal"
+                                                       data-url="{{ route('admin.teachers.update', $teacher->id) }}"
+                                                       data-name_ar="{{ $teacher->getTranslation('name', 'ar') }}"
+                                                       data-name_en="{{ $teacher->getTranslation('name', 'en') }}"
+                                                       data-email="{{ $teacher->email }}"
+                                                       data-national_id="{{ $teacher->national_id }}"
+                                                       data-gender_id="{{ $teacher->gender_id }}"
+                                                       data-blood_type_id="{{ $teacher->blood_type_id }}"
+                                                       data-nationality_id="{{ $teacher->nationality_id }}"
+                                                       data-religion_id="{{ $teacher->religion_id }}"
+                                                       data-joining_date="{{ $teacher->joining_date->format('Y-m-d') }}"
+                                                       data-address="{{ $teacher->address }}"
+                                                       data-phone="{{ $teacher->phone }}"
+                                                       data-status="{{ $teacher->status }}"
+                                                       data-image="{{ $teacher->image ? \Illuminate\Support\Facades\Storage::disk('public')->url($teacher->image) : '' }}"
+                                                       data-attachments='@json($attachmentUrls)'
+                                                       data-configs='@json($attachmentConfigs)'>
+                                                        <i class="las la-pen"></i> {{trans('admin.global.edit')}}
+                                                    </a>
+                                                @endcan
+                                                @can('delete_teachers')
+                                                    <a class="modal-effect btn btn-sm btn-danger delete-item"
+                                                       href="#"
+                                                       data-id="{{ $teacher->id }}"
+                                                       data-url="{{ route('admin.teachers.destroy', $teacher->id) }}"
+                                                       data-name="{{ $teacher->name }}">
+                                                        <i class="las la-trash"></i> {{trans('admin.global.archive')}}
+                                                    </a>
+                                                @endcan
+                                            </td>
+                                    @endcanany
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+
+    @include('admin.teachers.add_modal')
+    @include('admin.teachers.edit_modal')
+
+@endsection
+
+@section('js')
+    <script src="{{URL::asset('assets/admin/plugins/select2/js/select2.min.js')}}"></script>
+    <script src="{{URL::asset('assets/admin/plugins/fileuploads/js/fileupload.js')}}"></script>
+    <script src="{{URL::asset('assets/admin/plugins/fileuploads/js/file-upload.js')}}"></script>
+    <script src="{{URL::asset('assets/admin/plugins/parsleyjs/parsley.min.js')}}"></script>
+    <script src="{{URL::asset('assets/admin/plugins/parsleyjs/i18n/' . LaravelLocalization::getCurrentLocale() . '.js')}}"></script>
+    <script src="{{URL::asset('assets/admin/plugins/jquery.maskedinput/jquery.maskedinput.js')}}"></script>
+    <script src="{{URL::asset('assets/admin/js/crud.js')}}"></script>
+
+    <!--Internal  telephoneInput js-->
+    <script src="{{URL::asset('assets/admin/plugins/telephoneinput/telephoneinput.js')}}"></script>
+
+    @include('admin.layouts.scripts.datatable_config')
+    @include('admin.layouts.scripts.delete_script')
+
+    <script>
+        $(document).ready(function() {
+            $('#teachers_table').DataTable(globalTableConfig);
+
+            $('.select2').select2({
+                placeholder: '{{trans("admin.global.select")}}',
+                width: '100%'
+            });
+        });
+    </script>
+    @stack('scripts')
+@endsection

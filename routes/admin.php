@@ -116,6 +116,7 @@ Route::group(
                 // ─── Teachers ───────────────────────────────────────────────────────────────
                 Route::resource('teachers',TeacherController::class)->except(['show','create','edit']);
                 Route::prefix('teachers/')->name('teachers.')->group(function () {
+                    Route::delete('attachments/{id}', [TeacherController::class, 'deleteAttachment'])->name('attachments.destroy');
                     Route::get('archive',[TeacherController::class,'archive'])->name('archived');
                     Route::post('restore/{id}',[TeacherController::class, 'restore'])->name('restore');
                     Route::delete('force-delete/{id}',[TeacherController::class, 'forceDelete'])->name('forceDelete');

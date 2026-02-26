@@ -23,10 +23,11 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'password'          => ['required', 'string', 'min:8', 'confirmed'],
+            'password'          => ['required', 'string', 'min:8', 'max:30', 'confirmed'],
             'name.ar'           => ['required', 'string', 'max:100', 'min:3'],
             'name.en'           => ['required', 'string', 'max:100', 'min:3'],
             'email'             => ['required', 'email', 'max:100', 'unique:teachers,email'],
+            'national_id'       => ['required', 'string', 'max:50', 'unique:teachers,national_id'],
             'phone'             => ['nullable', 'string', 'max:20'],
             'address'           => ['nullable', 'string', 'max:500'],
             'joining_date'      => ['required', 'date'],

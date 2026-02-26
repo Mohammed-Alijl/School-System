@@ -18,6 +18,7 @@ class Teacher extends Authenticatable
         'teacher_code',
         'name',
         'email',
+        'national_id',
         'password',
         'phone',
         'address',
@@ -44,6 +45,14 @@ class Teacher extends Authenticatable
     public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = Hash::make($value);
+    }
+
+    public function getImageUrlAttribute()
+    {
+        if (!empty($this->image)) {
+            return asset('storage/' . $this->image);
+        }
+        return asset('assets/admin/img/faces/admin.png');
     }
 
     protected static function booted()
