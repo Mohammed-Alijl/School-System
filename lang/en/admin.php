@@ -173,12 +173,15 @@ return [
     'teachers' => [
         'title' => 'Teachers',
         'add' => "Add Teacher",
+        'show' => "Teacher Profile",
         'edit' => "Edit Teacher",
         'delete' => "Delete Teacher",
         'archived' => "Archived Teachers",
         'actions' => "Actions",
         'search' => "Search...",
         'teacher_information' => "Teacher Information",
+        'contact_info' => 'Contact Info',
+        'details' => 'Details',
         'fields' => [
             'name' => "Name",
             'name_ar' => "Name (Arabic)",

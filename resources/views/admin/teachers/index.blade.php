@@ -15,22 +15,17 @@
     <!-- Krajee Bootstrap FileInput CSS -->
     <link href="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-fileinput@5.5.2/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.min.css" rel="stylesheet">
-    
+
     <!--Internal telephoneInput css-->
     <link rel="stylesheet" href="{{URL::asset('assets/admin/plugins/telephoneinput/telephoneinput.css')}}">
     <style>
-        /* Force Datepicker above everything including modals (Bootstrap modal z-index is 1050) */
-        .ui-datepicker { 
-            z-index: 999999 !important; 
+        .ui-datepicker {
+            z-index: 999999 !important;
             position: absolute !important;
         }
         .ui-widget.ui-widget-content {
             z-index: 999999 !important;
         }
-        .modal-open .ui-datepicker {
-            z-index: 999999 !important;
-        }
-        .iti { width: 100%; display: block; }
     </style>
 @endsection
 
@@ -95,7 +90,33 @@
                                     <td>
                                         <img alt="avatar" class="avatar avatar-md brround bg-white" src="{{ $teacher->image_url}}">
                                     </td>
-                                    <td>{{ $teacher->teacher_code }}</td>
+                                    <td>
+                                        <a href="#" class="text-primary font-weight-bold show-btn"
+                                           data-toggle="modal"
+                                           data-target="#showModal"
+                                           data-teacher_code="{{ $teacher->teacher_code }}"
+                                           data-name_ar="{{ $teacher->getTranslation('name', 'ar') }}"
+                                           data-name_en="{{ $teacher->getTranslation('name', 'en') }}"
+                                           data-email="{{ $teacher->email }}"
+                                           data-national_id="{{ $teacher->national_id }}"
+                                           data-gender="{{ optional($teacher->gender)->name }}"
+                                           data-blood_type="{{ optional($teacher->bloodType)->name }}"
+                                           data-nationality="{{ optional($teacher->nationality)->name }}"
+                                           data-religion="{{ optional($teacher->religion)->name }}"
+                                           data-joining_date="{{ $teacher->joining_date->format('Y-m-d') }}"
+                                           data-address="{{ $teacher->address }}"
+                                           data-phone="{{ $teacher->phone }}"
+                                           data-status="{{ $teacher->status ? trans('admin.global.active') : trans('admin.global.disabled') }}"
+                                           data-image="{{ $teacher->imageUrl }}"
+                                           data-attachments='@json($teacher->attachments->map(function($att) {
+                                               return [
+                                                   "url" => asset("storage/" . $att->attachment_path),
+                                                   "name" => basename($att->attachment_path)
+                                               ];
+                                           }))'>
+                                            {{ $teacher->teacher_code }}
+                                        </a>
+                                    </td>
                                     <td>{{ $teacher->name }}</td>
                                     <td>{{ $teacher->email }}</td>
                                     <td>{{ $teacher->national_id }}</td>
@@ -190,6 +211,7 @@
 
     @include('admin.teachers.add_modal')
     @include('admin.teachers.edit_modal')
+    @include('admin.teachers.show_modal')
 
 @endsection
 
