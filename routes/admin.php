@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\GradeController;
 use App\Http\Controllers\Admin\GuardianController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\SectionController;
+use App\Http\Controllers\Admin\SpecializationController;
 use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Admin\StudentPromotionController;
 use App\Http\Controllers\Admin\TeacherController;
@@ -123,7 +124,7 @@ Route::group(
                 });
 
                 // ─── Specializations ───────────────────────────────────────────────────────────────
-                Route::resource('teachers',TeacherController::class)->except(['show','create','edit']);
+                Route::resource('specializations',SpecializationController::class)->except(['show','create','edit']);
 
             });
             Route::post('logout', [AdminAuthController::class, 'destroy'])->name('logout');
