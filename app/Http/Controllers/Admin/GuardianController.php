@@ -131,7 +131,7 @@ class GuardianController extends Controller implements HasMiddleware
         } catch (\Exception $ex) {
             return response()->json([
                 'status' => 'error',
-                'message' => __('admin.guardians.messages.failed.archive')
+                'message' => $ex->getMessage()
             ], 500);
         }
     }
@@ -176,10 +176,10 @@ class GuardianController extends Controller implements HasMiddleware
                 'status' => 'success',
                 'message' => __('admin.guardians.messages.success.delete')
             ]);
-        } catch (\Exception $e) {
+        } catch (\Exception $ex) {
             return response()->json([
                 'status' => 'error',
-                'message' => __('admin.guardians.messages.failed.delete')
+                'message' => $ex->getMessage()
             ], 500);
         }
     }

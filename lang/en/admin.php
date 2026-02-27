@@ -413,6 +413,7 @@ return [
                 'delete' => 'Failed to delete guardian.',
                 'restore' => 'Failed to restore guardian.',
                 'archive' => 'Failed to archive guardian.',
+                'has_students' => 'Failed to delete guardian because it has students.',
             ],
             'error' => [
                 'email_unique' => 'The Email Address is already registered.',

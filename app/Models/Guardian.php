@@ -74,4 +74,10 @@ class Guardian extends Authenticatable
         return $this->belongsTo(Religion::class, 'religion_mother_id');
     }
 
+    public function students()
+    {
+        return $this->hasMany(Student::class, 'guardian_id');
+    }
+
+
 }

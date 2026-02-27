@@ -88,6 +88,9 @@ class GuardianService
 
     public function delete($guardian)
     {
+        if ($guardian->students()->count() > 0) {
+            throw new \Exception(trans('admin.guardians.messages.failed.has_students'));
+        }
         if ($guardian->delete())
             return true;
         else
@@ -116,7 +119,9 @@ class GuardianService
         $guardian = Guardian::withTrashed()->find($id);
         if (!$guardian)
             throw new \Exception(__('admin.guardians.messages.failed.delete'));
-
+        if ($guardian->students()->count() > 0) {
+            throw new \Exception(trans('admin.guardians.messages.failed.has_students'));
+        }
         $folderPath = "guardians/{$guardian->national_id_father}";
         if (Storage::disk('public')->exists($folderPath)) {
             Storage::disk('public')->deleteDirectory($folderPath);
