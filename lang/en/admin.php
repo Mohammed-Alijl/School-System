@@ -424,6 +424,7 @@ return [
         'title' => "Students",
         'add' => "Add Student",
         'edit' => "Edit Student",
+        'show' => "Show Student",
         'delete' => "Delete Student",
         'archived' => "Archived Students",
         'student_information' => "Student Information",

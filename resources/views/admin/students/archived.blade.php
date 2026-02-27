@@ -50,7 +50,39 @@
                             @foreach($students as $student)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $student->student_code }}</td>
+                                    <td>
+                                        <a href="#" class="text-primary font-weight-bold show-btn"
+                                           data-toggle="modal"
+                                           data-target="#showModal"
+                                           data-student_code="{{ $student->student_code }}"
+                                           data-name_ar="{{ $student->getTranslation('name', 'ar') }}"
+                                           data-name_en="{{ $student->getTranslation('name', 'en') }}"
+                                           data-email="{{ $student->email }}"
+                                           data-national_id="{{ $student->national_id }}"
+                                           data-date_of_birth="{{ $student->date_of_birth->format('Y-m-d') }}"
+                                           data-grade_name="{{ optional($student->grade)->name }}"
+                                           data-classroom_name="{{ optional($student->classroom)->name }}"
+                                           data-section_name="{{ optional($student->section)->name }}"
+                                           data-academic_year="{{ $student->academic_year }}"
+                                           data-guardian_name="{{ optional($student->guardian)->name_father }}"
+                                           data-gender="{{ optional($student->gender)->name }}"
+                                           data-blood_type="{{ optional($student->bloodType)->name }}"
+                                           data-nationality="{{ optional($student->nationality)->name }}"
+                                           data-religion="{{ optional($student->religion)->name }}"
+                                           data-status="{{ $student->status ? trans('admin.global.active') : trans('admin.global.disabled') }}"
+                                           data-image="{{ $student->imageUrl }}"
+                                           @php
+                                               $attUrls = [];
+                                               if(!empty($student->attachments) && is_array($student->attachments)) {
+                                                   foreach($student->attachments as $att) {
+                                                       $attUrls[] = asset('storage/' . $att);
+                                                   }
+                                               }
+                                           @endphp
+                                           data-attachments='@json($attUrls)'>
+                                            {{ $student->student_code }}
+                                        </a>
+                                    </td>
                                     <td>{{ $student->name }}</td>
                                     <td>{{ $student->guardian->name_father }}</td>
                                     <td>{{ $student->grade->name }}</td>
@@ -96,8 +128,8 @@
         </div>
     </div>
     </div>
-    </div>
 
+    @include('admin.students.show_modal')
 @endsection
 
 @section('js')
@@ -117,4 +149,5 @@
             });
         });
     </script>
+    @stack('scripts')
 @endsection

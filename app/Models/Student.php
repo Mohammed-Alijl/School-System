@@ -52,6 +52,17 @@ class Student extends Authenticatable
         $this->attributes['password'] = Hash::make($value);
     }
 
+    public function getImageUrlAttribute()
+    {
+        if (!empty($this->image)) {
+            return asset('storage/' . $this->image);
+        }
+        $gender = $this->gender->getTranslation('name', 'en');
+        return $gender === 'Female'
+            ? asset('assets/student/img/faces/girl_student.png')
+            : asset('assets/student/img/faces/boy_student.png');
+    }
+
     protected static function boot()
     {
         parent::boot();
