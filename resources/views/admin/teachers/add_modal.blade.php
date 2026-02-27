@@ -137,7 +137,20 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>{{ trans('admin.specializations.title') ?? 'Specialization' }} <span class="text-danger">*</span></label>
+                                <select name="specialization_id" class="form-control select2" required>
+                                    <option value="" disabled selected>-- {{ trans('admin.global.select') }} --</option>
+                                    @foreach($specializations as $specialization)
+                                        <option value="{{ $specialization->id }}">{{ $specialization->name }}</option>
+                                    @endforeach
+                                </select>
+                                <span class="text-danger error-text specialization_id_error"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
                             <div class="form-group">
                                 <label>{{ trans('admin.teachers.fields.joining_date') }} <span class="text-danger">*</span></label>
                                 <input class="form-control fc-datepicker" placeholder="YYYY-MM-DD"
@@ -146,7 +159,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label>{{ trans('admin.teachers.fields.phone') }}</label>
                                 <input type="text" class="form-control numeric-only" name="phone" id="phone"
@@ -362,7 +375,7 @@
                     }, 0);
                 }
             });
-            
+
             /* Telephone Input */
             if ($("#phone").length) {
                 var input = document.querySelector("#phone");

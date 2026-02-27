@@ -68,15 +68,19 @@
                     <div class="col-12 mb-4">
                         <h6 class="text-primary font-weight-bold mb-3 border-bottom pb-2"><i class="fas fa-globe mx-1"></i> {{ trans('admin.teachers.details') }}</h6>
                         <div class="row text-center bg-light rounded p-3 m-0 shadow-sm">
-                            <div class="col-4 {{ app()->getLocale() == 'ar' ? 'border-left' : 'border-right' }}">
+                            <div class="col-3 {{ app()->getLocale() == 'ar' ? 'border-left' : 'border-right' }}">
+                                <small class="text-muted d-block mb-1">{{ trans('admin.specializations.title') ?? 'Specialization' }}</small>
+                                <span id="show_specialization" class="font-weight-bold text-dark"></span>
+                            </div>
+                            <div class="col-3 {{ app()->getLocale() == 'ar' ? 'border-left' : 'border-right' }}">
                                 <small class="text-muted d-block mb-1">{{ trans('admin.teachers.fields.nationality') }}</small>
                                 <span id="show_nationality" class="font-weight-bold text-dark"></span>
                             </div>
-                            <div class="col-4 {{ app()->getLocale() == 'ar' ? 'border-left' : 'border-right' }}">
+                            <div class="col-3 {{ app()->getLocale() == 'ar' ? 'border-left' : 'border-right' }}">
                                 <small class="text-muted d-block mb-1">{{ trans('admin.teachers.fields.religion') }}</small>
                                 <span id="show_religion" class="font-weight-bold text-dark"></span>
                             </div>
-                            <div class="col-4">
+                            <div class="col-3">
                                 <small class="text-muted d-block mb-1">{{ trans('admin.teachers.fields.blood_type') }}</small>
                                 <span id="show_blood_type" class="font-weight-bold text-danger"><i class="fas fa-tint mx-1"></i></span>
                             </div>
@@ -139,6 +143,7 @@
             $('#show_national_id').text(btn.data('national_id'));
             $('#show_joining_date').text(btn.data('joining_date'));
             $('#show_gender').text(btn.data('gender'));
+            $('#show_specialization').text(btn.data('specialization') || '-');
             $('#show_nationality').text(btn.data('nationality'));
             $('#show_religion').text(btn.data('religion'));
             $('#show_blood_type').html('<i class="fas fa-tint mr-1"></i> ' + btn.data('blood_type'));

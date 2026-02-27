@@ -62,6 +62,7 @@
                                            data-blood_type="{{ optional($teacher->bloodType)->name }}"
                                            data-nationality="{{ optional($teacher->nationality)->name }}"
                                            data-religion="{{ optional($teacher->religion)->name }}"
+                                           data-specialization="{{ optional($teacher->specialization)->name }}"
                                            data-joining_date="{{ $teacher->joining_date->format('Y-m-d') }}"
                                            data-address="{{ $teacher->address }}"
                                            data-phone="{{ $teacher->phone }}"

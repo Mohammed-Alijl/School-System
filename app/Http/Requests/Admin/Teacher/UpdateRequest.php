@@ -36,6 +36,7 @@ class UpdateRequest extends FormRequest
             'nationality_id'    => ['required','exists:nationalities,id'],
             'religion_id'       => ['required','exists:religions,id'],
             'gender_id'         => ['required', 'exists:genders,id'],
+            'specialization_id' => ['required', 'exists:specializations,id'],
             'status'            => ['required', 'boolean'],
             'image'             => ['nullable','image','mimes:jpeg,png,jpg','max:2048'],
             'attachments'       => ['nullable','array'],

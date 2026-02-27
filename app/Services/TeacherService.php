@@ -9,6 +9,7 @@ use App\Models\TeacherAttachment;
 use App\Models\TypeBlood;
 use App\Models\Religion;
 use App\Models\Gender;
+use App\Models\Specialization;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -27,6 +28,7 @@ class TeacherService
             'blood_types'   => TypeBlood::all(),
             'religions'     => Religion::all(),
             'genders'       => Gender::all(),
+            'specializations' => Specialization::all(),
         ];
     }
 
