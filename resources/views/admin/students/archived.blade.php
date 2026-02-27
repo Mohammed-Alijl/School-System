@@ -128,8 +128,8 @@
         </div>
     </div>
     </div>
+    </div>
 
-    @include('admin.students.show_modal')
 @endsection
 
 @section('js')
@@ -138,6 +138,7 @@
     @include('admin.layouts.scripts.datatable_config')
     @include('admin.layouts.scripts.delete_script')
     @include('admin.layouts.scripts.restore_script')
+    @include('admin.students.show_modal')
 
     <script>
         $(document).ready(function() {

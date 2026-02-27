@@ -28,7 +28,7 @@
                             <div class="alert alert-info">
                                 <i class="fas fa-barcode"></i>
                                 <strong>{{ trans('admin.students.fields.student_code') }}:</strong>
-                                <span id="student_code_preview">{{$student->student_code}}</span>
+                                <span id="student_code_preview"></span>
                             </div>
                         </div>
                     </div>
@@ -178,7 +178,6 @@
                             <div class="form-group">
                                 <label>{{ trans('admin.students.fields.classroom') }} <span class="text-danger">*</span></label>
                                 <select name="classroom_id" id="edit_classroom_id" class="form-control select2" required>
-                                    <option value="{{$student->classroom->id}}" selected>{{$student->classroom->name}}</option>
                                 </select>
                                 <span class="text-danger error-text classroom_id_error"></span>
                             </div>
@@ -188,7 +187,6 @@
                             <div class="form-group">
                                 <label>{{ trans('admin.students.fields.section') }} <span class="text-danger">*</span></label>
                                 <select name="section_id" id="edit_section_id" class="form-control select2" required>
-                                    <option value="{{$student->section->id}}" selected>{{$student->section->name}}</option>
                                 </select>
                                 <span class="text-danger error-text section_id_error"></span>
                             </div>
@@ -342,6 +340,9 @@
             /* ===============================
             WHEN MODAL OPENS
             =============================== */
+            let _pendingClassroomId = null;
+            let _pendingSectionId   = null;
+
             $('#editModal').on('shown.bs.modal', function (event) {
                 isInitialLoad = true;
 
@@ -356,10 +357,22 @@
 
                 initFileInputs(imageArray, attachments, configs);
 
-                let gradeId = button.data('grade_id');
-                let classroomId = button.data('classroom_id');
-                let sectionId = button.data('section_id');
+                let gradeId       = button.data('grade_id');
+                let classroomId   = button.data('classroom_id');
+                let classroomName = button.data('classroom_name');
+                let sectionId     = button.data('section_id');
+                let sectionName   = button.data('section_name');
 
+                // Store pending IDs so AJAX success callbacks can pre-select them
+                _pendingClassroomId = classroomId;
+                _pendingSectionId   = sectionId;
+
+                // Pre-fill classroom & section dropdowns immediately so user sees them
+                // even before the cascading AJAX finishes
+                $('#edit_classroom_id').html(`<option value="${classroomId}" selected>${classroomName}</option>`);
+                $('#edit_section_id').html(`<option value="${sectionId}" selected>${sectionName}</option>`);
+
+                // Trigger grade change to load full classroom list
                 $('#edit_grade_id').val(gradeId).trigger('change');
 
             });
@@ -371,6 +384,9 @@
                 let gradeId = $(this).val();
 
                 if (!isInitialLoad) {
+                    // User manually changed grade — reset downstream
+                    _pendingClassroomId = null;
+                    _pendingSectionId   = null;
                     resetDropdown('#edit_classroom_id');
                     resetDropdown('#edit_section_id');
                 }
@@ -383,9 +399,19 @@
                     data: { grade_id: gradeId },
                     success: function (response) {
                         if (response.success) {
+                            // Keep the already-shown placeholder / pre-filled option
+                            if (isInitialLoad && _pendingClassroomId) {
+                                // Rebuild with the full list and select the right one
+                                $('#edit_classroom_id').empty();
+                            }
+
                             $.each(response.data, function (key, classroom) {
                                 $('#edit_classroom_id').append(`<option value="${key}">${classroom}</option>`);
                             });
+
+                            if (_pendingClassroomId) {
+                                $('#edit_classroom_id').val(_pendingClassroomId).trigger('change');
+                            }
 
                             isInitialLoad = false;
                         }
@@ -396,6 +422,7 @@
             $('#edit_classroom_id').on('change', function () {
                 let classroomId = $(this).val();
                 if (!isInitialLoad) {
+                    _pendingSectionId = null;
                     resetDropdown('#edit_section_id');
                 }
                 if (!classroomId) return;
@@ -406,9 +433,16 @@
                     data: { classroom_id: classroomId },
                     success: function (response) {
                         if (response.success) {
+                            if (_pendingSectionId) {
+                                $('#edit_section_id').empty();
+                            }
                             $.each(response.data, function (key, section) {
                                 $('#edit_section_id').append(`<option value="${key}">${section}</option>`);
                             });
+                            if (_pendingSectionId) {
+                                $('#edit_section_id').val(_pendingSectionId).trigger('change');
+                                _pendingSectionId = null;
+                            }
                         }
                     }
                 });
