@@ -15,7 +15,15 @@ class GuardianService
      */
     public function getAll()
     {
-        return Guardian::latest()->get();
+        return Guardian::with([
+            'students.grade',
+            'students.classroom',
+            'students.section',
+            'students.gender',
+            'students.nationality',
+            'students.bloodType',
+            'students.religion'
+        ])->latest()->get();
     }
 
     /**
@@ -99,7 +107,15 @@ class GuardianService
 
     public function archive()
     {
-        return Guardian::onlyTrashed()->latest()->get();
+        return Guardian::onlyTrashed()->with([
+            'students.grade',
+            'students.classroom',
+            'students.section',
+            'students.gender',
+            'students.nationality',
+            'students.bloodType',
+            'students.religion'
+        ])->latest()->get();
     }
 
     public function restore($id)

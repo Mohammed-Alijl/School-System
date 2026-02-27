@@ -81,6 +81,26 @@
                                                     $gAttUrls[] = asset('storage/' . $att);
                                                 }
                                             }
+                                            $gChildren = [];
+                                            foreach($guardian->students as $child) {
+                                                $gChildren[] = [
+                                                    'id' => $child->id,
+                                                    'name' => $child->name,
+                                                    'code' => $child->student_code,
+                                                    'email' => $child->email,
+                                                    'image' => $child->imageUrl,
+                                                    'grade' => optional($child->grade)->name,
+                                                    'classroom' => optional($child->classroom)->name,
+                                                    'section' => optional($child->section)->name,
+                                                    'gender' => optional($child->gender)->name,
+                                                    'nationality' => optional($child->nationality)->name,
+                                                    'blood_type' => optional($child->bloodType)->name,
+                                                    'religion' => optional($child->religion)->name,
+                                                    'date_of_birth' => $child->date_of_birth ? $child->date_of_birth->format('Y-m-d') : null,
+                                                    'academic_year' => $child->academic_year,
+                                                    'status' => $child->status,
+                                                ];
+                                            }
                                         @endphp
                                         <a href="#" class="text-primary font-weight-bold guardian-show-btn"
                                            data-toggle="modal"
@@ -110,7 +130,8 @@
                                            data-nationality_mother="{{ optional($guardian->nationalityMother)->name }}"
                                            data-blood_type_mother="{{ optional($guardian->bloodTypeMohter)->name }}"
                                            data-religion_mother="{{ optional($guardian->religionMother)->name }}"
-                                           data-attachments='@json($gAttUrls)'>
+                                           data-attachments='@json($gAttUrls)'
+                                           data-children='@json($gChildren)'>
                                             {{ $guardian->name_father }}
                                         </a>
                                     </td>

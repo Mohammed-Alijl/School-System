@@ -247,6 +247,21 @@
                     </div>
                 </div>
 
+                <!-- Children / Students Information -->
+                <div class="section-card card border-0 shadow-sm rounded-lg mb-4" id="gshow_children_container" style="display: none;">
+                    <div class="card-header bg-success-gradient rounded-top border-0 py-2 px-4">
+                        <h6 class="mb-0 text-white font-weight-bold">
+                            <i class="fas fa-user-graduate mx-1"></i>
+                            {{ trans('admin.students.title') ?? 'Students' }}
+                        </h6>
+                    </div>
+                    <div class="card-body p-4">
+                        <div class="row" id="gshow_children_list">
+                            <!-- Children will be appended here -->
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Attachments -->
                 <div class="row" id="gshow_attachments_container" style="display: none;">
                     <div class="col-12">
@@ -281,6 +296,7 @@
     .guardian-hero-card { background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); }
     .bg-blue-gradient  { background: linear-gradient(135deg, #3d50ff 0%, #4f74ff 100%); }
     .bg-pink-gradient  { background: linear-gradient(135deg, #f6268282 0%, #e91e63 100%); }
+    .bg-success-gradient { background: linear-gradient(135deg, #00cc73 0%, #00a65a 100%); }
     .icon-circle {
         width: 38px; height: 38px; border-radius: 50%;
         display: flex; align-items: center; justify-content: center;
@@ -301,6 +317,10 @@
     .demographics-strip { gap: 8px; }
     .modal-content-demo { border: none; border-radius: 14px; overflow: hidden; }
     .modal-header { border-bottom: 1px solid #f0f0f0; background: #fff; padding: 20px 24px; }
+    .student-card { transition: all 0.2s ease-in-out; }
+    .student-card:hover { transform: translateY(-2px); box-shadow: 0 8px 15px rgba(0,0,0,0.1) !important; }
+    .collapse-indicator { transition: transform 0.3s ease; }
+    .student-card[aria-expanded="true"] .collapse-indicator { transform: rotate(180deg); color: #00cc73 !important; }
 </style>
 
 @push('scripts')
@@ -381,6 +401,79 @@
             });
         } else {
             attachContainer.hide();
+        }
+
+        // Children / Students
+        let children = btn.data('children') || [];
+        if (typeof children === 'string') {
+            try { children = JSON.parse(children); } catch(e) { children = []; }
+        }
+        let childrenContainer = $('#gshow_children_container');
+        let childrenList      = $('#gshow_children_list');
+        childrenList.empty();
+
+        if (children.length > 0) {
+            childrenContainer.show();
+            children.forEach(function(child) {
+                // Determine margin class based on locale (RTL/LTR)
+                let imgMargin = '{{ app()->getLocale() == "ar" ? "ml-3" : "mr-3" }}';
+                let html = `
+                    <div class="col-md-6 mb-3">
+                        <div class="bg-light p-3 rounded shadow-sm border h-100 position-relative student-card" style="cursor: pointer;" data-toggle="collapse" data-target="#childDetails-${child.id}" aria-expanded="false" aria-controls="childDetails-${child.id}">
+                            <div class="d-flex align-items-center">
+                                <img src="${child.image}" class="avatar avatar-md brround ${imgMargin} bg-white shadow-sm" style="object-fit: cover;">
+                                <div>
+                                    <h6 class="mb-1 font-weight-bold text-dark">${child.name}</h6>
+                                    <p class="mb-0 text-muted small"><i class="fas fa-barcode"></i> ${child.code}</p>
+                                    <p class="mb-0 text-muted small"><i class="fas fa-school"></i> ${child.grade} / ${child.classroom}</p>
+                                </div>
+                                <i class="fas fa-chevron-down {{ app()->getLocale() == 'ar' ? 'mr-auto' : 'ml-auto' }} text-muted collapse-indicator"></i>
+                            </div>
+
+                            <!-- Expandable Details Section -->
+                            <div class="collapse mt-3 pt-3 border-top" id="childDetails-${child.id}">
+                                <div class="row small">
+                                    <div class="col-6 mb-2">
+                                        <span class="text-muted d-block">{{ trans('admin.students.fields.section') }}</span>
+                                        <strong class="text-dark">${child.section || '—'}</strong>
+                                    </div>
+                                    <div class="col-6 mb-2">
+                                        <span class="text-muted d-block">{{ trans('admin.students.fields.academic_year') }}</span>
+                                        <strong class="text-dark">${child.academic_year || '—'}</strong>
+                                    </div>
+                                    <div class="col-6 mb-2">
+                                        <span class="text-muted d-block">{{ trans('admin.students.fields.date_of_birth') }}</span>
+                                        <strong class="text-dark">${child.date_of_birth || '—'}</strong>
+                                    </div>
+                                    <div class="col-6 mb-2">
+                                        <span class="text-muted d-block">{{ trans('admin.students.fields.gender') }}</span>
+                                        <strong class="text-dark">${child.gender || '—'}</strong>
+                                    </div>
+                                    <div class="col-6 mb-2">
+                                        <span class="text-muted d-block">{{ trans('admin.students.fields.nationality') }}</span>
+                                        <strong class="text-dark">${child.nationality || '—'}</strong>
+                                    </div>
+                                    <div class="col-6 mb-2">
+                                        <span class="text-muted d-block">{{ trans('admin.students.fields.blood_type') }}</span>
+                                        <strong class="text-danger">${child.blood_type || '—'}</strong>
+                                    </div>
+                                    <div class="col-6 mb-2">
+                                        <span class="text-muted d-block">{{ trans('admin.students.fields.email') }}</span>
+                                        <strong class="text-dark">${child.email || '—'}</strong>
+                                    </div>
+                                    <div class="col-6 mb-2">
+                                        <span class="text-muted d-block">{{ trans('admin.admins.fields.status') }}</span>
+                                        <span class="badge badge-pill ${parseInt(child.status) === 1 ? 'badge-success' : 'badge-danger'} px-2 py-1">${parseInt(child.status) === 1 ? '{{ trans('admin.global.active') }}' : '{{ trans('admin.global.disabled') }}'}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                childrenList.append(html);
+            });
+        } else {
+            childrenContainer.hide();
         }
     });
 </script>
