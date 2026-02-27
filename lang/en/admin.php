@@ -356,6 +356,7 @@ return [
         ]
     ],
     'guardians' => [
+        'show' => "Show Guardian",
         'title' => "Guardians",
         'add' => "Add Guardian",
         'delete' => "Delete Guardian",

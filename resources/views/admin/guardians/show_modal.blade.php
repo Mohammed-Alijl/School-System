@@ -1,0 +1,387 @@
+<!-- Show Guardian Modal -->
+<div class="modal fade" id="guardianShowModal">
+    <div class="modal-dialog modal-xl text-{{ app()->getLocale() == 'ar' ? 'right' : 'left' }}" role="document">
+        <div class="modal-content modal-content-demo">
+            <div class="modal-header d-flex justify-content-between">
+                <h6 class="modal-title font-weight-bold">
+                    <i class="fas fa-user-shield text-primary mx-1"></i>
+                    {{ trans('admin.guardians.show') }}
+                </h6>
+                <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body p-4">
+
+                <!-- Hero Header Card -->
+                <div class="card guardian-hero-card shadow-sm mb-4 border-0 rounded-lg">
+                    <div class="card-body p-4 d-flex align-items-center rounded-lg">
+                        <img id="gshow_image"
+                             src="{{ URL::asset('assets/admin/img/faces/6.jpg') }}"
+                             alt="Guardian Avatar"
+                             class="avatar avatar-xxl brround bg-white shadow mx-4"
+                             style="object-fit: cover; width: 90px; height: 90px;">
+                        <div>
+                            <h4 id="gshow_name_father" class="mb-1 font-weight-bold text-dark"></h4>
+                            <p class="text-muted mb-1 small">
+                                <i class="fas fa-envelope mx-1 text-primary"></i>
+                                <span id="gshow_email"></span>
+                            </p>
+                            <span id="gshow_status" class="badge badge-pill badge-success mt-1 px-3 py-1">
+                                {{ trans('admin.global.active') }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Father Information -->
+                <div class="section-card card border-0 shadow-sm rounded-lg mb-4">
+                    <div class="card-header bg-blue-gradient rounded-top border-0 py-2 px-4">
+                        <h6 class="mb-0 text-white font-weight-bold">
+                            <i class="fas fa-male mx-1"></i>
+                            {{ trans('admin.guardians.father_information') }}
+                        </h6>
+                    </div>
+                    <div class="card-body p-4">
+                        <div class="row">
+                            <!-- Father Name -->
+                            <div class="col-md-6 mb-3">
+                                <div class="info-item d-flex align-items-start">
+                                    <div class="icon-circle bg-primary-transparent text-primary mx-3 flex-shrink-0">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <div>
+                                        <small class="text-muted d-block">{{ trans('admin.guardians.fields.name_father') }}</small>
+                                        <strong id="gshow_name_father_full" class="text-dark"></strong>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Father National ID -->
+                            <div class="col-md-6 mb-3">
+                                <div class="info-item d-flex align-items-start">
+                                    <div class="icon-circle bg-danger-transparent text-danger mx-3 flex-shrink-0">
+                                        <i class="fas fa-id-card"></i>
+                                    </div>
+                                    <div>
+                                        <small class="text-muted d-block">{{ trans('admin.guardians.fields.national_id_father') }}</small>
+                                        <strong id="gshow_national_id_father" class="text-dark"></strong>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Father Passport -->
+                            <div class="col-md-6 mb-3">
+                                <div class="info-item d-flex align-items-start">
+                                    <div class="icon-circle bg-warning-transparent text-warning mx-3 flex-shrink-0">
+                                        <i class="fas fa-passport"></i>
+                                    </div>
+                                    <div>
+                                        <small class="text-muted d-block">{{ trans('admin.guardians.fields.passport_id_father') }}</small>
+                                        <strong id="gshow_passport_id_father" class="text-dark">—</strong>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Father Phone -->
+                            <div class="col-md-6 mb-3">
+                                <div class="info-item d-flex align-items-start">
+                                    <div class="icon-circle bg-success-transparent text-success mx-3 flex-shrink-0">
+                                        <i class="fas fa-phone"></i>
+                                    </div>
+                                    <div>
+                                        <small class="text-muted d-block">{{ trans('admin.guardians.fields.phone_father') }}</small>
+                                        <strong id="gshow_phone_father" class="text-dark"></strong>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Father Job -->
+                            <div class="col-md-6 mb-3">
+                                <div class="info-item d-flex align-items-start">
+                                    <div class="icon-circle bg-info-transparent text-info mx-3 flex-shrink-0">
+                                        <i class="fas fa-briefcase"></i>
+                                    </div>
+                                    <div>
+                                        <small class="text-muted d-block">{{ trans('admin.guardians.fields.job_father') }}</small>
+                                        <strong id="gshow_job_father" class="text-dark">—</strong>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Father Address -->
+                            <div class="col-md-6 mb-3">
+                                <div class="info-item d-flex align-items-start">
+                                    <div class="icon-circle bg-secondary-transparent text-secondary mx-3 flex-shrink-0">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                    </div>
+                                    <div>
+                                        <small class="text-muted d-block">{{ trans('admin.guardians.fields.address_father') }}</small>
+                                        <strong id="gshow_address_father" class="text-dark">—</strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Father Demographics Chips -->
+                        <div class="row mt-2">
+                            <div class="col-12">
+                                <div class="demographics-strip bg-light rounded p-3 d-flex flex-wrap justify-content-around text-center">
+                                    <div class="demo-item px-3">
+                                        <small class="text-muted d-block mb-1">{{ trans('admin.guardians.fields.nationality_father_id') }}</small>
+                                        <span id="gshow_nationality_father" class="font-weight-bold text-dark"></span>
+                                    </div>
+                                    <div class="demo-item px-3">
+                                        <small class="text-muted d-block mb-1">{{ trans('admin.guardians.fields.blood_type_father_id') }}</small>
+                                        <span id="gshow_blood_type_father" class="font-weight-bold text-danger"></span>
+                                    </div>
+                                    <div class="demo-item px-3">
+                                        <small class="text-muted d-block mb-1">{{ trans('admin.guardians.fields.religion_father_id') }}</small>
+                                        <span id="gshow_religion_father" class="font-weight-bold text-dark"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mother Information -->
+                <div class="section-card card border-0 shadow-sm rounded-lg mb-4">
+                    <div class="card-header bg-pink-gradient rounded-top border-0 py-2 px-4">
+                        <h6 class="mb-0 text-white font-weight-bold">
+                            <i class="fas fa-female mx-1"></i>
+                            {{ trans('admin.guardians.mother_information') }}
+                        </h6>
+                    </div>
+                    <div class="card-body p-4">
+                        <div class="row">
+                            <!-- Mother Name -->
+                            <div class="col-md-6 mb-3">
+                                <div class="info-item d-flex align-items-start">
+                                    <div class="icon-circle bg-pink-transparent text-pink mx-3 flex-shrink-0">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <div>
+                                        <small class="text-muted d-block">{{ trans('admin.guardians.fields.name_mother') }}</small>
+                                        <strong id="gshow_name_mother" class="text-dark">—</strong>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Mother National ID -->
+                            <div class="col-md-6 mb-3">
+                                <div class="info-item d-flex align-items-start">
+                                    <div class="icon-circle bg-danger-transparent text-danger mx-3 flex-shrink-0">
+                                        <i class="fas fa-id-card"></i>
+                                    </div>
+                                    <div>
+                                        <small class="text-muted d-block">{{ trans('admin.guardians.fields.national_id_mother') }}</small>
+                                        <strong id="gshow_national_id_mother" class="text-dark">—</strong>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Mother Passport -->
+                            <div class="col-md-6 mb-3">
+                                <div class="info-item d-flex align-items-start">
+                                    <div class="icon-circle bg-warning-transparent text-warning mx-3 flex-shrink-0">
+                                        <i class="fas fa-passport"></i>
+                                    </div>
+                                    <div>
+                                        <small class="text-muted d-block">{{ trans('admin.guardians.fields.passport_id_mother') }}</small>
+                                        <strong id="gshow_passport_id_mother" class="text-dark">—</strong>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Mother Phone -->
+                            <div class="col-md-6 mb-3">
+                                <div class="info-item d-flex align-items-start">
+                                    <div class="icon-circle bg-success-transparent text-success mx-3 flex-shrink-0">
+                                        <i class="fas fa-phone"></i>
+                                    </div>
+                                    <div>
+                                        <small class="text-muted d-block">{{ trans('admin.guardians.fields.phone_mother') }}</small>
+                                        <strong id="gshow_phone_mother" class="text-dark">—</strong>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Mother Job -->
+                            <div class="col-md-6 mb-3">
+                                <div class="info-item d-flex align-items-start">
+                                    <div class="icon-circle bg-info-transparent text-info mx-3 flex-shrink-0">
+                                        <i class="fas fa-briefcase"></i>
+                                    </div>
+                                    <div>
+                                        <small class="text-muted d-block">{{ trans('admin.guardians.fields.job_mother') }}</small>
+                                        <strong id="gshow_job_mother" class="text-dark">—</strong>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Mother Address -->
+                            <div class="col-md-6 mb-3">
+                                <div class="info-item d-flex align-items-start">
+                                    <div class="icon-circle bg-secondary-transparent text-secondary mx-3 flex-shrink-0">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                    </div>
+                                    <div>
+                                        <small class="text-muted d-block">{{ trans('admin.guardians.fields.address_mother') }}</small>
+                                        <strong id="gshow_address_mother" class="text-dark">—</strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Mother Demographics Chips -->
+                        <div class="row mt-2">
+                            <div class="col-12">
+                                <div class="demographics-strip bg-light rounded p-3 d-flex flex-wrap justify-content-around text-center">
+                                    <div class="demo-item px-3">
+                                        <small class="text-muted d-block mb-1">{{ trans('admin.guardians.fields.nationality_mother_id') }}</small>
+                                        <span id="gshow_nationality_mother" class="font-weight-bold text-dark">—</span>
+                                    </div>
+                                    <div class="demo-item px-3">
+                                        <small class="text-muted d-block mb-1">{{ trans('admin.guardians.fields.blood_type_mother_id') }}</small>
+                                        <span id="gshow_blood_type_mother" class="font-weight-bold text-danger">—</span>
+                                    </div>
+                                    <div class="demo-item px-3">
+                                        <small class="text-muted d-block mb-1">{{ trans('admin.guardians.fields.religion_mother_id') }}</small>
+                                        <span id="gshow_religion_mother" class="font-weight-bold text-dark">—</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Attachments -->
+                <div class="row" id="gshow_attachments_container" style="display: none;">
+                    <div class="col-12">
+                        <div class="card border-0 shadow-sm rounded-lg">
+                            <div class="card-header bg-light border-0 py-2 px-4">
+                                <h6 class="mb-0 font-weight-bold text-primary">
+                                    <i class="fas fa-paperclip mx-1"></i>
+                                    {{ trans('admin.guardians.fields.attachments') }}
+                                </h6>
+                            </div>
+                            <div class="card-body px-4 py-3">
+                                <div class="d-flex flex-wrap" id="gshow_attachments_list"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div><!-- /modal-body -->
+
+            <div class="modal-footer pb-4 px-4">
+                <button type="button" class="btn btn-secondary px-4 py-2" data-dismiss="modal">
+                    <i class="fas fa-times mx-1"></i> {{ trans('admin.global.close') }}
+                </button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Guardian Show Modal */
+    .guardian-hero-card { background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); }
+    .bg-blue-gradient  { background: linear-gradient(135deg, #3d50ff 0%, #4f74ff 100%); }
+    .bg-pink-gradient  { background: linear-gradient(135deg, #f6268282 0%, #e91e63 100%); }
+    .icon-circle {
+        width: 38px; height: 38px; border-radius: 50%;
+        display: flex; align-items: center; justify-content: center;
+        font-size: 16px; flex-shrink: 0;
+    }
+    .bg-primary-transparent   { background-color: rgba(61, 80, 255, 0.12); }
+    .bg-info-transparent      { background-color: rgba(0, 204, 255, 0.12); }
+    .bg-secondary-transparent { background-color: rgba(108, 117, 125, 0.12); }
+    .bg-warning-transparent   { background-color: rgba(255, 171, 0, 0.12); }
+    .bg-success-transparent   { background-color: rgba(0, 204, 115, 0.12); }
+    .bg-danger-transparent    { background-color: rgba(255, 71, 61, 0.12); }
+    .bg-pink-transparent      { background-color: rgba(246, 38, 130, 0.12); }
+    .text-pink                { color: #e91e63; }
+    .avatar-xxl { width: 90px; height: 90px; }
+    .section-card { transition: box-shadow .2s; }
+    .section-card:hover { box-shadow: 0 6px 24px rgba(0,0,0,.09) !important; }
+    .demo-item { min-width: 120px; }
+    .demographics-strip { gap: 8px; }
+    .modal-content-demo { border: none; border-radius: 14px; overflow: hidden; }
+    .modal-header { border-bottom: 1px solid #f0f0f0; background: #fff; padding: 20px 24px; }
+</style>
+
+@push('scripts')
+<script>
+    $(document).on('click', '.guardian-show-btn', function() {
+        let btn = $(this);
+
+        // Hero section
+        let nameAr = btn.data('name_father_ar') || '';
+        let nameEn = btn.data('name_father_en') || '';
+        $('#gshow_name_father').text(nameAr && nameEn ? nameAr + ' / ' + nameEn : nameAr || nameEn);
+        $('#gshow_name_father_full').text(nameAr && nameEn ? nameAr + ' / ' + nameEn : nameAr || nameEn);
+        $('#gshow_email').text(btn.data('email') || '—');
+
+        let statusText  = btn.data('status');
+        let statusBadge = $('#gshow_status');
+        statusBadge.text(statusText);
+        if (parseInt(btn.data('raw_status')) === 1) {
+            statusBadge.removeClass('badge-danger').addClass('badge-success').text('{{ trans("admin.global.active") }}');
+        } else {
+            statusBadge.removeClass('badge-success').addClass('badge-danger').text('{{ trans("admin.global.disabled") }}');
+        }
+
+        // Profile image
+        let profileImg = btn.data('image');
+        $('#gshow_image').attr('src', profileImg || "{{ URL::asset('assets/admin/img/faces/6.jpg') }}");
+
+        // Father fields
+        $('#gshow_national_id_father').text(btn.data('national_id_father') || '—');
+        $('#gshow_passport_id_father').text(btn.data('passport_id_father') || '—');
+        $('#gshow_phone_father').text(btn.data('phone_father') || '—');
+
+        let jobFatherAr = btn.data('job_father_ar') || '';
+        let jobFatherEn = btn.data('job_father_en') || '';
+        $('#gshow_job_father').text(jobFatherAr && jobFatherEn ? jobFatherAr + ' / ' + jobFatherEn : jobFatherAr || jobFatherEn || '—');
+
+        $('#gshow_address_father').text(btn.data('address_father') || '—');
+        $('#gshow_nationality_father').text(btn.data('nationality_father') || '—');
+        $('#gshow_blood_type_father').html('<i class="fas fa-tint mx-1"></i>' + (btn.data('blood_type_father') || '—'));
+        $('#gshow_religion_father').text(btn.data('religion_father') || '—');
+
+        // Mother fields
+        let motherNameAr = btn.data('name_mother_ar') || '';
+        let motherNameEn = btn.data('name_mother_en') || '';
+        $('#gshow_name_mother').text(motherNameAr && motherNameEn ? motherNameAr + ' / ' + motherNameEn : motherNameAr || motherNameEn || '—');
+
+        $('#gshow_national_id_mother').text(btn.data('national_id_mother') || '—');
+        $('#gshow_passport_id_mother').text(btn.data('passport_id_mother') || '—');
+        $('#gshow_phone_mother').text(btn.data('phone_mother') || '—');
+
+        let jobMotherAr = btn.data('job_mother_ar') || '';
+        let jobMotherEn = btn.data('job_mother_en') || '';
+        $('#gshow_job_mother').text(jobMotherAr && jobMotherEn ? jobMotherAr + ' / ' + jobMotherEn : jobMotherAr || jobMotherEn || '—');
+
+        $('#gshow_address_mother').text(btn.data('address_mother') || '—');
+        $('#gshow_nationality_mother').text(btn.data('nationality_mother') || '—');
+        $('#gshow_blood_type_mother').html('<i class="fas fa-tint mx-1"></i>' + (btn.data('blood_type_mother') || '—'));
+        $('#gshow_religion_mother').text(btn.data('religion_mother') || '—');
+
+        // Attachments
+        let attachments = btn.data('attachments') || [];
+        if (typeof attachments === 'string') {
+            try { attachments = JSON.parse(attachments); } catch(e) { attachments = []; }
+        }
+        let attachContainer = $('#gshow_attachments_container');
+        let attachList      = $('#gshow_attachments_list');
+        attachList.empty();
+
+        if (attachments.length > 0) {
+            attachContainer.show();
+            attachments.forEach(function(url) {
+                let name   = url.split('/').pop();
+                let ext    = name.split('.').pop().toLowerCase();
+                let icon   = ['jpg','jpeg','png','svg','webp'].includes(ext) ? 'fa-image' : (ext === 'pdf' ? 'fa-file-pdf' : 'fa-file-alt');
+                attachList.append(`<a href="${url}" target="_blank" class="btn btn-sm btn-outline-primary shadow-sm mb-2 mx-1">
+                                        <i class="fas ${icon} mx-1"></i> ${name}
+                                   </a>`);
+            });
+        } else {
+            attachContainer.hide();
+        }
+    });
+</script>
+@endpush

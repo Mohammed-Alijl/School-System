@@ -49,7 +49,47 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $guardian->email }}</td>
-                                    <td>{{ $guardian->name_father }}</td>
+                                    <td>
+                                        @php
+                                            $gAttUrls = [];
+                                            if (!empty($guardian->attachments) && is_array($guardian->attachments)) {
+                                                foreach ($guardian->attachments as $att) {
+                                                    $gAttUrls[] = asset('storage/' . $att);
+                                                }
+                                            }
+                                        @endphp
+                                        <a href="#" class="text-primary font-weight-bold guardian-show-btn"
+                                           data-toggle="modal"
+                                           data-target="#guardianShowModal"
+                                           data-email="{{ $guardian->email }}"
+                                           data-raw_status="{{ $guardian->status ?? 1 }}"
+                                           data-image="{{ $guardian->image ? \Illuminate\Support\Facades\Storage::disk('public')->url($guardian->image) : '' }}"
+                                           data-name_father_ar="{{ $guardian->getTranslation('name_father', 'ar') }}"
+                                           data-name_father_en="{{ $guardian->getTranslation('name_father', 'en') }}"
+                                           data-national_id_father="{{ $guardian->national_id_father }}"
+                                           data-passport_id_father="{{ $guardian->passport_id_father }}"
+                                           data-phone_father="{{ $guardian->phone_father }}"
+                                           data-job_father_ar="{{ $guardian->job_father ? $guardian->getTranslation('job_father', 'ar') : '' }}"
+                                           data-job_father_en="{{ $guardian->job_father ? $guardian->getTranslation('job_father', 'en') : '' }}"
+                                           data-address_father="{{ $guardian->address_father }}"
+                                           data-nationality_father="{{ optional($guardian->nationalityFather)->name }}"
+                                           data-blood_type_father="{{ optional($guardian->bloodTypeFather)->name }}"
+                                           data-religion_father="{{ optional($guardian->religionFather)->name }}"
+                                           data-name_mother_ar="{{ $guardian->name_mother ? $guardian->getTranslation('name_mother', 'ar') : '' }}"
+                                           data-name_mother_en="{{ $guardian->name_mother ? $guardian->getTranslation('name_mother', 'en') : '' }}"
+                                           data-national_id_mother="{{ $guardian->national_id_mother }}"
+                                           data-passport_id_mother="{{ $guardian->passport_id_mother }}"
+                                           data-phone_mother="{{ $guardian->phone_mother }}"
+                                           data-job_mother_ar="{{ $guardian->job_mother ? $guardian->getTranslation('job_mother', 'ar') : '' }}"
+                                           data-job_mother_en="{{ $guardian->job_mother ? $guardian->getTranslation('job_mother', 'en') : '' }}"
+                                           data-address_mother="{{ $guardian->address_mother }}"
+                                           data-nationality_mother="{{ optional($guardian->nationalityMother)->name }}"
+                                           data-blood_type_mother="{{ optional($guardian->bloodTypeMohter)->name }}"
+                                           data-religion_mother="{{ optional($guardian->religionMother)->name }}"
+                                           data-attachments='@json($gAttUrls)'>
+                                            {{ $guardian->name_father }}
+                                        </a>
+                                    </td>
                                     <td>{{ $guardian->national_id_father }}</td>
                                     <td>{{ $guardian->phone_father }}</td>
                                     <td>{{ $guardian->name_mother }}</td>
@@ -96,6 +136,7 @@
     @include('admin.layouts.scripts.datatable_config')
     @include('admin.layouts.scripts.delete_script')
     @include('admin.layouts.scripts.restore_script')
+    @include('admin.guardians.show_modal')
 
     <script>
         $(document).ready(function() {
@@ -107,4 +148,5 @@
             });
         });
     </script>
+    @stack('scripts')
 @endsection
