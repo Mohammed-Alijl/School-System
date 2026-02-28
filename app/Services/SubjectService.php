@@ -33,7 +33,7 @@ class SubjectService
     {
         return [
             'grades'           => Grade::active()->get(),
-            'specializations'  => Specialization::active()->latest()->get(),
+            'specializations'  => Specialization::latest()->get(),
         ];
     }
 

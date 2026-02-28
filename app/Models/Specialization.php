@@ -14,12 +14,6 @@ class Specialization extends Model
 
 
     // ─── Relationships ────────────────────────────────────────────────────────
-    public function scopeActive($query)
-    {
-        return $query->where('status', 1);
-    }
-
-    // ─── Relationships ────────────────────────────────────────────────────────
     public function teachers()
     {
         return $this->hasMany(Teacher::class, 'specialization_id');
