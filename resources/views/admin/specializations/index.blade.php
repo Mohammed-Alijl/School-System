@@ -20,7 +20,7 @@
             </div>
         </div>
         <div class="d-flex my-xl-auto right-content">
-            @can('create_specialization')
+            @can('create_specializations')
             <div class="pr-1 mb-3 mb-xl-0">
                 <a class="modal-effect btn btn-primary-gradient btn-with-icon btn-block"
                    data-effect="effect-scale"
@@ -46,9 +46,9 @@
                             <tr>
                                 <th class="wd-10p border-bottom-0">#</th>
                                 <th class="wd-60p border-bottom-0">{{ __('admin.specializations.fields.name') }}</th>
-                                @if(auth()->user()->canAny(['edit_specialization', 'delete_specialization']))
+                                @canany(['edit_specializations','delete_specializations'])
                                     <th class="wd-30p border-bottom-0">{{ __('admin.global.actions') }}</th>
-                                @endif
+                                @endcanany
                             </tr>
                             </thead>
                             <tbody>
@@ -56,9 +56,9 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $specialization->name }}</td>
-                                    @canany(['edit_specialization','delete_specialization'])
+                                    @canany(['edit_specializations','delete_specializations'])
                                     <td>
-                                        @can('edit_specialization')
+                                        @can('edit_specializations')
                                         <a class="btn btn-info btn-sm edit-btn"
                                            href="#"
                                            data-toggle="modal"
@@ -70,7 +70,7 @@
                                             <i class="las la-pen"></i> {{__('admin.global.edit')}}
                                         </a>
                                         @endcan
-                                        @can('delete_specialization')
+                                        @can('delete_specializations')
                                             <a class="modal-effect btn btn-sm btn-danger delete-item"
                                                href="#"
                                                data-id="{{ $specialization->id }}"
