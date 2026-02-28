@@ -20,6 +20,7 @@ class RoleSeeder extends Seeder
             'students'          => ['view', 'create', 'edit', 'delete', 'view-archived', 'restore', 'force-delete', 'graduate', 'promote'],
             'teachers'          => ['view', 'create', 'edit', 'delete'],
             'specializations'   => ['view', 'create', 'edit', 'delete'],
+            'subjects'          => ['view', 'create', 'edit', 'delete'],
             'invoices'          => ['view', 'create', 'edit', 'delete', 'print'],
         ];
 
