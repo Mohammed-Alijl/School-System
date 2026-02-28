@@ -11,7 +11,6 @@ use App\Models\Religion;
 use App\Models\Gender;
 use App\Models\AcademicYear;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class StudentService
@@ -38,7 +37,7 @@ class StudentService
     {
         return DB::transaction(function () use ($data) {
 
-            $data['admin_id'] = Auth::id();
+            $data['admin_id'] = auth('admin')->id();
 
             $image = $data['image'] ?? null;
             $attachments = $data['attachments'] ?? null;
