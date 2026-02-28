@@ -1,15 +1,15 @@
-$(document).ready(function() {
+$(document).ready(function () {
     $.ajaxSetup({
         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') }
     });
 
-    $(document).on('submit', '.ajax-form', function(e) {
+    $(document).on('submit', '.ajax-form', function (e) {
         e.preventDefault();
         var form = $(this);
         var modalId = form.data('modal-id');
 
         // Parsley Validation
-        if(form.parsley && !form.parsley().isValid()) return;
+        if (form.parsley && !form.parsley().isValid()) return;
 
         var formData = new FormData(this);
         var btn = form.find('button[type="submit"]');
@@ -18,7 +18,7 @@ $(document).ready(function() {
 
         // Loading State
         btn.attr('disabled', true);
-        if(spinner.length) spinner.removeClass('d-none');
+        if (spinner.length) spinner.removeClass('d-none');
 
         $('.error-text').text('');
         $('input, select, textarea').removeClass('is-invalid');
@@ -29,12 +29,12 @@ $(document).ready(function() {
             data: formData,
             processData: false,
             contentType: false,
-            success: function(response) {
+            success: function (response) {
                 btn.attr('disabled', false);
-                if(spinner.length) spinner.addClass('d-none');
+                if (spinner.length) spinner.addClass('d-none');
 
-                if(response.status === 'success') {
-                    if(modalId) $(modalId).modal('hide');
+                if (response.status === 'success') {
+                    if (modalId) $(modalId).modal('hide');
 
                     swal({
                         title: "Success",
@@ -44,27 +44,27 @@ $(document).ready(function() {
                         showConfirmButton: false
                     });
 
-                    setTimeout(function(){
+                    setTimeout(function () {
                         location.reload();
                     }, 2000);
                 }
             },
-            error: function(xhr) {
+            error: function (xhr) {
                 btn.attr('disabled', false);
-                if(spinner.length) spinner.addClass('d-none');
+                if (spinner.length) spinner.addClass('d-none');
 
                 if (xhr.status === 422) {
                     var errors = xhr.responseJSON.errors;
-                    $.each(errors, function(key, val) {
-                        var input = form.find('[name="'+key+'"]');
-                        if(input.length === 0) input = form.find('[name="'+key+'[]"]');
+                    $.each(errors, function (key, val) {
+                        var input = form.find('[name="' + key + '"]');
+                        if (input.length === 0) input = form.find('[name="' + key + '[]"]');
 
-                        if(input.length === 0) {
+                        if (input.length === 0) {
                             var spatieName = key.replace('.', '[').replace(/(\.[^.]+)$/, ']') + ']';
                             var parts = key.split('.');
-                            if(parts.length > 1) {
+                            if (parts.length > 1) {
                                 spatieName = parts[0] + '[' + parts[1] + ']';
-                                input = form.find('[name="'+spatieName+'"]');
+                                input = form.find('[name="' + spatieName + '"]');
                             }
                         }
 
@@ -85,7 +85,7 @@ $(document).ready(function() {
                         }
                     }
 
-                } else if(xhr.status === 413) {
+                } else if (xhr.status === 413) {
                     swal("خطأ!", "The Size Of The Attachments Is Too Big.", "error");
                 } else {
                     swal("Error!", "Server Error: " + xhr.status, "error");
@@ -94,7 +94,7 @@ $(document).ready(function() {
         });
     });
 
-    $(document).on('click', '.edit-btn', function() {
+    $(document).on('click', '.edit-btn', function () {
         var btn = $(this);
         var modalId = btn.data('target');
         var modal = $(modalId);
@@ -102,20 +102,22 @@ $(document).ready(function() {
 
         modal.find('form').attr('action', url);
 
-        $.each(btn.data(), function(key, value) {
+        $.each(btn.data(), function (key, value) {
 
-            var input = modal.find('[name="'+key+'"], #'+key);
+            var input = modal.find('[name="' + key + '"], #' + key);
 
-            if(input.length === 0 && (key.endsWith('_ar') || key.endsWith('_en'))) {
+            if (input.length === 0 && (key.endsWith('_ar') || key.endsWith('_en'))) {
                 var fieldName = key.slice(0, -3);
                 var locale = key.slice(-2);
                 input = modal.find('[name="' + fieldName + '[' + locale + ']"]');
             }
 
-            if(input.length) {
-                if(input.is('select')) {
+            if (input.length) {
+                if (input.is('select')) {
                     input.val(value).trigger('change');
-                } else if(input.attr('type') !== 'file') {
+                } else if (input.is('[type="radio"]')) {
+                    $('[name="' + input.attr('name') + '"][value="' + value + '"]').prop('checked', true);
+                } else if (input.attr('type') !== 'file') {
                     input.val(value);
                 }
             }

@@ -11,7 +11,6 @@
     <link href="{{ URL::asset('assets/admin/plugins/sweet-alert/sweetalert.css') }}" rel="stylesheet">
 
     <style>
-        /* Custom Modern Dashboard Styles */
         .glass-card {
             background: #ffffff;
             border-radius: 16px;
@@ -272,7 +271,7 @@
     </div>
     </div>
     @include('admin.subjects.add_modal')
-    {{-- @include('admin.subjects.edit_modal') --}}
+     @include('admin.subjects.edit_modal')
 
 @endsection
 
@@ -420,6 +419,8 @@
                 $('.error-text').text('');
                 $('#add_classroom_id').empty().append('<option value="" selected disabled>{{ __('admin.subjects.classroom_placeholder') }}</option>').prop('disabled', true).css('background-color', '#f8f9fc');
             });
+
         });
     </script>
+    @stack('scripts')
 @endsection
