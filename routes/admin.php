@@ -124,7 +124,15 @@ Route::group(
                 });
 
                 // ─── Specializations ───────────────────────────────────────────────────────────────
-                Route::resource('specializations',SpecializationController::class)->except(['show','create','edit']);
+                Route::resource('specializations', \App\Http\Controllers\Admin\SpecializationController::class)->except(['show','create','edit']);
+
+                // ─── Profile ───────────────────────────────────────────────────────────────
+                Route::prefix('profile')->name('profile.')->group(function () {
+                    Route::get('/', [\App\Http\Controllers\Admin\ProfileController::class, 'index'])->name('index');
+                    Route::put('/update', [\App\Http\Controllers\Admin\ProfileController::class, 'updateProfile'])->name('update');
+                    Route::put('/password', [\App\Http\Controllers\Admin\ProfileController::class, 'updatePassword'])->name('password');
+                    Route::post('/avatar', [\App\Http\Controllers\Admin\ProfileController::class, 'updateAvatar'])->name('avatar');
+                });
 
             });
             Route::post('logout', [AdminAuthController::class, 'destroy'])->name('logout');

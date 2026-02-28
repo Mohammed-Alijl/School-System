@@ -269,6 +269,8 @@ return [
         'image'            => 'الصورة الشخصية',
         'attachments'      => 'المرفقات',
         'attachments.*'    => 'الملف المرفق',
+        'current_password' => 'كلمة المرور الحالية',
+        'new_password'     => 'كلمة المرور الجديدة',
     ],
 
 ];
