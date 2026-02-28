@@ -18,7 +18,6 @@
         </div>
         <div class="d-flex my-xl-auto right-content">
             <div class="pr-1 mb-3 mb-xl-0">
-                {{-- 🔥 حماية زر الإضافة --}}
                 @can('create_roles')
                     <a class="modal-effect btn btn-primary-gradient btn-with-icon btn-block"
                        href="{{route('admin.roles.create')}}">

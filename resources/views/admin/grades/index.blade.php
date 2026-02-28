@@ -77,7 +77,7 @@
                                         @endif
                                     </td>
                                     <td>{{ $grade->notes ?? __('admin.grades.no_notes') }}</td>
-                                    @canany('edit_grades','delete_grades')
+                                    @canany(['edit_grades','delete_grades'])
                                     <td>
                                         @can('edit_grades')
                                         <a class="btn btn-info btn-sm edit-btn"

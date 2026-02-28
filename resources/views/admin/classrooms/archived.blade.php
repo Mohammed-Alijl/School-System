@@ -38,7 +38,7 @@
                                 <th class="wd-20p border-bottom-0">{{ __('admin.classrooms.fields.grade') }}</th>
                                 <th class="wd-10p border-bottom-0">{{ __('admin.classrooms.fields.status') }}</th>
                                 <th class="wd-10p border-bottom-0">{{ __('admin.classrooms.fields.notes') }}</th>
-                                @canany('restore_classrooms','force-delete_classrooms')
+                                @canany(['restore_classrooms','force-delete_classrooms'])
                                     <th class="wd-20p border-bottom-0">{{ __('admin.global.actions') }}</th>
                                 @endcanany
                             </tr>
@@ -57,7 +57,7 @@
                                         @endif
                                     </td>
                                     <td>{{ $grade->notes ?? __('admin.grades.no_notes') }}</td>
-                                    @canany('restore_classrooms','force-delete_classrooms')
+                                    @canany(['restore_classrooms','force-delete_classrooms'])
                                     <td>
                                         @can('restore_classrooms')
                                         <a class="btn btn-info btn-sm restore-item"

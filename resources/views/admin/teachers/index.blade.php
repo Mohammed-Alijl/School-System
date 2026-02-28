@@ -78,7 +78,7 @@
                                 <th class="wd-10p border-bottom-0">{{ trans('admin.teachers.fields.national_id') }}</th>
                                 <th class="wd-15p border-bottom-0">{{ trans('admin.teachers.fields.phone') }}</th>
                                 <th class="wd-10p border-bottom-0">{{ trans('admin.teachers.fields.status') }}</th>
-                                @canany('edit_teachers','delete_teachers')
+                                @canany(['edit_teachers','delete_teachers'])
                                     <th class="wd-15p border-bottom-0">{{ trans('admin.global.actions') }}</th>
                                 @endcanany
                             </tr>
@@ -129,7 +129,7 @@
                                             <span class="label text-danger d-flex">{{ trans('admin.global.disabled') }}</span>
                                         @endif
                                     </td>
-                                    @canany('edit_teachers','delete_teachers')
+                                    @canany(['edit_teachers','delete_teachers'])
                                             <td>
                                                 @can('edit_teachers')
                                                     @php

@@ -65,7 +65,9 @@
                                 <th>{{ __('admin.guardians.fields.national_id_father') }}</th>
                                 <th>{{ __('admin.guardians.fields.phone_father') }}</th>
                                 <th>{{ __('admin.guardians.fields.name_mother') }}</th>
+                                @canany(['edit_guardians','delete_guardians'])
                                 <th>{{ __('admin.global.actions') }}</th>
+                                @endcanany
                             </tr>
                             </thead>
                             <tbody>
@@ -138,6 +140,7 @@
                                     <td>{{ $guardian->national_id_father }}</td>
                                     <td>{{ $guardian->phone_father }}</td>
                                     <td>{{ $guardian->name_mother }}</td>
+                                    @canany(['edit_guardians','delete_guardians'])
                                     <td>
                                         @can('edit_guardians')
                                             <a class="btn btn-info btn-sm edit-btn"
@@ -184,6 +187,7 @@
                                             </a>
                                         @endcan
                                     </td>
+                                    @endcanany
                                 </tr>
                             @endforeach
                             </tbody>

@@ -60,7 +60,7 @@
                                 <th class="wd-20p border-bottom-0">{{ __('admin.classrooms.fields.grade') }}</th>
                                 <th class="wd-10p border-bottom-0">{{ __('admin.classrooms.fields.status') }}</th>
                                 <th class="wd-10p border-bottom-0">{{ __('admin.classrooms.fields.notes') }}</th>
-                                @canany('edit_classrooms','delete_classrooms')
+                                @canany(['edit_classrooms','delete_classrooms'])
                                     <th class="wd-20p border-bottom-0">{{ __('admin.global.actions') }}</th>
                                 @endcanany
                             </tr>
@@ -79,7 +79,7 @@
                                         @endif
                                     </td>
                                     <td>{{ $classroom->notes ?? __('admin.grades.no_notes') }}</td>
-                                    @canany('edit_classrooms','delete_classrooms')
+                                    @canany(['edit_classrooms','delete_classrooms'])
                                     <td>
                                         @if($classroom->grade->status)
                                         @can('edit_classrooms')

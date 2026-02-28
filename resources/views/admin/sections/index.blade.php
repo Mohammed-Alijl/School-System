@@ -61,7 +61,7 @@
                                 <th class="wd-20p border-bottom-0">{{ __('admin.sections.fields.classroom') }}</th>
                                 <th class="wd-10p border-bottom-0">{{ __('admin.sections.fields.status') }}</th>
                                 <th class="wd-10p border-bottom-0">{{ __('admin.sections.fields.notes') }}</th>
-                                @canany('edit_sections','delete_sections')
+                                @canany(['edit_sections','delete_sections'])
                                     <th class="wd-20p border-bottom-0">{{ __('admin.global.actions') }}</th>
                                 @endcanany
                             </tr>
@@ -81,7 +81,7 @@
                                         @endif
                                     </td>
                                     <td>{{ $section->notes ?? __('admin.sections.no_notes') }}</td>
-                                    @canany('edit_sections','delete_sections')
+                                    @canany(['edit_sections','delete_sections'])
                                             <td>
                                                 @if($section->grade->status && $section->classroom->status)
                                                 @can('edit_sections')

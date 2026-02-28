@@ -40,7 +40,7 @@
                                 <th class="wd-10p border-bottom-0">{{ trans('admin.teachers.fields.national_id') }}</th>
                                 <th class="wd-10p border-bottom-0">{{ trans('admin.teachers.fields.phone') }}</th>
                                 <th class="wd-10p border-bottom-0">{{ trans('admin.teachers.fields.status') }}</th>
-                                @canany('restore_teachers','force-delete_teachers')
+                                @canany(['restore_teachers','force-delete_teachers'])
                                     <th class="wd-20p border-bottom-0">{{ trans('admin.global.actions') }}</th>
                                 @endcanany
                             </tr>
@@ -88,7 +88,7 @@
                                             <span class="label text-danger d-flex">{{ trans('admin.global.disabled') }}</span>
                                         @endif
                                     </td>
-                                    @canany('restore_teachers','force-delete_teachers')
+                                    @canany(['restore_teachers','force-delete_teachers'])
                                         <td>
                                             @can('restore_teachers')
                                                 <a class="btn btn-info btn-sm restore-item"

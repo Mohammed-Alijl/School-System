@@ -93,7 +93,7 @@
                                     <td>{{ $guardian->national_id_father }}</td>
                                     <td>{{ $guardian->phone_father }}</td>
                                     <td>{{ $guardian->name_mother }}</td>
-                                    @canany('restore_guardian','force-delete_guardian')
+                                    @canany(['restore_guardians','force-delete_guardians'])
                                         <td>
                                             @can('restore_guardian')
                                                 <a class="btn btn-info btn-sm restore-item"

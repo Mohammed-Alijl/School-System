@@ -39,7 +39,7 @@
                                 <th class="wd-20p border-bottom-0">{{ __('admin.sections.fields.classroom') }}</th>
                                 <th class="wd-10p border-bottom-0">{{ __('admin.sections.fields.status') }}</th>
                                 <th class="wd-10p border-bottom-0">{{ __('admin.sections.fields.notes') }}</th>
-                                @canany('restore_sections','force-delete_sections')
+                                @canany(['restore_sections','force-delete_sections'])
                                     <th class="wd-20p border-bottom-0">{{ __('admin.global.actions') }}</th>
                                 @endcanany
                             </tr>
@@ -59,7 +59,7 @@
                                         @endif
                                     </td>
                                     <td>{{ $section->notes ?? __('admin.sections.no_notes') }}</td>
-                                    @canany('restore_sections','force-delete_sections')
+                                    @canany(['restore_sections','force-delete_sections'])
                                         <td>
                                             @can('restore_sections')
                                                 <a class="btn btn-info btn-sm restore-item"
