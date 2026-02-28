@@ -19,4 +19,9 @@ class Specialization extends Model
     {
         return $this->hasMany(Teacher::class, 'specialization_id');
     }
+
+    public function subjects()
+    {
+        return $this->hasMany(Specialization::class, 'specialization_id');
+    }
 }
