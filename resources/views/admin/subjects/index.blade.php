@@ -104,6 +104,58 @@
         .action-icon-btn:hover {
             transform: translateY(-2px);
         }
+        .action-icon-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1) !important;
+        }
+
+        /* ─── DARK THEME OVERRIDES ─── */
+        .dark-theme .glass-card {
+            background: #1e212b;
+            border-color: rgba(255, 255, 255, 0.05);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
+        }
+        .dark-theme .glass-card:hover {
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4) !important;
+        }
+        .dark-theme .filter-section {
+            background: #14161f;
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+        .dark-theme .form-control-modern {
+            background-color: #1e212b;
+            border-color: rgba(255, 255, 255, 0.1);
+            color: #e2e8f0;
+        }
+        .dark-theme .form-control-modern:focus {
+            border-color: #4e73df;
+            background-color: #1e212b;
+            color: #fff;
+        }
+        .dark-theme .table-hover tbody tr:hover {
+            background-color: #242836;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        .dark-theme table.dataTable thead th, 
+        .dark-theme table.dataTable thead td {
+            border-bottom-color: rgba(255, 255, 255, 0.1) !important;
+            color: #e2e8f0;
+        }
+        .dark-theme .text-muted {
+            color: #94a3b8 !important;
+        }
+        .dark-theme h6, .dark-theme .font-weight-bold {
+            color: #f1f5f9 !important;
+        }
+        .dark-theme .action-icon-btn {
+            background: rgba(255,255,255,0.05) !important;
+            border-color: rgba(255,255,255,0.05);
+        }
+        .dark-theme .badge-light {
+            background-color: rgba(255,255,255,0.05);
+            color: #cbd5e1;
+            border-color: rgba(255,255,255,0.1) !important;
+        }
     </style>
 @endsection
 

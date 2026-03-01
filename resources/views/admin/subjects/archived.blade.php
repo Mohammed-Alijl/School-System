@@ -76,6 +76,45 @@
             display: flex;
             align-items: center;
         }
+
+        /* ─── DARK THEME OVERRIDES ─── */
+        .dark-theme .glass-card {
+            background: #1e212b;
+            border-color: rgba(255, 255, 255, 0.05);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
+        }
+        .dark-theme .table-archive th {
+            background-color: #14161f !important;
+            border-bottom-color: rgba(255, 255, 255, 0.1) !important;
+            color: #e2e8f0 !important;
+        }
+        .dark-theme .table-hover tbody tr:hover {
+            background-color: #242836;
+        }
+        .dark-theme .table-archive td {
+            border-bottom-color: rgba(255, 255, 255, 0.05) !important;
+            color: #e2e8f0;
+        }
+        .dark-theme .text-muted {
+            color: #94a3b8 !important;
+        }
+        .dark-theme h6, .dark-theme .font-weight-bold {
+            color: #f1f5f9 !important;
+        }
+        .dark-theme .archive-alert {
+            background: rgba(231, 76, 60, 0.1);
+            border-left-color: #e74c3c;
+        }
+        .dark-theme .badge-light {
+            background-color: rgba(255,255,255,0.05);
+            color: #cbd5e1;
+            border: 1px solid rgba(255,255,255,0.1) !important;
+        }
+        .dark-theme .btn-light {
+            background: rgba(255,255,255,0.05) !important;
+            border-color: rgba(255,255,255,0.05);
+            color: #cbd5e1 !important;
+        }
     </style>
 @endsection
 
