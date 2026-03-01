@@ -105,7 +105,7 @@ class TeacherService
         if ($teacher->delete()) {
             return true;
         }
-        throw new \Exception(__('admin.teacher.messages.failed.delete'));
+        throw new \Exception(__('admin.teachers.messages.failed.delete'));
     }
 
     public function archive()
@@ -118,7 +118,7 @@ class TeacherService
         $teacher = Teacher::withTrashed()->find($id);
 
         if (!$teacher) {
-            throw new \Exception(__('admin.teacher.messages.failed.restore'));
+            throw new \Exception(__('admin.teachers.messages.failed.restore'));
         }
 
         $teacher->restore();
@@ -130,7 +130,7 @@ class TeacherService
         $teacher = Teacher::withTrashed()->find($id);
 
         if (!$teacher)
-            throw new \Exception(__('admin.teacher.messages.failed.delete'));
+            throw new \Exception(__('admin.teachers.messages.failed.delete'));
 
         if ($teacher->attachments()->count() > 0 ){
             foreach ($teacher->attachments as $attachment)
@@ -145,7 +145,7 @@ class TeacherService
         if($teacher->forceDelete())
             return true;
 
-        throw new \Exception(__('admin.teacher.messages.failed.delete'));
+        throw new \Exception(__('admin.teachers.messages.failed.delete'));
     }
 
     public function getNextTeacherCode()
