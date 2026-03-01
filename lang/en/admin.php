@@ -40,6 +40,9 @@ return [
         'previous' => "Previous",
         'saving' => "Saving...",
         'required_hint' => "Required fields",
+        'statistics' => "Statistics",
+        'overview' => "Overview",
+        'sections' => "Sections",
         'dropify' => [
             'drag_drop' => 'Drag and drop a file here or click',
             'replace' => 'Drag and drop or click to replace',

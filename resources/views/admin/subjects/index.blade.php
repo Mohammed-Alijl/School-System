@@ -188,7 +188,7 @@
                                 <th class="wd-15p border-bottom-0">{{ __('admin.subjects.fields.grade_id') }}</th>
                                 <th class="wd-15p border-bottom-0">{{ __('admin.subjects.fields.classroom_id') }}</th>
                                 <th class="wd-10p border-bottom-0 text-center">{{ __('admin.subjects.fields.status') }}</th>
-                                @canany(['edit_subjects','delete_subjects'])
+                                @canany(['edit_subjects','delete_subjects','view_subjects'])
                                     <th class="wd-15p border-bottom-0 text-center">{{ __('admin.global.actions') }}</th>
                                 @endcanany
                             </tr>
@@ -230,13 +230,32 @@
                                             <span class="badge badge-modern badge-inactive"><i class="las la-times-circle mr-1 ml-1"></i> {{ __('admin.subjects.inactive') }}</span>
                                         @endif
                                     </td>
-                                    @canany(['edit_subjects','delete_subjects'])
+                                    @canany(['edit_subjects','delete_subjects','view_subjects'])
                                     <td class="text-center">
+                                        @can('view_subjects')
+                                        <a class="btn btn-light action-icon-btn btn-sm show-subject-btn shadow-sm text-info"
+                                           href="javascript:void(0)"
+                                           data-id="{{ $subject->id }}"
+                                           data-name_ar="{{ $subject->getTranslation('name', 'ar') }}"
+                                           data-name_en="{{ $subject->getTranslation('name', 'en') }}"
+                                           data-status="{{ $subject->status }}"
+                                           data-grade="{{ $subject->grade->name ?? '-' }}"
+                                           data-classroom="{{ $subject->classroom->name ?? '-' }}"
+                                           data-specialization="{{ $subject->specialization->name ?? '-' }}"
+                                           data-updated-at="{{ $subject->updated_at ? $subject->updated_at->diffForHumans() : '' }}"
+                                           data-students="{{ $subject->classroom ? $subject->classroom->students()->count() : 0 }}"
+                                           data-sections="{{ $subject->classroom ? $subject->classroom->sections()->count() : 0 }}"
+                                           data-teachers="0"
+                                        >
+                                            <i class="las la-eye tx-16"></i>
+                                        </a>
+                                        @endcan
                                         @can('edit_subjects')
                                         <a class="btn btn-light action-icon-btn btn-sm edit-btn shadow-sm text-primary"
                                            href="#"
                                            data-toggle="modal"
                                            data-target="#editModal"
+                                           data-id="{{ $subject->id }}"
                                            data-url="{{ route('admin.subjects.update', $subject->id) }}"
                                            data-name_ar="{{ $subject->getTranslation('name', 'ar') }}"
                                            data-name_en="{{ $subject->getTranslation('name', 'en') }}"
@@ -272,6 +291,7 @@
     </div>
     @include('admin.subjects.add_modal')
      @include('admin.subjects.edit_modal')
+    @include('admin.subjects.show_modal')
 
 @endsection
 
