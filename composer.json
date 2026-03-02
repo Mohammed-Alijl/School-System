@@ -17,7 +17,8 @@
         "spatie/laravel-permission": "*",
         "spatie/laravel-translatable": "*",
         "symfony/http-client": "*",
-        "symfony/mailgun-mailer": "*"
+        "symfony/mailgun-mailer": "*",
+        "yajra/laravel-datatables-oracle": "*"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",

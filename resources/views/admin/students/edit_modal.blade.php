@@ -343,25 +343,25 @@
             let _pendingClassroomId = null;
             let _pendingSectionId   = null;
 
-            $('#editModal').on('shown.bs.modal', function (event) {
+            $(document).on('click', '.edit-btn', function () {
                 isInitialLoad = true;
 
-                let button = $(event.relatedTarget);
+                let button = $(this);
 
-                let imageUrl = button.data('image');
+                let imageUrl = button.attr('data-image');
                 let imageArray = imageUrl ? [imageUrl] : [];
-                let attachments = safeJson(button.attr('data-attachments'), button.data('attachments') || []);
-                let configs = safeJson(button.attr('data-configs'), button.data('configs') || []);
+                let attachments = safeJson(button.attr('data-attachments'), []);
+                let configs = safeJson(button.attr('data-configs'), []);
 
-                $('#student_code_preview').text(button.data('student_code') || '');
+                $('#student_code_preview').text(button.attr('data-student_code') || '');
 
                 initFileInputs(imageArray, attachments, configs);
 
-                let gradeId       = button.data('grade_id');
-                let classroomId   = button.data('classroom_id');
-                let classroomName = button.data('classroom_name');
-                let sectionId     = button.data('section_id');
-                let sectionName   = button.data('section_name');
+                let gradeId       = button.attr('data-grade_id');
+                let classroomId   = button.attr('data-classroom_id');
+                let classroomName = button.attr('data-classroom_name');
+                let sectionId     = button.attr('data-section_id');
+                let sectionName   = button.attr('data-section_name');
 
                 // Store pending IDs so AJAX success callbacks can pre-select them
                 _pendingClassroomId = classroomId;
@@ -372,9 +372,9 @@
                 $('#edit_classroom_id').html(`<option value="${classroomId}" selected>${classroomName}</option>`);
                 $('#edit_section_id').html(`<option value="${sectionId}" selected>${sectionName}</option>`);
 
-                // Trigger grade change to load full classroom list
-                $('#edit_grade_id').val(gradeId).trigger('change');
-
+                // We don't need to manually trigger change because crud.js does it already
+                // But just in case crud.js missed it, we trigger it only if needed.
+                // Actually, let crud.js handle setting the basic `.val()` via generic loop.
             });
 
             /* ===============================

@@ -12,6 +12,7 @@ use App\Services\StudentService;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
+use Yajra\DataTables\Facades\DataTables;
 
 class StudentController extends Controller implements HasMiddleware
 {
@@ -35,13 +36,26 @@ class StudentController extends Controller implements HasMiddleware
         ];
     }
 
-    public function index()
-    {
-        $students = $this->studentService->getAll();
-        $lookups = $this->studentService->getLookups();
+    // public function index()
+    // {
+    //     $students = $this->studentService->getAll();
+    //     $lookups = $this->studentService->getLookups();
 
-        return view('admin.students.index', array_merge(['students' => $students], $lookups));
+    //     return view('admin.students.index', array_merge(['students' => $students], $lookups));
+    // }
+
+
+public function index(Request $request)
+    {
+        if ($request->ajax()) {
+            return $this->studentService->getStudentsDataTable($request);
+        }
+        
+        $lookups = $this->studentService->getLookups();
+        
+        return view('admin.students.index', $lookups);
     }
+
 
     public function store(StoreRequest $request)
     {
@@ -55,6 +69,32 @@ class StudentController extends Controller implements HasMiddleware
         } catch (\Exception $e) {
             return response()->json(['status' => 'error', 'message' => $e->getMessage()], 500);
         }
+    }
+
+    public function edit(Student $student)
+    {
+
+        return response()->json([
+            'status' => 'success',
+            'data' => [
+                'id' => $student->id,
+                'student_code' => $student->student_code,
+                'name_ar' => $student->getTranslation('name', 'ar'),
+                'name_en' => $student->getTranslation('name', 'en'),
+                'email' => $student->email,
+                'national_id' => $student->national_id,
+                'date_of_birth' => $student->date_of_birth->format('Y-m-d'),                
+                'grade_id' => $student->grade_id,
+                'classroom_id' => $student->classroom_id,
+                'section_id' => $student->section_id,
+                'guardian_id' => $student->guardian_id,
+                'blood_type_id' => $student->blood_type_id,
+                'nationality_id' => $student->nationality_id,
+                'religion_id' => $student->religion_id,
+                'gender_id' => $student->gender_id,
+                'status' => $student->status,
+            ]
+        ]);
     }
 
     public function update(UpdateRequest $request, Student $student)

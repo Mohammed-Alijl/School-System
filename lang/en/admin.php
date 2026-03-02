@@ -45,6 +45,7 @@ return [
         'sections' => "Sections",
         'back' => "Back",
         'view' => 'View',
+        'reset_filters' => 'Reset Filters',
         'dropify' => [
             'drag_drop' => 'Drag and drop a file here or click',
             'replace' => 'Drag and drop or click to replace',

@@ -15,34 +15,247 @@
     <!-- Krajee Bootstrap FileInput CSS -->
     <link href="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-fileinput@5.5.2/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.min.css" rel="stylesheet">
+
+    <style>
+        /* ─── GLASS CARD ─── */
+        .glass-card {
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05) !important;
+            border: 1px solid rgba(0, 0, 0, 0.02);
+            transition: all 0.3s ease;
+        }
+        .glass-card:hover {
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08) !important;
+        }
+
+        /* ─── FILTER SECTION ─── */
+        .filter-section {
+            background: #f8f9fc;
+            border-radius: 14px;
+            padding: 1.4rem 1.6rem;
+            margin-bottom: 1.75rem;
+            border: 1px dashed #e3e6f0;
+        }
+        .filter-section .form-label {
+            margin-bottom: 0.4rem;
+        }
+
+        /* ─── FORM CONTROLS ─── */
+        .form-control-modern {
+            border-radius: 8px;
+            border: 1px solid #e3e6f0;
+            padding: 0.55rem 1rem;
+            font-size: 0.875rem;
+            box-shadow: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .form-control-modern:focus {
+            border-color: #4e73df;
+            box-shadow: 0 0 0 0.2rem rgba(78, 115, 223, 0.18);
+        }
+        .form-control-modern:disabled {
+            background-color: #f1f3f9;
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        /* ─── BUTTONS ─── */
+        .btn-modern {
+            border-radius: 9px;
+            font-weight: 600;
+            padding: 0.55rem 1.4rem;
+            letter-spacing: 0.3px;
+            transition: all 0.25s ease;
+        }
+        .btn-modern:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 5px 14px rgba(0,0,0,0.12) !important;
+        }
+
+        /* ─── TABLE HEADER ─── */
+        table.dataTable thead th,
+        table.dataTable thead td {
+            border-bottom: 2px solid #edf2f7 !important;
+            color: #4a5568;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.72rem;
+            letter-spacing: 1px;
+            white-space: nowrap;
+        }
+
+        /* ─── TABLE ROW HOVER ─── */
+        .table-hover tbody tr:hover {
+            background-color: #f8fafc;
+            transition: background-color 0.2s ease;
+        }
+
+        /* ─── STATUS BADGES ─── */
+        .badge-modern {
+            padding: 0.45em 0.95em;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 82%;
+            letter-spacing: 0.4px;
+        }
+        .badge-active {
+            background-color: #e3fcef;
+            color: #0d965e;
+            border: 1px solid #c9f5e1;
+        }
+        .badge-inactive {
+            background-color: #fee2e2;
+            color: #dc2626;
+            border: 1px solid #fecaca;
+        }
+
+        /* ─── ACTION BUTTONS ─── */
+        .action-icon-btn {
+            width: 34px;
+            height: 34px;
+            border-radius: 8px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+        .action-icon-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12) !important;
+        }
+
+        /* ─── PAGE HEADER AVATAR ─── */
+        .avatar-initial {
+            width: 42px;
+            height: 42px;
+            border-radius: 11px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            color: #fff;
+        }
+        .bg-gradient-primary { background: linear-gradient(135deg, #4e73df 0%, #224abe 100%); }
+        .bg-gradient-warning  { background: linear-gradient(135deg, #f6a935 0%, #e07b00 100%); }
+
+        /* ─── RESET BUTTON ─── */
+        #reset_filters {
+            border: 1px solid #dce1ef;
+            color: #6c7a9c;
+            background: #fff;
+        }
+        #reset_filters:hover {
+            background: #f1f3f9;
+            border-color: #c4cbdc;
+        }
+
+        /* ══════════════════════════════════════
+           DARK THEME OVERRIDES
+        ══════════════════════════════════════ */
+        .dark-theme .glass-card {
+            background: #1e212b;
+            border-color: rgba(255, 255, 255, 0.05);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35) !important;
+        }
+        .dark-theme .glass-card:hover {
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.45) !important;
+        }
+        .dark-theme .filter-section {
+            background: #14161f;
+            border-color: rgba(255, 255, 255, 0.08);
+        }
+        .dark-theme .filter-section .form-label {
+            color: #94a3b8 !important;
+        }
+        .dark-theme .form-control-modern {
+            background-color: #1e212b;
+            border-color: rgba(255, 255, 255, 0.1);
+            color: #e2e8f0;
+        }
+        .dark-theme .form-control-modern:focus {
+            border-color: #4e73df;
+            background-color: #1e212b;
+            color: #fff;
+            box-shadow: 0 0 0 0.2rem rgba(78, 115, 223, 0.2);
+        }
+        .dark-theme .form-control-modern:disabled {
+            background-color: #12141c;
+            color: #64748b;
+        }
+        .dark-theme #reset_filters {
+            background: #1e212b;
+            border-color: rgba(255, 255, 255, 0.08);
+            color: #94a3b8;
+        }
+        .dark-theme #reset_filters:hover {
+            background: #242836;
+        }
+        .dark-theme table.dataTable thead th,
+        .dark-theme table.dataTable thead td {
+            border-bottom-color: rgba(255, 255, 255, 0.08) !important;
+            color: #cbd5e1;
+        }
+        .dark-theme .table-hover tbody tr:hover {
+            background-color: #242836;
+        }
+        .dark-theme .text-muted {
+            color: #94a3b8 !important;
+        }
+        .dark-theme h6,
+        .dark-theme .font-weight-bold {
+            color: #f1f5f9 !important;
+        }
+        .dark-theme .action-icon-btn {
+            background: rgba(255, 255, 255, 0.05) !important;
+            border-color: rgba(255, 255, 255, 0.05);
+        }
+        .dark-theme .badge-active {
+            background-color: rgba(13, 150, 94, 0.15);
+            border-color: rgba(13, 150, 94, 0.25);
+        }
+        .dark-theme .badge-inactive {
+            background-color: rgba(220, 38, 38, 0.12);
+            border-color: rgba(220, 38, 38, 0.2);
+        }
+    </style>
 @endsection
 
 @section('page-header')
     <div class="breadcrumb-header justify-content-between">
         <div class="my-auto">
-            <div class="d-flex">
-                <h4 class="content-title mb-0 my-auto">{{ trans('admin.sidebar.users') }}</h4>
-                <span class="text-muted mt-1 tx-13 mr-2 mb-0">/ {{ trans('admin.students.title') }}</span>
+            <div class="d-flex align-items-center">
+                <div class="mr-3 ml-3">
+                    <span class="avatar-initial bg-gradient-primary shadow-sm">
+                        <i class="las la-user-graduate"></i>
+                    </span>
+                </div>
+                <div>
+                    <h4 class="content-title mb-0 my-auto font-weight-bold">{{ trans('admin.students.title') }}</h4>
+                    <span class="text-muted mt-1 tx-13 d-block">{{ trans('admin.sidebar.users') }}</span>
+                </div>
             </div>
         </div>
-        <div class="d-flex my-xl-auto right-content">
+        <div class="d-flex my-xl-auto right-content align-items-center">
             @can('view-archived_students')
-                 <div class="pr-1 mb-3 mb-xl-0">
-                    <a class="modal-effect btn btn-warning-gradient btn-with-icon btn-block"
-                       href="{{route('admin.students.archived')}}">
-                        <i class="fas fa-book ml-2"></i>  {{trans('admin.students.archived') }}
+                <div class="mb-3 mb-xl-0 ml-2">
+                    <a class="btn btn-modern btn-danger shadow-sm"
+                       href="{{ route('admin.students.archived') }}">
+                        <i class="las la-archive tx-16 mr-1 ml-1"></i>
+                        {{ trans('admin.students.archived') }}
                     </a>
-            </div>
+                </div>
             @endcan
             @can('create_students')
-                  <div class="pr-1 mb-3 mb-xl-0">
-                <a class="modal-effect btn btn-primary-gradient btn-with-icon btn-block"
-                   data-effect="effect-scale"
-                   data-toggle="modal"
-                   href="#addModal">
-                    <i class="fas fa-plus-circle ml-2"></i> {{ trans('admin.students.add') }}
-                </a>
-            </div>
+                <div class="mb-3 mb-xl-0 ml-2">
+                    <a class="modal-effect btn btn-primary btn-modern shadow-sm"
+                       data-effect="effect-scale"
+                       data-toggle="modal"
+                       href="#addModal">
+                        <i class="las la-plus-circle tx-18 mr-1 ml-1"></i>
+                        {{ trans('admin.students.add') }}
+                    </a>
+                </div>
             @endcan
         </div>
     </div>
@@ -51,158 +264,95 @@
 @section('content')
     <div class="row row-sm">
         <div class="col-xl-12">
-            <div class="card">
-                <div class="card-header pb-0"></div>
-                <div class="card-body">
+
+            {{-- ─── Advanced Filter Section ─── --}}
+            <div class="filter-section shadow-sm">
+                <div class="row align-items-end">
+
+                    {{-- Grade --}}
+                    <div class="col-md-3 mb-3 mb-md-0">
+                        <label class="form-label tx-11 font-weight-bold text-uppercase text-muted">
+                            <i class="las la-layer-group mr-1"></i> {{ trans('admin.students.fields.grade') }}
+                        </label>
+                        <select class="form-control form-control-modern" id="filter_grade">
+                            <option value="">{{ trans('admin.global.all') }}</option>
+                            @foreach($grades as $grade)
+                                <option value="{{ $grade->id }}" data-name="{{ $grade->name }}">{{ $grade->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    {{-- Classroom --}}
+                    <div class="col-md-2 mb-3 mb-md-0">
+                        <label class="form-label tx-11 font-weight-bold text-uppercase text-muted">
+                            <i class="las la-chalkboard mr-1"></i> {{ trans('admin.students.fields.classroom') }}
+                        </label>
+                        <select class="form-control form-control-modern" id="filter_classroom" disabled>
+                            <option value="">{{ trans('admin.global.all') }}</option>
+                        </select>
+                    </div>
+
+                    {{-- Section --}}
+                    <div class="col-md-2 mb-3 mb-md-0">
+                        <label class="form-label tx-11 font-weight-bold text-uppercase text-muted">
+                            <i class="las la-users mr-1"></i> {{ trans('admin.students.fields.section') }}
+                        </label>
+                        <select class="form-control form-control-modern" id="filter_section" disabled>
+                            <option value="">{{ trans('admin.global.all') }}</option>
+                        </select>
+                    </div>
+
+                    {{-- Status --}}
+                    <div class="col-md-2 mb-3 mb-md-0">
+                        <label class="form-label tx-11 font-weight-bold text-uppercase text-muted">
+                            <i class="las la-toggle-on mr-1"></i> {{ trans('admin.students.fields.status') }}
+                        </label>
+                        <select class="form-control form-control-modern" id="filter_status">
+                            <option value="">{{ trans('admin.global.all') }}</option>
+                            <option value="1">{{ trans('admin.global.active') }}</option>
+                            <option value="0">{{ trans('admin.global.disabled') }}</option>
+                        </select>
+                    </div>
+
+                    {{-- Reset Button --}}
+                    <div class="col-md-3 text-right mt-3 mt-md-0">
+                        <button class="btn btn-modern w-100" id="reset_filters">
+                            <i class="las la-sync-alt mr-1 ml-1"></i>
+                            {{ trans('admin.global.reset_filters', [], null) ?? 'Reset Filters' }}
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+
+            {{-- ─── Glass Table Card ─── --}}
+            <div class="card glass-card">
+                <div class="card-body p-4">
                     <div class="table-responsive">
-                        <table class="table text-md-nowrap" id="students_table">
+                        <table class="table table-hover text-md-nowrap" id="students_table">
                             <thead>
                             <tr>
                                 <th class="wd-5p border-bottom-0">#</th>
                                 <th class="wd-10p border-bottom-0">{{ trans('admin.students.fields.student_code') }}</th>
-                                <th class="wd-10p border-bottom-0">{{ trans('admin.students.fields.name') }}</th>
+                                <th class="wd-15p border-bottom-0">{{ trans('admin.students.fields.name') }}</th>
                                 <th class="wd-10p border-bottom-0">{{ trans('admin.students.fields.guardian') }}</th>
                                 <th class="wd-10p border-bottom-0">{{ trans('admin.students.fields.grade') }}</th>
                                 <th class="wd-10p border-bottom-0">{{ trans('admin.students.fields.classroom') }}</th>
                                 <th class="wd-10p border-bottom-0">{{ trans('admin.students.fields.section') }}</th>
-                                <th class="wd-10p border-bottom-0">{{ trans('admin.students.fields.status') }}</th>
+                                <th class="wd-10p border-bottom-0 text-center">{{ trans('admin.students.fields.status') }}</th>
                                 @canany(['edit_students','delete_students'])
-                                    <th class="wd-20p border-bottom-0">{{ trans('admin.global.actions') }}</th>
+                                    <th class="wd-10p border-bottom-0 text-center">{{ trans('admin.global.actions') }}</th>
                                 @endcanany
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($students as $student)
-                                <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>
-                                        <a href="#" class="text-primary font-weight-bold show-btn"
-                                           data-toggle="modal"
-                                           data-target="#showModal"
-                                           data-student_code="{{ $student->student_code }}"
-                                           data-name_ar="{{ $student->getTranslation('name', 'ar') }}"
-                                           data-name_en="{{ $student->getTranslation('name', 'en') }}"
-                                           data-email="{{ $student->email }}"
-                                           data-national_id="{{ $student->national_id }}"
-                                           data-date_of_birth="{{ $student->date_of_birth->format('Y-m-d') }}"
-                                           data-grade_name="{{ optional($student->grade)->name }}"
-                                           data-classroom_name="{{ optional($student->classroom)->name }}"
-                                           data-section_name="{{ optional($student->section)->name }}"
-                                           data-academic_year="{{ $student->academic_year }}"
-                                           data-guardian_name="{{ optional($student->guardian)->name_father }}"
-                                           data-gender="{{ optional($student->gender)->name }}"
-                                           data-blood_type="{{ optional($student->bloodType)->name }}"
-                                           data-nationality="{{ optional($student->nationality)->name }}"
-                                           data-religion="{{ optional($student->religion)->name }}"
-                                           data-status="{{ $student->status ? trans('admin.global.active') : trans('admin.global.disabled') }}"
-                                           data-image="{{ $student->imageUrl }}"
-                                           @php
-                                               $attUrls = [];
-                                               if(!empty($student->attachments) && is_array($student->attachments)) {
-                                                   foreach($student->attachments as $att) {
-                                                       $attUrls[] = asset('storage/' . $att);
-                                                   }
-                                               }
-                                           @endphp
-                                           data-attachments='@json($attUrls)'>
-                                            {{ $student->student_code }}
-                                        </a>
-                                    </td>
-                                    <td>{{ $student->name }}</td>
-                                    <td>{{ $student->guardian->name_father }}</td>
-                                    <td>{{ $student->grade->name }}</td>
-                                    <td>{{ $student->classroom->name }}</td>
-                                    <td>{{ $student->section->name }}</td>
-                                    <td>
-                                        @if ($student->status)
-                                            <span class="label text-success d-flex">{{ trans('admin.global.active') }}</span>
-                                        @else
-                                            <span class="label text-danger d-flex">{{ trans('admin.global.disabled') }}</span>
-                                        @endif
-                                    </td>
-                                    @canany(['edit_students','delete_students'])
-                                            <td>
-                                                @can('edit_students')
-                                                    @php
-                                                        $attachmentUrls = [];
-                                                        $attachmentConfigs = [];
-
-                                                        if(!empty($student->attachments) && is_array($student->attachments)) {
-                                                            foreach($student->attachments as $index => $filePath) {
-                                                                $fullUrl = asset('storage/' . $filePath);
-                                                                $attachmentUrls[] = $fullUrl;
-
-                                                                $fileName = basename($filePath);
-                                                                $extension = pathinfo($filePath, PATHINFO_EXTENSION);
-
-                                                                $type = 'other';
-                                                                if(in_array($extension, ['jpg', 'jpeg', 'png', 'svg'])) {
-                                                                    $type = 'image';
-                                                                } elseif ($extension == 'pdf') {
-                                                                    $type = 'pdf';
-                                                                } elseif (in_array($extension, ['doc', 'docx'])) {
-                                                                    $type = 'office';
-                                                                }
-
-                                                                $attachmentConfigs[] = [
-                                                                    'caption' => $fileName,
-                                                                    'type' => $type,
-                                                                    'key' => $index + 1
-                                                                ];
-                                                            }
-                                                        }
-                                                    @endphp
-                                                    <a class="btn btn-info btn-sm edit-btn"
-                                                       href="#"
-                                                       data-toggle="modal"
-                                                       data-target="#editModal"
-                                                       data-url="{{ route('admin.students.update', $student->id) }}"
-                                                       data-student_code="{{ $student->student_code }}"
-                                                       data-name_ar="{{ $student->getTranslation('name', 'ar') }}"
-                                                       data-name_en="{{ $student->getTranslation('name', 'en') }}"
-                                                       data-email="{{ $student->email }}"
-                                                       data-national_id="{{ $student->national_id }}"
-                                                       data-date_of_birth="{{ $student->date_of_birth->format('d-m-Y') }}"
-                                                       data-grade_id="{{ $student->grade_id }}"
-                                                       data-classroom_id="{{ $student->classroom_id }}"
-                                                       data-classroom_name="{{ optional($student->classroom)->name }}"
-                                                       data-section_id="{{ $student->section_id }}"
-                                                       data-section_name="{{ optional($student->section)->name }}"
-                                                       data-academic_year="{{ $student->academic_year }}"
-                                                       data-status="{{ $student->status }}"
-                                                       data-guardian_id="{{ $student->guardian_id }}"
-                                                       data-blood_type_id="{{ $student->blood_type_id }}"
-                                                       data-nationality_id="{{ $student->nationality_id }}"
-                                                       data-religion_id="{{ $student->religion_id }}"
-                                                       data-gender_id="{{ $student->gender_id }}"
-                                                       data-admin_id="{{ $student->admin_id }}"
-                                                       data-image="{{ $student->imageUrl }}"
-                                                       data-attachments='@json($attachmentUrls)'
-                                                       data-configs='@json($attachmentConfigs)'>
-                                                        <i class="las la-pen"></i> {{trans('admin.global.edit')}}
-                                                    </a>
-                                                @endcan
-                                                @can('delete_students')
-                                                    <a class="modal-effect btn btn-sm btn-danger delete-item"
-                                                       href="#"
-                                                       data-id="{{ $student->id }}"
-                                                       data-url="{{ route('admin.students.destroy', $student->id) }}"
-                                                       data-name="{{ $student->name }}">
-                                                        <i class="las la-trash"></i> {{trans('admin.global.archive')}}
-                                                    </a>
-                                                @endcan
-                                            </td>
-                                    @endcanany
-                                </tr>
-                            @endforeach
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
+
         </div>
-    </div>
-    </div>
     </div>
 
     @include('admin.students.add_modal')
@@ -222,16 +372,102 @@
 
     @include('admin.layouts.scripts.datatable_config')
     @include('admin.layouts.scripts.delete_script')
+<script>
+    $(document).ready(function() {
 
-    <script>
-        $(document).ready(function() {
-            $('#students_table').DataTable(globalTableConfig);
-
-            $('.select2').select2({
-                placeholder: '{{trans("admin.global.select")}}',
-                width: '100%'
-            });
+        var table = $('#students_table').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: {
+                url: "{{ route('admin.students.index') }}",
+                data: function(d) {
+                    d.filter_grade     = $('#filter_grade').val();
+                    d.filter_classroom = $('#filter_classroom').val();
+                    d.filter_section   = $('#filter_section').val();
+                    d.filter_status    = $('#filter_status').val();
+                }
+            },
+            columns: [
+                {data: 'DT_RowIndex',    name: 'DT_RowIndex',           orderable: false, searchable: false},
+                {data: 'student_code',   name: 'student_code'},
+                {data: 'name',           name: 'name'},
+                {data: 'guardian_name',  name: 'guardian.name_father'},
+                {data: 'grade_name',     name: 'grade_name',            defaultContent: '-'},
+                {data: 'classroom_name', name: 'classroom_name',        defaultContent: '-'},
+                {data: 'section_name',   name: 'section_name',          defaultContent: '-'},
+                {data: 'status',         name: 'status',                className: 'text-center'},
+                @canany(['edit_students','delete_students'])
+                {data: 'actions',        name: 'actions',               orderable: false, searchable: false, className: 'text-center'},
+                @endcanany
+            ],
+            language: {
+                url: "{{ asset('assets/admin/plugins/datatable/Arabic.json') }}"
+            }
         });
-    </script>
+
+        /* ─── Grade filter → load classrooms ─── */
+        $('#filter_grade').on('change', function () {
+            let gradeId = $(this).val();
+            let classroomSelect = $('#filter_classroom');
+            let sectionSelect   = $('#filter_section');
+
+            classroomSelect.empty().append('<option value="">{{ trans('admin.global.all') }}</option>').prop('disabled', true);
+            sectionSelect.empty().append('<option value="">{{ trans('admin.global.all') }}</option>').prop('disabled', true);
+
+            if (gradeId) {
+                $.ajax({
+                    url: "{{ route('admin.classrooms.by-grade') }}",
+                    data: { grade_id: gradeId },
+                    success: function (response) {
+                        if (response.success && Object.keys(response.data).length) {
+                            $.each(response.data, function (id, name) {
+                                classroomSelect.append('<option value="' + id + '">' + name + '</option>');
+                            });
+                            classroomSelect.prop('disabled', false);
+                        }
+                    }
+                });
+            }
+            table.draw();
+        });
+
+        /* ─── Classroom filter → load sections ─── */
+        $('#filter_classroom').on('change', function () {
+            let classroomId = $(this).val();
+            let sectionSelect = $('#filter_section');
+
+            sectionSelect.empty().append('<option value="">{{ trans('admin.global.all') }}</option>').prop('disabled', true);
+
+            if (classroomId) {
+                $.ajax({
+                    url: "{{ route('admin.sections.by-classroom') }}",
+                    data: { classroom_id: classroomId },
+                    success: function (response) {
+                        if (response.success && Object.keys(response.data).length) {
+                            $.each(response.data, function (id, name) {
+                                sectionSelect.append('<option value="' + id + '">' + name + '</option>');
+                            });
+                            sectionSelect.prop('disabled', false);
+                        }
+                    }
+                });
+            }
+            table.draw();
+        });
+
+        /* ─── Section & Status direct filter ─── */
+        $('#filter_section, #filter_status').on('change', function () {
+            table.draw();
+        });
+
+        /* ─── Reset all filters ─── */
+        $('#reset_filters').on('click', function () {
+            $('#filter_grade').val('').trigger('change');
+            $('#filter_status').val('');
+            table.draw();
+        });
+
+    });
+</script>
     @stack('scripts')
 @endsection

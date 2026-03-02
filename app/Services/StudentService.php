@@ -10,14 +10,52 @@ use App\Models\TypeBlood;
 use App\Models\Religion;
 use App\Models\Gender;
 use App\Models\AcademicYear;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
+use Yajra\DataTables\Facades\DataTables;
 
 class StudentService
 {
     public function getAll()
     {
         return Student::with(['grade', 'classroom', 'section', 'guardian'])->latest()->get();
+    }
+
+    public function getStudentsDataTable(Request $request)
+    {
+        $query = $this->getStudentsQuery();
+        
+        $query = $this->applyFilters($query, $request);
+
+        return DataTables::of($query)
+            ->addIndexColumn()
+            ->addColumn('name', function ($row) {
+                return $row->getTranslation('name', app()->getLocale());
+            })
+            ->addColumn('guardian_name', function ($row) {
+                return $row->guardian->name_father ?? '-';
+            })
+            ->addColumn('grade_name', function ($row) {
+                return $row->grade ? $row->grade->getTranslation('name', app()->getLocale()) : '-';
+            })
+            ->addColumn('classroom_name', function ($row) {
+                return $row->classroom ? $row->classroom->getTranslation('name', app()->getLocale()) : '-';
+            })
+            ->addColumn('section_name', function ($row) {
+                return $row->section ? $row->section->getTranslation('name', app()->getLocale()) : '-';
+            })
+            ->addColumn('status', function ($row) {
+                if ($row->status) {
+                    return '<span class="badge badge-modern badge-active"><i class="las la-check-circle mr-1 ml-1"></i>' . trans('admin.global.active') . '</span>';
+                }
+                return '<span class="badge badge-modern badge-inactive"><i class="las la-times-circle mr-1 ml-1"></i>' . trans('admin.global.disabled') . '</span>';
+            })
+            ->addColumn('actions', function ($row) {
+                return view('admin.students.partials._actions', compact('row'))->render();
+            })
+            ->rawColumns(['status', 'actions'])
+            ->make(true);
     }
 
     public function getLookups()
@@ -160,5 +198,29 @@ class StudentService
         }
 
         return $currentYear . $newSequence;
+    }
+
+
+    private function applyFilters($query, Request $request)
+    {
+        return $query->when($request->filled('filter_grade'), function ($q) use ($request) {
+                $q->where('grade_id', (int) $request->filter_grade);
+            })
+            ->when($request->filled('filter_classroom'), function ($q) use ($request) {
+                $q->where('classroom_id', (int) $request->filter_classroom);
+            })
+            ->when($request->filled('filter_section'), function ($q) use ($request) {
+                $q->where('section_id', (int) $request->filter_section);
+            })
+            ->when($request->has('filter_status') && $request->filter_status !== null, function ($q) use ($request) {
+                $q->where('status', (int) $request->filter_status);
+            });
+    }
+
+
+    private function getStudentsQuery()
+    {
+        return Student::with(['grade', 'classroom', 'section', 'guardian'])
+                      ->select('students.*'); 
     }
 }

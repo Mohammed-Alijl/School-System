@@ -106,7 +106,7 @@ Route::group(
                 });
 
                 // ─── Students ───────────────────────────────────────────────────────────────
-                Route::resource('students',StudentController::class)->except(['show','create','edit']);
+                Route::resource('students',StudentController::class)->except(['show','create']);
                 Route::prefix('students/')->name('students.')->group(function () {
                     Route::get('promotions', [StudentPromotionController::class, 'index'])->name('promotions.index');
                     Route::post('promotions', [StudentPromotionController::class, 'store'])->name('promotions.store');
