@@ -2,6 +2,61 @@
 @section('css')
     <!-- Sidemenu-respoansive-tabs css -->
     <link href="{{URL::asset('assets/admin/plugins/sidemenu-responsive-tabs/css/sidemenu-responsive-tabs.css')}}" rel="stylesheet">
+    <style>
+        .login-right-panel {
+            background-color: #ffffff;
+            transition: background-color 0.3s ease;
+        }
+
+        /* ─── DARK THEME OVERRIDES ─── */
+        .dark-theme .login-right-panel {
+            background-color: #1e212b !important;
+            color: #f1f5f9;
+        }
+
+        .dark-theme .main-signup-header h2,
+        .dark-theme .main-signup-header h5 {
+            color: #f1f5f9 !important;
+        }
+
+        .dark-theme .main-logo1 {
+            color: #f1f5f9 !important;
+        }
+
+        .dark-theme .form-group label {
+            color: #cbd5e1 !important;
+            font-weight: 500;
+        }
+
+        .dark-theme .form-control {
+            background-color: #14161f !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+            color: #e2e8f0 !important;
+        }
+
+        .dark-theme .form-control:focus {
+            background-color: #1a1d27 !important;
+            border-color: rgba(255, 255, 255, 0.2) !important;
+            box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.05) !important;
+        }
+
+        .dark-theme .form-control::placeholder {
+            color: #94a3b8 !important;
+        }
+
+        .dark-theme .bg-primary-transparent {
+            background-color: #14161f !important;
+        }
+        
+        .dark-theme .main-signin-footer p,
+        .dark-theme .main-signin-footer a {
+            color: #94a3b8 !important;
+        }
+        
+        .dark-theme .main-signin-footer a:hover {
+            color: #f1f5f9 !important;
+        }
+    </style>
 @endsection
 @section('content')
     <div class="container-fluid">
@@ -15,7 +70,7 @@
                 </div>
             </div>
             <!-- The content half -->
-            <div class="col-md-6 col-lg-6 col-xl-5 bg-white">
+            <div class="col-md-6 col-lg-6 col-xl-5 login-right-panel">
                 <div class="login d-flex align-items-center py-2">
                     <!-- Demo content-->
                     <div class="container p-0">
