@@ -36,14 +36,6 @@ class StudentController extends Controller implements HasMiddleware
         ];
     }
 
-    // public function index()
-    // {
-    //     $students = $this->studentService->getAll();
-    //     $lookups = $this->studentService->getLookups();
-
-    //     return view('admin.students.index', array_merge(['students' => $students], $lookups));
-    // }
-
 
 public function index(Request $request)
     {
@@ -128,18 +120,17 @@ public function index(Request $request)
         }
     }
 
-    public function archive()
+
+    public function archive(Request $request)
     {
-        try {
-            $students= $this->studentService->archive();
-            return view('admin.students.archived', compact('students'));
-        } catch (\Exception $ex) {
-            return response()->json([
-                'status' => 'error',
-                'message' => trans('admin.students.messages.failed.archive')
-            ], 500);
+        if ($request->ajax()) {
+            return $this->studentService->getArchivedDataTable($request);
         }
+
+        $grades    = $this->studentService->getLookups()['grades'];
+        return view('admin.students.archived', compact('grades'));
     }
+
 
     public function restore($id)
     {

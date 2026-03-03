@@ -154,6 +154,28 @@ class StudentService
         return Student::onlyTrashed()->latest()->get();
     }
 
+    public function getArchivedDataTable(Request $request)
+    {
+        $query = Student::onlyTrashed()
+            ->with(['grade', 'classroom', 'section', 'guardian'])
+            ->select('students.*');
+
+        $query = $this->applyFilters($query, $request);
+
+        return DataTables::of($query)
+            ->addIndexColumn()
+            ->addColumn('student_code',     fn($row) => $row->student_code)
+            ->addColumn('name',             fn($row) => $row->getTranslation('name', app()->getLocale()))
+            ->addColumn('grade_name',       fn($row) => $row->grade ? $row->grade->getTranslation('name', app()->getLocale()) : '—')
+            ->addColumn('classroom_name',   fn($row) => $row->classroom ? $row->classroom->getTranslation('name', app()->getLocale()) : '—')
+            ->addColumn('deleted_at',       fn($row) => $row->deleted_at ? $row->deleted_at->format('Y-m-d H:i') : '—')
+            ->addColumn('actions', function ($row) {
+                return view('admin.students.partials.archived_actions', compact('row'))->render();
+            })
+            ->rawColumns(['actions'])
+            ->make(true);
+    }
+
     public function restore($id)
     {
         $student = Student::withTrashed()->find($id);
