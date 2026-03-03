@@ -340,7 +340,7 @@
                                 <th class="wd-10p border-bottom-0">{{ trans('admin.students.fields.classroom') }}</th>
                                 <th class="wd-10p border-bottom-0">{{ trans('admin.students.fields.section') }}</th>
                                 <th class="wd-10p border-bottom-0 text-center">{{ trans('admin.students.fields.status') }}</th>
-                                @canany(['edit_students','delete_students'])
+                                @canany(['view_students','edit_students','delete_students'])
                                     <th class="wd-10p border-bottom-0 text-center">{{ trans('admin.global.actions') }}</th>
                                 @endcanany
                             </tr>
