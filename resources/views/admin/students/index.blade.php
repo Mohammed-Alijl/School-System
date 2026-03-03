@@ -351,10 +351,10 @@
                     </div>
                 </div>
             </div>
-
+          </div>
         </div>
     </div>
-
+  </div>
     @include('admin.students.add_modal')
     @include('admin.students.edit_modal')
     @include('admin.students.show_modal')
@@ -376,8 +376,10 @@
     $(document).ready(function() {
 
         var table = $('#students_table').DataTable({
+            ...globalTableConfig,
             processing: true,
             serverSide: true,
+            language: $.extend({}, datatable_lang),
             ajax: {
                 url: "{{ route('admin.students.index') }}",
                 data: function(d) {
@@ -400,9 +402,6 @@
                 {data: 'actions',        name: 'actions',               orderable: false, searchable: false, className: 'text-center'},
                 @endcanany
             ],
-            language: {
-                url: "{{ asset('assets/admin/plugins/datatable/Arabic.json') }}"
-            }
         });
 
         /* ─── Grade filter → load classrooms ─── */
