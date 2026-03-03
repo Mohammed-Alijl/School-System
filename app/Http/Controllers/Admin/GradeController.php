@@ -53,7 +53,7 @@ class GradeController extends Controller implements HasMiddleware
         } catch (\Exception $ex) {
             return response()->json([
                 'status' => 'error',
-                'message' => __('admin.grades.messages.failed.add')
+                'message' => $ex->getMessage() ?? __('admin.grades.messages.failed.add')
             ], 500);
         }
     }
@@ -72,7 +72,7 @@ class GradeController extends Controller implements HasMiddleware
         } catch (\Exception $ex) {
             return response()->json([
                 'status' => 'error',
-                'message' => __('admin.grades.messages.failed.update')
+                'message' => $ex->getMessage() ?? __('admin.grades.messages.failed.update')
             ], 500);
         }
     }
@@ -91,7 +91,7 @@ class GradeController extends Controller implements HasMiddleware
         } catch (\Exception $ex) {
             return response()->json([
                 'status' => 'error',
-                'message' => __('admin.grades.messages.failed.archive')
+                'message' => $ex->getMessage() ?? __('admin.grades.messages.failed.archive')
             ], 500);
         }
     }
@@ -104,7 +104,7 @@ class GradeController extends Controller implements HasMiddleware
         } catch (\Exception $ex) {
             return response()->json([
                 'status' => 'error',
-                'message' => __('admin.grades.messages.failed.archive')
+                'message' => $ex->getMessage() ?? __('admin.grades.messages.failed.archive')
             ], 500);
         }
     }
@@ -120,7 +120,7 @@ class GradeController extends Controller implements HasMiddleware
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => __('admin.grades.messages.failed.restore')
+                'message' => $ex->getMessage() ?? __('admin.grades.messages.failed.restore') 
             ], 404);
         }
     }
@@ -137,7 +137,7 @@ class GradeController extends Controller implements HasMiddleware
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => __('admin.grades.messages.failed.delete')
+                'message' => $ex->getMessage() ?? __('admin.grades.messages.failed.delete')
             ], 500);
         }
     }

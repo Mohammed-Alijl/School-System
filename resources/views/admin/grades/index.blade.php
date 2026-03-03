@@ -60,10 +60,7 @@
                                 <th class="wd-5p border-bottom-0">#</th>
                                 <th class="wd-20p border-bottom-0">{{ __('admin.grades.fields.name') }}</th>
                                 <th class="wd-10p border-bottom-0">{{ __('admin.grades.fields.status') }}</th>
-                                <th class="wd-10p border-bottom-0">{{ __('admin.grades.fields.notes') }}</th>
-                                @if(auth()->user()->canAny(['edit_grades', 'delete_grades']))
-                                    <th class="wd-20p border-bottom-0">{{ __('admin.global.actions') }}</th>
-                                @endif
+                                <th class="wd-20p border-bottom-0">{{ __('admin.global.actions') }}</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -78,9 +75,19 @@
                                             <span class="label text-danger d-flex">{{ __('admin.global.disabled') }}</span>
                                         @endif
                                     </td>
-                                    <td>{{ $grade->notes ?? __('admin.grades.no_notes') }}</td>
-                                    @canany(['edit_grades','delete_grades'])
                                     <td>
+                                        <a class="btn btn-primary btn-sm view-btn"
+                                           href="#"
+                                           data-toggle="modal"
+                                           data-target="#showModal"
+                                           data-name="{{ $grade->name }}"
+                                           data-status="{{ $grade->status }}"
+                                           data-status_text="{{ $grade->status ? __('admin.global.active') : __('admin.global.disabled') }}"
+                                           data-notes="{{ $grade->notes ?? __('admin.grades.no_notes') }}"
+                                           data-classrooms='{!! json_encode($grade->classrooms) !!}'
+                                        >
+                                            <i class="las la-eye"></i> {{__('admin.global.view')}}
+                                        </a>
                                         @can('edit_grades')
                                         <a class="btn btn-info btn-sm edit-btn"
                                         href="#"
@@ -106,7 +113,6 @@
                                             </a>
                                         @endcan
                                     </td>
-                                    @endcanany
                                 </tr>
                             @endforeach
                             </tbody>
@@ -121,6 +127,7 @@
 
     @include('admin.grades.add_modal')
     @include('admin.grades.edit_modal')
+    @include('admin.grades.show_modal')
 
 @endsection
 
@@ -143,6 +150,48 @@
                 placeholder: '{{__("admin.global.select")}}',
                 width: '100%'
             });
+            
+            // Handle Show Modal Populating
+            $('.view-btn').on('click', function() {
+                var btn = $(this);
+                $('#show-grade-name').text(btn.data('name'));
+                $('#show-notes').text(btn.data('notes'));
+                
+                var statusBadge = $('#show-status-badge');
+                if (btn.data('status') == 1) {
+                    statusBadge.removeClass('badge-danger').addClass('badge-success').text(btn.data('status_text'));
+                } else {
+                    statusBadge.removeClass('badge-success').addClass('badge-danger').text(btn.data('status_text'));
+                }
+
+                var classrooms = btn.data('classrooms');
+                var tbody = $('#classrooms-table-body');
+                tbody.empty();
+                
+                if (classrooms && classrooms.length > 0) {
+                    $('#classrooms-table').removeClass('d-none');
+                    $('#no-classrooms-empty-state').addClass('d-none');
+                    
+                    $('#show-classrooms-count').text(classrooms.length);
+                    
+                    $.each(classrooms, function(index, classroom) {
+                        var statusHtml = classroom.status == 1 
+                            ? '<span class="label text-success d-flex">{{ __("admin.global.active") }}</span>' 
+                            : '<span class="label text-danger d-flex">{{ __("admin.global.disabled") }}</span>';
+                            
+                        var classroomName = typeof classroom.name === 'object' 
+                            ? (classroom.name['{{ app()->getLocale() }}'] || Object.values(classroom.name)[0])
+                            : classroom.name;
+                        
+                        tbody.append('<tr><td>' + (index + 1) + '</td><td>' + classroomName + '</td><td>' + statusHtml + '</td></tr>');
+                    });
+                } else {
+                    $('#classrooms-table').addClass('d-none');
+                    $('#no-classrooms-empty-state').removeClass('d-none');
+                    $('#show-classrooms-count').text('0');
+                }
+            });
         });
     </script>
+    @stack('scripts')
 @endsection

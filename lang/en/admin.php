@@ -260,9 +260,12 @@ return [
     'grades' => [
         'title' => "Grades",
         'add' => "Add Grade",
+        'show' => "Show Grade Details",
         'delete' => "Delete Grade",
         'edit' => "Edit Grade",
         'no_notes' => "No Notes",
+        'classrooms_list' => "Classrooms List",
+        'no_classrooms' => "No classrooms allocated for this grade yet.",
         'archived' => 'Archived Grades',
         'archived_list' => 'List of all soft-deleted grades',
         'warning_body' => 'Be careful when deleting a grade, as it will be permanently removed from the system',
@@ -288,6 +291,7 @@ return [
                 'delete' => 'Grade failed to delete.',
                 'restore' => 'Grade failed to restore.',
                 'archive' => 'Grade failed to archive.',
+                'has_classrooms' => 'Grade has classrooms.',
             ]
         ]
     ],

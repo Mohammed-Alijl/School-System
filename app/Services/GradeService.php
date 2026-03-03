@@ -11,7 +11,7 @@ class GradeService
      */
     public function getAll()
     {
-        return Grade::all()->sortBy('sort_order');
+        return Grade::with('classrooms')->get()->sortBy('sort_order');
     }
 
     /**
@@ -47,14 +47,14 @@ class GradeService
     public function delete($grade)
     {
         if ($grade->classrooms->count())
-            throw new \Exception(__('admin.grades.messages.failed.archive'));
+            throw new \Exception(__('admin.grades.messages.failed.has_classrooms'));
 
         $grade->delete();
         return true;
     }
     public function archive()
     {
-        $grades = Grade::onlyTrashed()->orderBy('sort_order')->get();
+        $grades = Grade::onlyTrashed()->with('classrooms')->orderBy('sort_order')->get();
         return $grades;
     }
 
