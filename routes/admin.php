@@ -95,6 +95,7 @@ Route::group(
                     Route::post('restore/{id}',[SectionController::class, 'restore'])->name('restore');
                     Route::delete('force-delete/{id}',[SectionController::class, 'forceDelete'])->name('forceDelete');
                     Route::get('by-classroom', [SectionController::class, 'getByClassroom'])->name('by-classroom');
+                    Route::get('{section}/students', [SectionController::class, 'studentsOf'])->name('students');
                 });
 
                 // ─── Guardians ───────────────────────────────────────────────────────────────

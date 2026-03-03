@@ -341,9 +341,12 @@ return [
     'sections' => [
         'title' => "Section",
         'add' => "Add Section",
+        'show' => "Section Details",
         'delete' => "Delete Section",
         'edit' => "Edit Section",
         'archived' => "Archived Section",
+        'students_list' => "Students in this Section",
+        'no_students' => "No students enrolled in this section yet.",
         'no_notes' => "No Notes",
         'fields' => [
             'name' => "Section Name",
@@ -369,6 +372,7 @@ return [
                 'delete' => 'Section failed to delete.',
                 'restore' => 'Section failed to restore.',
                 'archive' => 'Section failed to archive.',
+                'has_students' => "The Section Have Students, Can't Delete It.",
             ],
             'error' => [
                 'name_ar_unique' => 'The Section Name In Arabic Is Already Exists',

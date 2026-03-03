@@ -38,12 +38,15 @@ class SectionController extends Controller implements HasMiddleware
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        if ($request->ajax()) {
+            return $this->sectionService->getSectionsDataTable($request);
+        }
         try {
-            $sections = $this->sectionService->getAll();
-            $grades = $this->gradeService->getAllWithClassrooms();
-            return view('admin.sections.index', compact('sections', 'grades'));
+            $lookups = $this->sectionService->getLookups();
+            $grades  = $this->gradeService->getAllWithClassrooms();
+            return view('admin.sections.index', array_merge($lookups, compact('grades')));
         } catch (\Exception $ex) {
             return response()->json([
                 'status' => 'error',
@@ -66,7 +69,7 @@ class SectionController extends Controller implements HasMiddleware
         } catch (\Exception $ex) {
             return response()->json([
                 'status' => 'error',
-                'message' => $ex->getMessage()
+                'message' => $ex->getMessage() ?? __('admin.sections.messages.failed.add')
             ], 500);
         }
     }
@@ -85,7 +88,7 @@ class SectionController extends Controller implements HasMiddleware
         } catch (\Exception $ex) {
             return response()->json([
                 'status' => 'error',
-                'message' => __('admin.sections.messages.failed.update')
+                'message' => $ex->getMessage() ?? __('admin.sections.messages.failed.update')
             ], 500);
         }
     }
@@ -106,20 +109,23 @@ class SectionController extends Controller implements HasMiddleware
         } catch (\Exception $ex) {
             return response()->json([
                 'status' => 'error',
-                'message' => __('admin.sections.messages.failed.archive')
+                'message' => $ex->getMessage() ?? __('admin.sections.messages.failed.archive')
             ], 500);
         }
     }
 
-    public function archive()
+    public function archive(Request $request)
     {
+        if ($request->ajax()) {
+            return $this->sectionService->getArchivedSectionsDataTable($request);
+        }
         try {
-            $sections = $this->sectionService->archive();
-            return view('admin.sections.archived', compact('sections'));
+            $grades = $this->gradeService->getAllWithClassrooms();
+            return view('admin.sections.archived', compact('grades'));
         } catch (\Exception $ex) {
             return response()->json([
                 'status' => 'error',
-                'message' => __('admin.sections.messages.failed.archive')
+                'message' => $ex->getMessage() ?? __('admin.sections.messages.failed.archive')
             ], 500);
         }
     }
@@ -135,7 +141,7 @@ class SectionController extends Controller implements HasMiddleware
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => __('admin.sections.messages.failed.restore')
+                'message' => $e->getMessage() ?? __('admin.sections.messages.failed.restore')
             ], 404);
         }
     }
@@ -152,7 +158,7 @@ class SectionController extends Controller implements HasMiddleware
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => __('admin.sections.messages.failed.delete')
+                'message' => $e->getMessage() ?? __('admin.sections.messages.failed.delete')
             ], 500);
         }
     }
@@ -163,5 +169,22 @@ class SectionController extends Controller implements HasMiddleware
             'success' => true,
             'data' => $sections
         ]);
+    }
+
+    /**
+     * Return students of a section as JSON (for Show Modal)
+     */
+    public function studentsOf(Section $section)
+    {
+        $students = $section->students()->with([])->get()->map(function ($s) {
+            return [
+                'id'           => $s->id,
+                'name'         => $s->getTranslation('name', app()->getLocale()),
+                'student_code' => $s->student_code,
+                'status'       => $s->status,
+                'status_text'  => $s->status ? trans('admin.global.active') : trans('admin.global.disabled'),
+            ];
+        });
+        return response()->json(['success' => true, 'data' => $students]);
     }
 }
