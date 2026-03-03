@@ -46,7 +46,7 @@ return [
         'back' => "Back",
         'view' => 'View',
         'reset_filters' => 'Reset Filters',
-        'warning_title' => 'Warning: Destructive Zone',
+        'archive_warning_title' => 'Warning: Destructive Zone',
         'dropify' => [
             'drag_drop' => 'Drag and drop a file here or click',
             'replace' => 'Drag and drop or click to replace',
@@ -294,10 +294,15 @@ return [
     'classrooms' => [
         'title' => "Class Room",
         'add' => "Add Class",
+        'show' => "Show Class Details",
         'delete' => "Delete Class",
         'edit' => "Edit Class",
         'archived' => "Archived Classes",
+        'sections_list' => "Sections List",
+        'no_sections' => "No sections allocated for this classroom yet.",
         'no_notes' => "No Notes",
+        'archived_list' => 'List of all soft-deleted classrooms',
+        'warning_body' => 'Be careful when deleting a classroom, as it will be permanently removed from the system',
         'fields' => [
             'name' => "Class Room Name",
             'name_ar' => "Class Room Name (Arabic)",
@@ -321,6 +326,7 @@ return [
                 'delete' => 'Class Room failed to delete.',
                 'restore' => 'Class Room failed to restore.',
                 'archive' => 'Class Room failed to archive.',
+                'has_sections' => 'Classroom has sections, you can\'t delete it'
             ],
             'error' => [
                 'name_ar_unique' => 'The Class Name In Arabic Is Already Exists',

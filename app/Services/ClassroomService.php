@@ -13,7 +13,7 @@ class ClassroomService
      */
     public function getAll()
     {
-        $classrooms = Classroom::with('grade')->orderBy('grade_id')->get()->sortBy('sort_order');
+        $classrooms = Classroom::with(['grade', 'sections'])->orderBy('grade_id')->get()->sortBy('sort_order');
         return $classrooms;
     }
 
@@ -44,6 +44,9 @@ class ClassroomService
     {
         if (!$classroom->grade->status)
             throw new \Exception(__('admin.classrooms.messages.failed.archive'));
+        if ($classroom->sections()->count() > 0)
+            throw new \Exception(__('admin.classrooms.messages.failed.has_sections'));
+        
         $classroom->status = 0;
         $classroom->save();
         $classroom->delete();
