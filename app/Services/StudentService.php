@@ -52,7 +52,7 @@ class StudentService
                 return '<span class="badge badge-modern badge-inactive"><i class="las la-times-circle mr-1 ml-1"></i>' . trans('admin.global.disabled') . '</span>';
             })
             ->addColumn('actions', function ($row) {
-                return view('admin.students.partials._actions', compact('row'))->render();
+                return view('admin.students.partials.index_actions', compact('row'))->render();
             })
             ->rawColumns(['status', 'actions'])
             ->make(true);
