@@ -8,6 +8,10 @@
     <link href="{{ URL::asset('assets/admin/plugins/datatable/css/responsive.bootstrap4.min.css') }}" rel="stylesheet" />
     <link href="{{ URL::asset('assets/admin/plugins/datatable/css/jquery.dataTables.min.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('assets/admin/plugins/datatable/css/responsive.dataTables.min.css') }}" rel="stylesheet">
+    {{-- Grade CRUD Styles --}}
+    <link href="{{ URL::asset('assets/admin/css/grade/grade-crud.css') }}" rel="stylesheet">
+    {{-- Grade Show Styles --}}
+    <link href="{{ URL::asset('assets/admin/css/grade/show.css') }}" rel="stylesheet">
 
     <link href="{{URL::asset('assets/admin/plugins/select2/css/select2.min.css')}}" rel="stylesheet">
     <link href="{{URL::asset('assets/admin/plugins/sweet-alert/sweetalert.css')}}" rel="stylesheet">
@@ -50,7 +54,7 @@
 @section('content')
     <div class="row row-sm">
         <div class="col-xl-12">
-            <div class="card">
+            <div class="card glass-card">
                 <div class="card-header pb-0"></div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -149,47 +153,6 @@
             $('.select2').select2({
                 placeholder: '{{__("admin.global.select")}}',
                 width: '100%'
-            });
-            
-            // Handle Show Modal Populating
-            $('.view-btn').on('click', function() {
-                var btn = $(this);
-                $('#show-grade-name').text(btn.data('name'));
-                $('#show-notes').text(btn.data('notes'));
-                
-                var statusBadge = $('#show-status-badge');
-                if (btn.data('status') == 1) {
-                    statusBadge.removeClass('badge-danger').addClass('badge-success').text(btn.data('status_text'));
-                } else {
-                    statusBadge.removeClass('badge-success').addClass('badge-danger').text(btn.data('status_text'));
-                }
-
-                var classrooms = btn.data('classrooms');
-                var tbody = $('#classrooms-table-body');
-                tbody.empty();
-                
-                if (classrooms && classrooms.length > 0) {
-                    $('#classrooms-table').removeClass('d-none');
-                    $('#no-classrooms-empty-state').addClass('d-none');
-                    
-                    $('#show-classrooms-count').text(classrooms.length);
-                    
-                    $.each(classrooms, function(index, classroom) {
-                        var statusHtml = classroom.status == 1 
-                            ? '<span class="label text-success d-flex">{{ __("admin.global.active") }}</span>' 
-                            : '<span class="label text-danger d-flex">{{ __("admin.global.disabled") }}</span>';
-                            
-                        var classroomName = typeof classroom.name === 'object' 
-                            ? (classroom.name['{{ app()->getLocale() }}'] || Object.values(classroom.name)[0])
-                            : classroom.name;
-                        
-                        tbody.append('<tr><td>' + (index + 1) + '</td><td>' + classroomName + '</td><td>' + statusHtml + '</td></tr>');
-                    });
-                } else {
-                    $('#classrooms-table').addClass('d-none');
-                    $('#no-classrooms-empty-state').removeClass('d-none');
-                    $('#show-classrooms-count').text('0');
-                }
             });
         });
     </script>
