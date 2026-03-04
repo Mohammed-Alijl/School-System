@@ -239,6 +239,14 @@ return [
             ]
         ]
     ],
+
+    'assignments' => [
+        'teacher_id' => 'المعلم',
+        'subject_id' => 'المادة',
+        'section_id' => 'الشعبة',
+        'academic_year' => 'السنة الدراسية',
+    ],
+
     'roles' => [
         'title' => "الأدوار والصلاحيات",
         'add' => "إضافة دور جديد",

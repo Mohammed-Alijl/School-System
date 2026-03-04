@@ -241,6 +241,14 @@ return [
             ]
         ]
     ],
+
+    'assignments' => [
+        'teacher_id' => 'Teacher',
+        'subject_id' => 'Subject',
+        'section_id' => 'Section',
+        'academic_year' => 'Academic Year',
+    ],
+
     'roles' => [
         'title' => "Roles",
         'add' => "Add Role",
