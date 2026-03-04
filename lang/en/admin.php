@@ -45,6 +45,11 @@ return [
         'sections' => "Sections",
         'back' => "Back",
         'view' => 'View',
+        'add' => 'Add',
+        'force_delete' => 'Force Delete',
+        'view_archived' => 'View Archived',
+        'promote' => 'Promote',
+        'graduate' => 'Graduate',
         'reset_filters' => 'Reset Filters',
         'archive_warning_title' => 'Warning: Destructive Zone',
         'dropify' => [
@@ -256,7 +261,8 @@ return [
                 'add' => 'Role failed to add.',
                 'update' => 'Role failed to update.',
                 'delete' => 'Role failed to delete.',
-                'used' => "Can't Delete This Roles Is In Used"
+                'used' => "Can't Delete This Roles Is In Used",
+                'reserved_name' => "You cannot create a role with this reserved name."
             ]
         ]
     ],

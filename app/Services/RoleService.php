@@ -31,13 +31,11 @@ class RoleService
 
         foreach ($permissions as $permission) {
             $parts = explode('_', $permission->name, 2);
-
-            $action = $parts[0];
             $model = $parts[1] ?? 'other';
-
             $grouped[$model][] = $permission;
         }
 
+        ksort($grouped);
         return $grouped;
     }
 
@@ -52,14 +50,12 @@ class RoleService
     public function store(array $data)
     {
         if (strtolower($data['name']) === strtolower(self::SUPER_ADMIN_NAME)) {
-            throw new Exception("You cannot create a role with this name.");
+            throw new Exception(__('admin.roles.messages.failed.reserved_name'));
         }
 
         $role = Role::create(['name' => $data['name']]);
 
-        if (!empty($data['permissions'])) {
-            $role->syncPermissions($data['permissions']);
-        }
+        $role->syncPermissions($data['permissions'] ?? []);
 
         return $role;
     }
@@ -70,9 +66,7 @@ class RoleService
             throw new Exception( __('admin.roles.messages.failed.update'));
         }
         $role->update(['name' => $data['name']]);
-        if (!empty($data['permissions'])) {
-            $role->syncPermissions($data['permissions']);
-        }
+        $role->syncPermissions($data['permissions'] ?? []);
 
         return $role;
     }
