@@ -201,8 +201,25 @@ class StudentService
             Storage::disk('public')->deleteDirectory($folderPath);
         }
 
-        $student->forceDelete();
-        return true;
+        return $student->forceDelete();
+    }
+
+    public function deleteAttachment($attachmentPath)
+    {
+        $student = Student::whereJsonContains('attachments', $attachmentPath)->first();
+        if (!$student) {
+            throw new \Exception(__('admin.students.messages.failed.delete'));
+        }
+        if (Storage::disk('public')->exists($attachmentPath)) {
+            Storage::disk('public')->delete($attachmentPath);
+        }
+
+        $attachments = array_filter($student->attachments ?? [], function($path) use ($attachmentPath) {
+            return $path !== $attachmentPath;
+        });
+
+        $student->attachments = array_values($attachments);
+        return $student->save();
     }
 
     public function getNextStudentCode()

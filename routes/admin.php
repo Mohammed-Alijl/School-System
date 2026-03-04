@@ -115,6 +115,7 @@ Route::group(
                     Route::post('restore/{id}',[StudentController::class, 'restore'])->name('restore');
                     Route::delete('force-delete/{id}',[StudentController::class, 'forceDelete'])->name('forceDelete');
                     Route::get('/next-code', [StudentController::class, 'getNextStudentCode'])->name('next-code');
+                    Route::post('attachments/destroy', [StudentController::class, 'deleteAttachment'])->name('attachment.destroy');
                 });
 
                 // ─── Teachers ───────────────────────────────────────────────────────────────

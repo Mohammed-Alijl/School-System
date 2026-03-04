@@ -63,32 +63,6 @@ public function index(Request $request)
         }
     }
 
-    public function edit(Student $student)
-    {
-
-        return response()->json([
-            'status' => 'success',
-            'data' => [
-                'id' => $student->id,
-                'student_code' => $student->student_code,
-                'name_ar' => $student->getTranslation('name', 'ar'),
-                'name_en' => $student->getTranslation('name', 'en'),
-                'email' => $student->email,
-                'national_id' => $student->national_id,
-                'date_of_birth' => $student->date_of_birth->format('Y-m-d'),                
-                'grade_id' => $student->grade_id,
-                'classroom_id' => $student->classroom_id,
-                'section_id' => $student->section_id,
-                'guardian_id' => $student->guardian_id,
-                'blood_type_id' => $student->blood_type_id,
-                'nationality_id' => $student->nationality_id,
-                'religion_id' => $student->religion_id,
-                'gender_id' => $student->gender_id,
-                'status' => $student->status,
-            ]
-        ]);
-    }
-
     public function update(UpdateRequest $request, Student $student)
     {
         try {
@@ -98,8 +72,11 @@ public function index(Request $request)
                 'status' => 'success',
                 'message' => trans('admin.students.messages.success.update')
             ]);
-        } catch (\Exception $e) {
-            return response()->json(['status' => 'error', 'message' => trans('admin.students.messages.failed.update')], 500);
+        } catch (\Exception $ex) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $ex->getMessage() ?? trans('admin.students.messages.failed.update')
+            ], 500);
         }
     }
 
@@ -112,10 +89,10 @@ public function index(Request $request)
                 'status' => 'success',
                 'message' => trans('admin.students.messages.success.delete')
             ]);
-        } catch (\Exception $e) {
+        } catch (\Exception $ex) {
             return response()->json([
                 'status' => 'error',
-                'message' => trans('admin.students.messages.failed.delete')
+                'message' => $ex->getMessage() ?? trans('admin.students.messages.failed.delete')
             ], 500);
         }
     }
@@ -140,10 +117,10 @@ public function index(Request $request)
                 'status' => 'success',
                 'message' => trans('admin.students.messages.success.restore')
             ]);
-        } catch (\Exception $e) {
+        } catch (\Exception $ex) {
             return response()->json([
                 'status' => 'error',
-                'message' => trans('admin.students.messages.failed.restore')
+                'message' => $ex->getMessage() ?? trans('admin.students.messages.failed.restore')
             ], 404);
         }
     }
@@ -157,10 +134,27 @@ public function index(Request $request)
                 'status' => 'success',
                 'message' => trans('admin.students.messages.success.delete')
             ]);
-        } catch (\Exception $e) {
+        } catch (\Exception $ex) {
             return response()->json([
                 'status' => 'error',
-                'message' => trans('admin.students.messages.failed.delete')
+                'message' => $ex->getMessage() ?? trans('admin.students.messages.failed.delete')
+            ], 500);
+        }
+    }
+
+    public function deleteAttachment(Request $request): \Illuminate\Http\JsonResponse
+    {
+
+        try {
+            $this->studentService->deleteAttachment($request->key);
+            return response()->json([
+                'status' => 'success',
+                'message' => trans('admin.students.messages.success.delete')
+            ]);
+        } catch (\Exception $ex) {
+            return response()->json([
+                'status' => 'error',
+                'message' => $ex->getMessage() ?? trans('admin.students.messages.failed.delete')
             ], 500);
         }
     }

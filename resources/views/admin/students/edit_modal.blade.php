@@ -1,9 +1,4 @@
 <style>
-    /* ══════════════════════════════════════════
-       EDIT STUDENT MODAL — CUSTOM STYLES
-       (mirrors add_modal design exactly)
-    ══════════════════════════════════════════ */
-
     #editModal .modal-content {
         border: none;
         border-radius: 18px;
@@ -825,6 +820,10 @@
                     overwriteInitial: false, initialPreviewAsData: true,
                     initialPreview: attachmentsPreviewUrls,
                     initialPreviewConfig: attachmentsConfig,
+                    deleteUrl: '{{ route("admin.students.attachment.destroy") }}',
+                    ajaxDeleteSettings: {
+                        headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'}
+                    },
                     allowedFileExtensions: ['pdf','doc','docx','jpg','jpeg','png','svg','zip'],
                     maxFileSize: 5120, maxFileCount: 5, browseOnZoneClick: true,
                 });
