@@ -12,12 +12,14 @@
     <link href="{{URL::asset('assets/admin/plugins/select2/css/select2.min.css')}}" rel="stylesheet">
     <link href="{{URL::asset('assets/admin/plugins/sweet-alert/sweetalert.css')}}" rel="stylesheet">
 
-    <!-- Krajee Bootstrap FileInput CSS -->
+    {{-- Krajee Bootstrap FileInput CSS --}}
     <link href="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-fileinput@5.5.2/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.min.css" rel="stylesheet">
 
-    <!-- Student CRUD Styles -->
+    {{-- Student CRUD Styles --}}
     <link href="{{ URL::asset('assets/admin/css/student/student-crud.css') }}" rel="stylesheet">
+    {{-- Student Show Styles --}}
+    <link href="{{ URL::asset('assets/admin/css/student/show.css') }}" rel="stylesheet">
 @endsection
 
 @section('page-header')
