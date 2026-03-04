@@ -102,7 +102,7 @@
                     success: function (response) {
                         if (response.success) {
                             classroomSelect.empty();
-                            classroomSelect.append('<option value="">{{__("admin.global.choose")}}</option>');
+                            classroomSelect.append('<option value="">{{ __("admin.global.select") }}</option>');
 
                             $.each(response.data, function (key, classroom) {
                                 classroomSelect.append(
@@ -110,7 +110,7 @@
                                 );
                             });
 
-                            if(selectedId) {
+                            if (selectedId) {
                                 classroomSelect.val(selectedId).trigger('change');
                             }
                         }
@@ -119,9 +119,19 @@
             }
         }
 
-        $(document).on('change', '#editModal select[name="grade_id"]', function() {
+        // Store classroom_id when edit button is clicked BEFORE crud.js triggers change
+        var _pendingClassroomId = null;
+
+        $(document).on('click', '.edit-btn', function () {
+            _pendingClassroomId = $(this).data('classroom_id') || null;
+        });
+
+        // When grade changes (triggered by crud.js), carry the stored classroom_id
+        $(document).on('change', '#editModal select[name="grade_id"]', function () {
             var gradeId = $(this).val();
-            getClassrooms(gradeId);
+            var selectedId = _pendingClassroomId;
+            _pendingClassroomId = null; // reset after first use
+            getClassrooms(gradeId, selectedId);
         });
     </script>
 @endpush

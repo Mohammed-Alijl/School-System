@@ -11,78 +11,9 @@
     <link href="{{URL::asset('assets/admin/plugins/select2/css/select2.min.css')}}" rel="stylesheet">
     <link href="{{URL::asset('assets/admin/plugins/sweet-alert/sweetalert.css')}}" rel="stylesheet">
     <link href="{{URL::asset('assets/admin/plugins/fileuploads/css/fileupload.css')}}" rel="stylesheet" type="text/css"/>
-
-    <style>
-        /* ─── GLASS CARD ─── */
-        .glass-card {
-            background: #ffffff;
-            border-radius: 16px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05) !important;
-            border: 1px solid rgba(0,0,0,0.02);
-            transition: all 0.3s ease;
-        }
-        .glass-card:hover { box-shadow: 0 8px 30px rgba(0,0,0,0.08) !important; }
-
-        /* ─── FILTER SECTION ─── */
-        .filter-section {
-            background: #f8f9fc;
-            border-radius: 14px;
-            padding: 1.4rem 1.6rem;
-            margin-bottom: 1.75rem;
-            border: 1px dashed #e3e6f0;
-        }
-
-        /* ─── FORM CONTROLS ─── */
-        .form-control-modern {
-            border-radius: 8px;
-            border: 1px solid #e3e6f0;
-            padding: 0.55rem 1rem;
-            font-size: 0.875rem;
-            box-shadow: none;
-            transition: border-color 0.2s, box-shadow 0.2s;
-        }
-        .form-control-modern:focus {
-            border-color: #4e73df;
-            box-shadow: 0 0 0 0.2rem rgba(78,115,223,0.18);
-        }
-        .form-control-modern:disabled { background-color: #f1f3f9; opacity: 0.7; cursor: not-allowed; }
-
-        /* ─── TABLE HEADER ─── */
-        table.dataTable thead th {
-            border-bottom: 2px solid #edf2f7 !important;
-            color: #4a5568; font-weight: 700;
-            text-transform: uppercase; font-size: 0.72rem; letter-spacing: 1px;
-        }
-        .table-hover tbody tr:hover { background-color: #f8fafc; transition: background-color 0.2s ease; }
-
-        /* ─── STATUS BADGES ─── */
-        .badge-modern { padding: 0.45em 0.95em; border-radius: 30px; font-weight: 600; font-size: 82%; letter-spacing: 0.4px; }
-        .badge-active { background-color: #e3fcef; color: #0d965e; border: 1px solid #c9f5e1; }
-        .badge-inactive { background-color: #fee2e2; color: #dc2626; border: 1px solid #fecaca; }
-
-        /* ─── ACTION BUTTONS ─── */
-        .action-icon-btn { width: 34px; height: 34px; border-radius: 8px; display: inline-flex; align-items: center; justify-content: center; transition: all 0.2s ease; }
-        .action-icon-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0,0,0,0.12) !important; }
-
-        /* ─── RESET BUTTON ─── */
-        #reset_filters { border: 1px solid #dce1ef; color: #6c7a9c; background: #fff; }
-        #reset_filters:hover { background: #f1f3f9; border-color: #c4cbdc; }
-
-        /* ══════════════════════════════════════
-           DARK THEME OVERRIDES
-        ══════════════════════════════════════ */
-        .dark-theme .glass-card { background: #1e212b; border-color: rgba(255,255,255,0.05); box-shadow: 0 4px 20px rgba(0,0,0,0.35) !important; }
-        .dark-theme .filter-section { background: #14161f; border-color: rgba(255,255,255,0.08); }
-        .dark-theme .filter-section .form-label { color: #94a3b8 !important; }
-        .dark-theme .form-control-modern { background-color: #1e212b; border-color: rgba(255,255,255,0.1); color: #e2e8f0; }
-        .dark-theme .form-control-modern:disabled { background-color: #12141c; color: #64748b; }
-        .dark-theme #reset_filters { background: #1e212b; border-color: rgba(255,255,255,0.08); color: #94a3b8; }
-        .dark-theme #reset_filters:hover { background: #242836; }
-        .dark-theme table.dataTable thead th { border-bottom-color: rgba(255,255,255,0.08) !important; color: #cbd5e1; }
-        .dark-theme .table-hover tbody tr:hover { background-color: #242836; }
-        .dark-theme .badge-active { background-color: rgba(13,150,94,0.15); border-color: rgba(13,150,94,0.25); }
-        .dark-theme .badge-inactive { background-color: rgba(220,38,38,0.12); border-color: rgba(220,38,38,0.2); }
-    </style>
+    {{-- Section CRUD Styles --}}
+    <link href="{{ URL::asset('assets/admin/css/section/section-crud.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('assets/admin/css/section/show.css') }}" rel="stylesheet">
 @endsection
 
 @section('page-header')
