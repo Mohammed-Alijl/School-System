@@ -10,82 +10,9 @@
     <link href="{{ URL::asset('assets/admin/plugins/datatable/css/responsive.dataTables.min.css') }}" rel="stylesheet">
 
     <link href="{{URL::asset('assets/admin/plugins/sweet-alert/sweetalert.css')}}" rel="stylesheet">
-    <style>
-        .page-header-archive {
-            background: linear-gradient(to right, #2c3e50, #e74c3c);
-            padding: 2rem;
-            border-radius: 12px;
-            margin-bottom: 2rem;
-            color: white;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-        
-        .glass-card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.05);
-            border-radius: 16px;
-        }
-
-        .table-archive th {
-            background-color: #f8f9fc !important;
-            color: #4a5568 !important;
-            text-transform: uppercase;
-            font-size: 0.75rem;
-            letter-spacing: 0.5px;
-            border-bottom: 2px solid #e2e8f0 !important;
-        }
-        /* Warning banner */
-        .archive-alert {
-            background: #fff5f5;
-            border-left: 4px solid #fc8181;
-            border-radius: 8px;
-            padding: 1rem 1.5rem;
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-        }
-
-        /* ─── DARK THEME OVERRIDES ─── */
-        .dark-theme .glass-card {
-            background: #1e212b;
-            border-color: rgba(255, 255, 255, 0.05);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
-        }
-        .dark-theme .table-archive th {
-            background-color: #14161f !important;
-            border-bottom-color: rgba(255, 255, 255, 0.1) !important;
-            color: #e2e8f0 !important;
-        }
-        .dark-theme .table-hover tbody tr:hover {
-            background-color: #242836;
-        }
-        .dark-theme .table-archive td {
-            border-bottom-color: rgba(255, 255, 255, 0.05) !important;
-            color: #e2e8f0;
-        }
-        .dark-theme .text-muted {
-            color: #94a3b8 !important;
-        }
-        .dark-theme h6, .dark-theme .font-weight-bold {
-            color: #f1f5f9 !important;
-        }
-        .dark-theme .archive-alert {
-            background: rgba(231, 76, 60, 0.1);
-            border-left-color: #e74c3c;
-        }
-        .dark-theme .badge-light {
-            background-color: rgba(255,255,255,0.05);
-            color: #cbd5e1;
-            border: 1px solid rgba(255,255,255,0.1) !important;
-        }
-        .dark-theme .btn-light {
-            background: rgba(255,255,255,0.05) !important;
-            border-color: rgba(255,255,255,0.05);
-            color: #cbd5e1 !important;
-        }
-    </style>
+    {{-- Classroom Archive Styles --}}
+    <link href="{{ URL::asset('assets/admin/css/classroom/archive.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('assets/admin/css/classroom/show.css') }}" rel="stylesheet">
 @endsection
 
 @section('page-header')
@@ -121,7 +48,7 @@
     </div>
     <div class="row row-sm">
         <div class="col-xl-12">
-            <div class="card glass-card">
+            <div class="card glass-card-archive">
                 <div class="card-header pb-0">
                     <div class="row">
                         <div class="col-md-4 mb-3">
@@ -137,7 +64,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table text-md-nowrap table-archive table-hover" id="classrooms_table">
+                        <table class="table text-md-nowrap table-archive table-hover" id="archivedClassroomsTable">
                             <thead>
                             <tr>
                                 <th class="wd-5p border-bottom-0">#</th>
@@ -175,7 +102,7 @@
                                             <i class="las la-eye"></i> {{__('admin.global.view')}}
                                         </a>
                                         @can('restore_classrooms')
-                                        <a class="btn btn-info btn-sm restore-item"
+                                        <a class="btn btn-sm btn-archive-restore restore-item"
                                         href="#"
                                            data-url="{{ route('admin.classrooms.restore', $classroom->id) }}"
                                            data-id="{{ $classroom->id }}"
@@ -185,7 +112,7 @@
                                         </a>
                                         @endcan
                                         @can('delete_classrooms')
-                                            <a class="modal-effect btn btn-danger btn-sm delete-item"
+                                            <a class="btn btn-sm btn-archive-delete delete-item"
                                                href="#"
                                                data-id="{{ $classroom->id }}"
                                                data-url="{{ route('admin.classrooms.forceDelete', $classroom->id) }}"
@@ -218,7 +145,7 @@
 
     <script>
         $(document).ready(function() {
-            var table = $('#classrooms_table').DataTable(globalTableConfig);
+            var table = $('#archivedClassroomsTable').DataTable(globalTableConfig);
 
             $('.select2').select2({
                 placeholder: '{{__("admin.global.select")}}',

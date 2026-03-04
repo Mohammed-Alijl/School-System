@@ -12,6 +12,9 @@
     <link href="{{URL::asset('assets/admin/plugins/select2/css/select2.min.css')}}" rel="stylesheet">
     <link href="{{URL::asset('assets/admin/plugins/sweet-alert/sweetalert.css')}}" rel="stylesheet">
     <link href="{{URL::asset('assets/admin/plugins/fileuploads/css/fileupload.css')}}" rel="stylesheet" type="text/css"/>
+    {{-- Classroom CRUD Styles --}}
+    <link href="{{ URL::asset('assets/admin/css/classroom/classroom-crud.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('assets/admin/css/classroom/show.css') }}" rel="stylesheet">
 @endsection
 
 @section('page-header')
@@ -50,7 +53,7 @@
 @section('content')
     <div class="row row-sm">
         <div class="col-xl-12">
-            <div class="card">
+            <div class="card glass-card">
                 <div class="card-header pb-0">
                     <div class="row">
                         <div class="col-md-4 mb-3">
