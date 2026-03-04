@@ -222,6 +222,8 @@
         background: rgba(14, 165, 115, 0.08);
         border-color: rgba(14, 165, 115, 0.2);
     }
+    .dark-theme #editModal .student-code-banner strong { color: #e2e8f0; }
+    .dark-theme #editModal .student-code-banner .code-value { color: #3ecf8e; }
     .dark-theme #editModal .tab-content { background: #1e212b; }
     .dark-theme #editModal .form-label { color: #cbd5e1; }
     .dark-theme #editModal .form-control-modern {

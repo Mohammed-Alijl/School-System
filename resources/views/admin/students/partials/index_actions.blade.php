@@ -51,7 +51,8 @@
            data-guardian_id="{{ $row->guardian_id }}"
            data-status="{{ $row->status }}"
            data-image="{{ $row->image_url }}"
-           data-attachments="{{ collect($row->attachments)->toJson() }}"
+           data-attachments='@json(collect($row->attachments ?? [])->map(fn($p) => asset("storage/$p")))'
+           data-configs='@json(collect($row->attachments ?? [])->map(fn($p) => ["caption" => basename($p), "key" => $p]))'
            data-toggle="modal" data-target="#editModal"
            title="{{ trans('admin.global.edit') }}">
             <i class="fas fa-edit"></i>
