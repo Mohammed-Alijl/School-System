@@ -54,6 +54,9 @@
                                 @can('view_teachers')
                                     <li><a class="slide-item" href="{{route('admin.teachers.index')}}">{{__('admin.sidebar.teachers')}}</a></li>
                                 @endcan
+                                @can('view_teacher_assignments')
+                                    <li><a class="slide-item" href="{{route('admin.teacher_assignments.index')}}">{{__('admin.sidebar.teacher_assignments')}}</a></li>
+                                @endcan
                                 @can('view_specializations')
                                     <li><a class="slide-item" href="{{ route('admin.specializations.index') }}">{{__('admin.specializations.title')}}</a></li>
                                 @endcan

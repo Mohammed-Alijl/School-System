@@ -72,6 +72,7 @@ return [
         'sections' => 'الأقسام',
         'admins'    => 'المشرفين',
         'teachers' => 'المعلمين',
+        'teacher_assignments' => 'إسناد المعلمين',
         'students' => 'الطلاب',
         'guardians' => 'أولياء الأمور',
         'roles'     => 'الصلاحيات والرتب',
@@ -240,11 +241,32 @@ return [
         ]
     ],
 
-    'assignments' => [
-        'teacher_id' => 'المعلم',
-        'subject_id' => 'المادة',
-        'section_id' => 'الشعبة',
-        'academic_year' => 'السنة الدراسية',
+    'teacher_assignments' => [
+        'title' => 'إسناد المعلمين',
+        'add' => 'إضافة إسناد',
+        'edit' => 'تعديل الإسناد',
+        'delete' => 'حذف الإسناد',
+        'fields' => [
+            'teacher_id' => 'المعلم',
+            'subject_id' => 'المادة',
+            'section_id' => 'الشعبة',
+            'academic_year' => 'السنة الدراسية',
+            'grade' => 'المرحلة',
+            'classroom' => 'الصف',
+        ],
+        'messages' => [
+            'success' => [
+                'add' => 'تم إضافة الإسناد بنجاح.',
+                'update' => 'تم تحديث الإسناد بنجاح.',
+                'delete' => 'تم حذف الإسناد بنجاح.',
+            ],
+            'failed' => [
+                'add' => 'فشل إضافة الإسناد.',
+                'update' => 'فشل تحديث الإسناد.',
+                'delete' => 'فشل حذف الإسناد.',
+            ],
+            'duplicate' => 'هذا المعلم مسند بالفعل لهذه المادة والشعبة في العام الدراسي المحدد.'
+        ]
     ],
 
     'roles' => [
@@ -640,7 +662,7 @@ return [
         'warning_body' => 'سيؤدي حذف المادة من هذه القائمة إلى إزالتها نهائيًا من قاعدة البيانات مع جميع ارتباطاتها. هذا الإجراء <strong>لا يمكن</strong> التراجع عنه.',
         'deleted_at'  => 'تاريخ الحذف',
         'restore'     => 'استعادة',
-        'force_delete'=> 'حذف نهائي',
+        'force_delete' => 'حذف نهائي',
         'confirm_restore_title' => 'هل أنت متأكد؟',
         'confirm_restore_text' => 'أنت على وشك استعادة هذه المادة إلى القائمة النشطة.',
         'confirm_restore_btn' => 'نعم، قم بالاستعادة!',
@@ -665,8 +687,8 @@ return [
         'section_basic'        => 'المعلومات الأساسية',
         'section_basic_hint'   => 'أدخل اسم المادة باللغتين العربية والإنجليزية.',
         'section_academic'     => 'الارتباطات الأكاديمية',
-        'section_academic_hint'=> 'ربط هذه المادة بالمرحلة والصف والتخصص.',
-        'classroom_placeholder'=> '— اختر المرحلة أولاً —',
+        'section_academic_hint' => 'ربط هذه المادة بالمرحلة والصف والتخصص.',
+        'classroom_placeholder' => '— اختر المرحلة أولاً —',
         'placeholders' => [
             'name_ar' => 'مثال: اللغة العربية',
             'name_en' => 'مثال: Arabic Language',

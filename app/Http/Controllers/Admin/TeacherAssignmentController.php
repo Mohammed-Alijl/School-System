@@ -57,7 +57,7 @@ class TeacherAssignmentController extends Controller
      */
     public function edit(string $id)
     {
-        $assignment = TeacherAssignment::with('section.classroom')->findOrFail($id);
+        $assignment = TeacherAssignment::with('section.classroom.grade')->findOrFail($id);
 
         return response()->json([
             'id' => $assignment->id,
@@ -65,7 +65,9 @@ class TeacherAssignmentController extends Controller
             'subject_id' => $assignment->subject_id,
             'grade_id' => $assignment->section->classroom->grade_id ?? null,
             'classroom_id' => $assignment->section->classroom_id ?? null,
+            'classroom_name' => $assignment->section->classroom->name ?? '',
             'section_id' => $assignment->section_id,
+            'section_name' => $assignment->section->name ?? '',
             'academic_year' => $assignment->academic_year,
         ]);
     }

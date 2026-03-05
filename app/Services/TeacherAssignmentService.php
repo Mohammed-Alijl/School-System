@@ -22,6 +22,23 @@ class TeacherAssignmentService
             'section.classroom.grade'
         ])->select('teacher_assignments.*');
 
+        // Apply filters
+        if ($request->filled('filter_teacher')) {
+            $assignments->where('teacher_id', (int) $request->filter_teacher);
+        }
+
+        if ($request->filled('filter_section')) {
+            $assignments->where('section_id', (int) $request->filter_section);
+        } elseif ($request->filled('filter_classroom')) {
+            $assignments->whereHas('section', function ($q) use ($request) {
+                $q->where('classroom_id', (int) $request->filter_classroom);
+            });
+        } elseif ($request->filled('filter_grade')) {
+            $assignments->whereHas('section.classroom', function ($q) use ($request) {
+                $q->where('grade_id', (int) $request->filter_grade);
+            });
+        }
+
         return DataTables::eloquent($assignments)
             ->addColumn('teacher_name', function ($assignment) {
                 return $assignment->teacher->name ?? '-';

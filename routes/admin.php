@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\SpecializationController;
 use App\Http\Controllers\Admin\StudentController;
 use App\Http\Controllers\Admin\StudentPromotionController;
 use App\Http\Controllers\Admin\SubjectController;
+use App\Http\Controllers\Admin\TeacherAssignmentController;
 use App\Http\Controllers\Admin\TeacherController;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -126,6 +127,9 @@ Route::group(
                     Route::post('restore/{id}',[TeacherController::class, 'restore'])->name('restore');
                     Route::delete('force-delete/{id}',[TeacherController::class, 'forceDelete'])->name('forceDelete');
                 });
+
+                // ─── Teacher Assignments ───────────────────────────────────────────────────────────────
+                Route::resource('teacher_assignments', TeacherAssignmentController::class)->except(['show','create']);
 
                 // ─── Specializations ───────────────────────────────────────────────────────────────
                 Route::resource('specializations', \App\Http\Controllers\Admin\SpecializationController::class)->except(['show','create','edit']);

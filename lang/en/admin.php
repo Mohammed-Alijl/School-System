@@ -71,6 +71,7 @@ return [
         'admins'    => 'Admins',
         'students' => 'Students',
         'teachers' => 'Teachers',
+        'teacher_assignments' => 'Teacher Assignments',
         'guardians' => 'Guardians',
         'logs' => 'Activity Logs',
         'promotions' => 'Promotions',
@@ -110,43 +111,43 @@ return [
         'designed_by' => 'Designed by',
         'rights' => 'All rights reserved.',
     ],
-  'login' => [
-      'welcome' => 'Welcome back!',
-      'subtitle' => 'Please sign in to continue.',
-      'email' => 'Email',
-      'email_placeholder' => 'Enter Your Email',
-      'password' => 'Password',
-      'password_placeholder' => 'Enter Your Password',
-      'remember' => 'Remember Me',
-      'submit' => 'Sign In',
-      'forgot_password' => 'Forgot password? Click Here',
-      'login_success' => 'Login Successful',
-  ],
+    'login' => [
+        'welcome' => 'Welcome back!',
+        'subtitle' => 'Please sign in to continue.',
+        'email' => 'Email',
+        'email_placeholder' => 'Enter Your Email',
+        'password' => 'Password',
+        'password_placeholder' => 'Enter Your Password',
+        'remember' => 'Remember Me',
+        'submit' => 'Sign In',
+        'forgot_password' => 'Forgot password? Click Here',
+        'login_success' => 'Login Successful',
+    ],
     'forgot_password' => [
         'title' => 'Forgot Password!',
         'subtitle' => 'Please Enter Your Email',
     ],
-     'reset_password' => [
+    'reset_password' => [
         'welcome' => 'Welcome back!',
         'title' => 'Reset Your Password',
         'new_password' => 'New Password',
         'password_confirmation' => 'Confirm Password',
         'confirm_error' => 'Passwords do not match',
         'reset' => 'Reset',
-         'message' => [
-             'subject' => 'Admin Password Reset Link',
-             'body' => 'You are receiving this email because we received a password reset request for your admin account.',
-             'action' => 'Reset Admin Password',
-             'footer' => 'If you did not request a password reset, no further action is required.',
-         ],
+        'message' => [
+            'subject' => 'Admin Password Reset Link',
+            'body' => 'You are receiving this email because we received a password reset request for your admin account.',
+            'action' => 'Reset Admin Password',
+            'footer' => 'If you did not request a password reset, no further action is required.',
+        ],
     ],
     'verify_email' => [
-      'title' => 'Verify Your Email',
-      'subtitle' => 'Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you?',
-      'sent' => 'Sent!',
-      'sent_description' => 'A new verification link has been sent to your email.',
-      'resend' => 'Resend Verification Email',
-      'message' => [
+        'title' => 'Verify Your Email',
+        'subtitle' => 'Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you?',
+        'sent' => 'Sent!',
+        'sent_description' => 'A new verification link has been sent to your email.',
+        'resend' => 'Resend Verification Email',
+        'message' => [
             'subject' => 'Verify Your Admin Email Address',
             'body' => 'Please click the button below to verify your email address.',
             'action' => 'Verify Email Address',
@@ -242,11 +243,32 @@ return [
         ]
     ],
 
-    'assignments' => [
-        'teacher_id' => 'Teacher',
-        'subject_id' => 'Subject',
-        'section_id' => 'Section',
-        'academic_year' => 'Academic Year',
+    'teacher_assignments' => [
+        'title' => 'Teacher Assignments',
+        'add' => 'Add Assignment',
+        'edit' => 'Edit Assignment',
+        'delete' => 'Delete Assignment',
+        'fields' => [
+            'teacher_id' => 'Teacher',
+            'subject_id' => 'Subject',
+            'section_id' => 'Section',
+            'academic_year' => 'Academic Year',
+            'grade' => 'Grade',
+            'classroom' => 'Classroom',
+        ],
+        'messages' => [
+            'success' => [
+                'add' => 'Assignment added successfully.',
+                'update' => 'Assignment updated successfully.',
+                'delete' => 'Assignment deleted successfully.',
+            ],
+            'failed' => [
+                'add' => 'Failed to add assignment.',
+                'update' => 'Failed to update assignment.',
+                'delete' => 'Failed to delete assignment.',
+            ],
+            'duplicate' => 'This teacher is already assigned to this subject and section for the selected academic year.'
+        ]
     ],
 
     'roles' => [
@@ -649,7 +671,7 @@ return [
         'warning_body' => 'Force deleting a subject from this list will permanently remove it from the database along with all its relations. This action <strong>cannot</strong> be undone.',
         'deleted_at'  => 'Deleted At',
         'restore'     => 'Restore',
-        'force_delete'=> 'Force Delete',
+        'force_delete' => 'Force Delete',
         'confirm_restore_title' => 'Are you sure?',
         'confirm_restore_text' => 'You are about to restore this subject back to the active list.',
         'confirm_restore_btn' => 'Yes, Restore it!',
@@ -674,8 +696,8 @@ return [
         'section_basic'        => 'Basic Information',
         'section_basic_hint'   => 'Set the subject name in both Arabic and English.',
         'section_academic'     => 'Academic Relations',
-        'section_academic_hint'=> 'Link this subject to its grade, classroom, and specialization.',
-        'classroom_placeholder'=> '— Select a Grade first —',
+        'section_academic_hint' => 'Link this subject to its grade, classroom, and specialization.',
+        'classroom_placeholder' => '— Select a Grade first —',
         'placeholders' => [
             'name_ar' => 'e.g. اللغة العربية',
             'name_en' => 'e.g. Arabic Language',
