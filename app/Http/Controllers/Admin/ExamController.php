@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Exam\ExamDatatableRequest;
 use App\Http\Requests\Admin\Exam\ResetAttemptRequest;
 use App\Models\Exam;
 use App\Services\ExamService;
 use App\Services\StudentService;
-use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
 use Yajra\DataTables\Facades\DataTables;
@@ -43,7 +43,7 @@ class ExamController extends Controller implements HasMiddleware
     }
 
 
-    public function datatable(Request $request)
+    public function datatable(ExamDatatableRequest $request)
     {
         if ($request->ajax()) {
             $query = $this->adminExamService->getExamsQuery($request->all());
