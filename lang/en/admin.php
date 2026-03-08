@@ -1,6 +1,11 @@
 <?php
 
 return [
+    /*
+    |--------------------------------------------------------------------------
+    | Global
+    |--------------------------------------------------------------------------
+    */
     'global' => [
         'brand' => 'Learn To Earn',
         'email' => 'Email',
@@ -52,6 +57,7 @@ return [
         'graduate' => 'Graduate',
         'reset_filters' => 'Reset Filters',
         'search' => 'Search',
+        'filters' => 'Filters',
         'archive_warning_title' => 'Warning: Destructive Zone',
         'dropify' => [
             'drag_drop' => 'Drag and drop a file here or click',
@@ -59,6 +65,12 @@ return [
             'error' => 'Ooops, something wrong appended.',
         ],
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Sidebar
+    |--------------------------------------------------------------------------
+    */
     'sidebar' => [
         'dashboard' => 'Dashboard',
         'roles'     => 'Roles & Permissions',
@@ -95,6 +107,12 @@ return [
         'grades_report' => 'Grades Report',
         'library' => 'Library',
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Header
+    |--------------------------------------------------------------------------
+    */
     'header' => [
         'mark_read' => 'Mark All Read',
         'read' => 'Read',
@@ -107,12 +125,24 @@ return [
         'edit_profile' => 'Edit Profile',
         'sign_out' => 'Sign Out',
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Footer
+    |--------------------------------------------------------------------------
+    */
     'footer' => [
         'copyright' => 'Copyright ©',
         'owner' => 'Mohammed',
         'designed_by' => 'Designed by',
         'rights' => 'All rights reserved.',
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Login Page
+    |--------------------------------------------------------------------------
+    */
     'login' => [
         'welcome' => 'Welcome back!',
         'subtitle' => 'Please sign in to continue.',
@@ -125,10 +155,22 @@ return [
         'forgot_password' => 'Forgot password? Click Here',
         'login_success' => 'Login Successful',
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Forgot Password
+    |--------------------------------------------------------------------------
+    */
     'forgot_password' => [
         'title' => 'Forgot Password!',
         'subtitle' => 'Please Enter Your Email',
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Reset Password
+    |--------------------------------------------------------------------------
+    */
     'reset_password' => [
         'welcome' => 'Welcome back!',
         'title' => 'Reset Your Password',
@@ -143,6 +185,12 @@ return [
             'footer' => 'If you did not request a password reset, no further action is required.',
         ],
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Verify Email
+    |--------------------------------------------------------------------------
+    */
     'verify_email' => [
         'title' => 'Verify Your Email',
         'subtitle' => 'Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you?',
@@ -156,6 +204,12 @@ return [
             'footer' => 'If you did not create an account, no further action is required.',
         ],
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Admins CRUD
+    |--------------------------------------------------------------------------
+    */
     'admins' => [
         'fields' => [
             'name' => "Name",
@@ -187,6 +241,12 @@ return [
             ]
         ]
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Teachers CRUD
+    |--------------------------------------------------------------------------
+    */
     'teachers' => [
         'warning_title' => 'Warning: Destructive Zone',
         'warning_body' => 'Are you sure you want to archive this teacher? They will be removed from the active list but can be restored later.',
@@ -245,6 +305,12 @@ return [
         ]
     ],
 
+
+    /*
+    |--------------------------------------------------------------------------
+    | Teachers Assignments
+    |--------------------------------------------------------------------------
+    */
     'teacher_assignments' => [
         'title' => 'Teacher Assignments',
         'add' => 'Add Assignment',
@@ -273,6 +339,11 @@ return [
         ]
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Roles CRUD
+    |--------------------------------------------------------------------------
+    */
     'roles' => [
         'title' => "Roles",
         'add' => "Add Role",
@@ -298,6 +369,13 @@ return [
             ]
         ]
     ],
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Grades CRUD
+    |--------------------------------------------------------------------------
+    */
     'grades' => [
         'title' => "Grades",
         'add' => "Add Grade",
@@ -336,6 +414,12 @@ return [
             ]
         ]
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Classrooms CRUD
+    |--------------------------------------------------------------------------
+    */
     'classrooms' => [
         'title' => "Class Room",
         'add' => "Add Class",
@@ -379,6 +463,12 @@ return [
             ]
         ]
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Sections CRUD
+    |--------------------------------------------------------------------------
+    */
     'sections' => [
         'title' => "Section",
         'add' => "Add Section",
@@ -424,6 +514,12 @@ return [
             ]
         ]
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Guardians CRUD
+    |--------------------------------------------------------------------------
+    */
     'guardians' => [
         'show' => "Show Guardian",
         'title' => "Guardians",
@@ -491,6 +587,12 @@ return [
             ]
         ]
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Students CRUD
+    |--------------------------------------------------------------------------
+    */
     'students' => [
         'title' => "Students",
         'add' => "Add Student",
@@ -556,6 +658,12 @@ return [
             ],
         ]
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Student Promotions
+    |--------------------------------------------------------------------------
+    */
     'promotions' => [
         'title' => 'Student Promotions',
         'filters' => 'Promotion Filters',
@@ -593,6 +701,12 @@ return [
             ],
         ],
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Specializations CRUD
+    |--------------------------------------------------------------------------
+    */
     'specializations' => [
         'title'    => 'Specializations',
         'add'      => 'Add Specialization',
@@ -626,6 +740,13 @@ return [
             ],
         ],
     ],
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Profile Page
+    |--------------------------------------------------------------------------
+    */
     'profile' => [
         'title' => 'My Profile',
         'breadcrumb' => 'Settings & Security',
@@ -660,6 +781,12 @@ return [
         ]
     ],
 
+
+    /*
+    |--------------------------------------------------------------------------
+    | Attendances CRUD
+    |--------------------------------------------------------------------------
+    */
     'attendances' => [
         'title' => 'Attendance',
         'subtitle' => 'Manage student attendance quickly and accurately',
@@ -704,7 +831,11 @@ return [
     ],
 
 
-    // ─── Subjects ─────────────────────────────────────────────────────────────
+    /*
+    |--------------------------------------------------------------------------
+    | Subjects
+    |--------------------------------------------------------------------------
+    */
     'subjects' => [
         'title'       => 'Subjects',
         'add'         => 'Add Subject',
@@ -887,8 +1018,6 @@ return [
         'deleted_text'      => 'The online class has been deleted successfully.',
         'ok'                => 'OK',
         'minutes'           => 'min',
-
-        // Filter Section
         'filter_title'      => 'Advanced Search & Filters',
         'filter_subtitle'   => 'Filter online classes by academic year, grade, classroom, section, and teacher',
         'filter'            => 'Search',
@@ -896,16 +1025,12 @@ return [
         'all'               => 'All',
         'select_option'     => 'Select an option',
         'no_results'        => 'No results found',
-
-        // Table Section
         'list_title'        => 'Online Classes List',
         'list_subtitle'     => 'View and manage all scheduled online classes',
         'records'           => 'Records',
         'loading'           => 'Loading data...',
         'no_data'           => 'No online classes available',
         'no_matching'       => 'No matching records found',
-
-        // Fields
         'academic_year'     => 'Academic Year',
         'grade'             => 'Grade',
         'classroom'         => 'Classroom',
@@ -920,8 +1045,6 @@ return [
         'join'              => 'Join',
         'open_link'         => 'Open Meeting Link',
         'no_link'           => 'N/A',
-
-        // Messages
         'message' => [
             'success' => [
                 'delete' => 'Online class deleted successfully',
