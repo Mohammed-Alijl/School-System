@@ -25,12 +25,14 @@
                 </div>
             </div>
         </div>
-        <div class="d-flex align-items-center gap-2">
-            <button type="button" class="btn btn-info btn-sm" id="btn_print_section_attendance">
-                <i class="las la-print mr-1"></i>
-                {{ trans('admin.attendances.print_section') ?? 'Print Section' }}
-            </button>
-        </div>
+        @can('print_attendances')
+            <div class="d-flex align-items-center gap-2">
+                <button type="button" class="btn btn-info btn-sm" id="btn_print_section_attendance">
+                    <i class="las la-print mr-1"></i>
+                    {{ trans('admin.attendances.print_section') ?? 'Print Section' }}
+                </button>
+            </div>
+        @endcan
     </div>
 @endsection
 
@@ -83,13 +85,15 @@
                             </div>
                         </div>
 
-                        <div class="d-flex justify-content-end mt-2">
-                            <button type="button" class="btn load-students-btn" id="btn_load_students">
-                                <span class="spinner-border spinner-border-sm d-none" id="load_students_spinner"></span>
-                                <i class="las la-search mr-1 ml-1"></i>
-                                {{ trans('admin.attendances.load_students') }}
-                            </button>
-                        </div>
+                        @can('view_attendances')
+                            <div class="d-flex justify-content-end mt-2">
+                                <button type="button" class="btn load-students-btn" id="btn_load_students">
+                                    <span class="spinner-border spinner-border-sm d-none" id="load_students_spinner"></span>
+                                    <i class="las la-search mr-1 ml-1"></i>
+                                    {{ trans('admin.attendances.load_students') }}
+                                </button>
+                            </div>
+                        @endcan
                     </div>
                 </div>
 
@@ -104,7 +108,9 @@
 @section('js')
     <script src="{{ URL::asset('assets/admin/plugins/select2/js/select2.min.js') }}"></script>
     <script src="{{ URL::asset('assets/admin/plugins/parsleyjs/parsley.min.js') }}"></script>
-    <script src="{{ URL::asset('assets/admin/plugins/parsleyjs/i18n/' . LaravelLocalization::getCurrentLocale() . '.js') }}"></script>
+    <script
+        src="{{ URL::asset('assets/admin/plugins/parsleyjs/i18n/' . LaravelLocalization::getCurrentLocale() . '.js') }}">
+    </script>
     <!-- SweetAlert2 js -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
@@ -127,14 +133,14 @@
                     this.$classroom = $('#filter_classroom');
                     this.$section = $('#filter_section');
                     this.$date = $('#attendance_date');
-                    
+
                     // Buttons
                     this.$loadBtn = $('#btn_load_students');
                     this.$printBtn = $('#btn_print_section_attendance');
-                    
+
                     // Containers
                     this.$container = $('#students_container');
-                    
+
                     // Translations & Routes (Passed from Blade)
                     this.routes = {
                         classrooms: "{{ route('admin.classrooms.by-grade') }}",
@@ -146,8 +152,8 @@
 
                     this.trans = {
                         select: "-- {{ trans('admin.global.select') }} --",
-                        loading: '<i class="las la-spinner la-spin mr-1"></i> {{ trans("admin.attendances.loading") }}',
-                        saving: '<span class="spinner-border spinner-border-sm mr-2"></span> {{ trans("admin.attendances.saving") }}',
+                        loading: '<i class="las la-spinner la-spin mr-1"></i> {{ trans('admin.attendances.loading') }}',
+                        saving: '<span class="spinner-border spinner-border-sm mr-2"></span> {{ trans('admin.attendances.saving') }}',
                         ok: "{{ trans('admin.global.ok') }}",
                         warning: "{{ trans('admin.attendances.messages.failed.warning') }}",
                         errorTitle: "{{ trans('admin.attendances.messages.failed.error') }}",
@@ -163,13 +169,23 @@
                     const self = this;
                     this.alert = {
                         success: (text) => Swal.fire({
-                            icon: 'success', title: self.trans.success, text: text, timer: 2000, showConfirmButton: false
+                            icon: 'success',
+                            title: self.trans.success,
+                            text: text,
+                            timer: 2000,
+                            showConfirmButton: false
                         }),
                         error: (text) => Swal.fire({
-                            icon: 'error', title: self.trans.errorTitle, text: text, confirmButtonText: self.trans.ok
+                            icon: 'error',
+                            title: self.trans.errorTitle,
+                            text: text,
+                            confirmButtonText: self.trans.ok
                         }),
                         warning: (text) => Swal.fire({
-                            icon: 'warning', title: self.trans.warning, text: text, confirmButtonText: self.trans.ok
+                            icon: 'warning',
+                            title: self.trans.warning,
+                            text: text,
+                            confirmButtonText: self.trans.ok
                         })
                     };
                 }
@@ -191,7 +207,8 @@
                 }
 
                 resetSelect($el) {
-                    $el.empty().append(`<option value="" disabled selected>${this.trans.select}</option>`).prop('disabled', true);
+                    $el.empty().append(`<option value="" disabled selected>${this.trans.select}</option>`).prop(
+                        'disabled', true);
                 }
 
                 populateSelect($el, data) {
@@ -207,7 +224,9 @@
                     this.resetSelect(this.$section);
 
                     if (gradeId) {
-                        $.get(this.routes.classrooms, { grade_id: gradeId }, (response) => {
+                        $.get(this.routes.classrooms, {
+                            grade_id: gradeId
+                        }, (response) => {
                             if (response.success) this.populateSelect(this.$classroom, response.data);
                         });
                     }
@@ -218,7 +237,9 @@
                     this.resetSelect(this.$section);
 
                     if (classroomId) {
-                        $.get(this.routes.sections, { classroom_id: classroomId }, (response) => {
+                        $.get(this.routes.sections, {
+                            classroom_id: classroomId
+                        }, (response) => {
                             if (response.success) this.populateSelect(this.$section, response.data);
                         });
                     }
@@ -249,16 +270,16 @@
                     this.toggleButton(this.$loadBtn, this.trans.loading, true);
 
                     $.get(this.routes.students, {
-                        section_id: this.$section.val(),
-                        attendance_date: this.$date.val()
-                    })
-                    .done((response) => {
-                        if (response.status === 'success') {
-                            this.$container.html(response.html).hide().fadeIn('fast');
-                        }
-                    })
-                    .fail(() => this.alert.error(this.trans.errorFetch))
-                    .always(() => this.toggleButton(this.$loadBtn, null, false));
+                            section_id: this.$section.val(),
+                            attendance_date: this.$date.val()
+                        })
+                        .done((response) => {
+                            if (response.status === 'success') {
+                                this.$container.html(response.html).hide().fadeIn('fast');
+                            }
+                        })
+                        .fail(() => this.alert.error(this.trans.errorFetch))
+                        .always(() => this.toggleButton(this.$loadBtn, null, false));
                 }
 
                 printAttendance(e) {
@@ -271,28 +292,28 @@
                     this.toggleButton(this.$printBtn, this.trans.loading, true);
 
                     $.post(this.routes.print, {
-                        section_id: this.$section.val(),
-                        attendance_date: this.$date.val()
-                    })
-                    .done((response) => {
-                        if (response.status === 'success') {
-                            const printWindow = window.open('', '_blank');
-                            printWindow.document.write(response.html);
-                            printWindow.document.close();
-                            setTimeout(() => printWindow.print(), 500);
-                        } else {
-                            this.alert.error(response.message || this.trans.errorPrint);
-                        }
-                    })
-                    .fail((xhr) => {
-                        this.alert.error(xhr.responseJSON?.message || this.trans.errorPrint);
-                    })
-                    .always(() => this.toggleButton(this.$printBtn, null, false));
+                            section_id: this.$section.val(),
+                            attendance_date: this.$date.val()
+                        })
+                        .done((response) => {
+                            if (response.status === 'success') {
+                                const printWindow = window.open('', '_blank');
+                                printWindow.document.write(response.html);
+                                printWindow.document.close();
+                                setTimeout(() => printWindow.print(), 500);
+                            } else {
+                                this.alert.error(response.message || this.trans.errorPrint);
+                            }
+                        })
+                        .fail((xhr) => {
+                            this.alert.error(xhr.responseJSON?.message || this.trans.errorPrint);
+                        })
+                        .always(() => this.toggleButton(this.$printBtn, null, false));
                 }
 
                 saveAttendance(e) {
                     e.preventDefault();
-                    
+
                     const $form = $(e.target);
                     if ($form.parsley && !$form.parsley().isValid()) return;
 
@@ -305,12 +326,19 @@
 
                     // Serialize and append dynamic filters
                     const formData = $form.serializeArray();
-                    formData.push(
-                        { name: 'grade_id', value: this.$grade.val() },
-                        { name: 'classroom_id', value: this.$classroom.val() },
-                        { name: 'section_id', value: this.$section.val() },
-                        { name: 'attendance_date', value: this.$date.val() }
-                    );
+                    formData.push({
+                        name: 'grade_id',
+                        value: this.$grade.val()
+                    }, {
+                        name: 'classroom_id',
+                        value: this.$classroom.val()
+                    }, {
+                        name: 'section_id',
+                        value: this.$section.val()
+                    }, {
+                        name: 'attendance_date',
+                        value: this.$date.val()
+                    });
 
                     $.post(this.routes.store, $.param(formData))
                         .done((response) => {
@@ -327,7 +355,7 @@
                         const errors = xhr.responseJSON.errors;
                         $.each(errors, (key, value) => {
                             this.alert.error(value[0]);
-                            
+
                             let $input = $form.find(`[name="${key}"]`);
                             if (!$input.length) $input = $form.find(`[name="${key}[]"]`);
 
@@ -343,11 +371,12 @@
                             $input.addClass('is-invalid');
                             const errorClass = key.replace(/\./g, '_') + '_error';
                             const $errorElement = $form.find('.' + errorClass);
-                            
+
                             if ($errorElement.length) {
                                 $errorElement.text(value[0]);
                             } else {
-                                const errorHtml = `<div class="text-danger error-text mt-1 ${errorClass}">${value[0]}</div>`;
+                                const errorHtml =
+                                    `<div class="text-danger error-text mt-1 ${errorClass}">${value[0]}</div>`;
                                 if ($input.closest('.status-pills').length) {
                                     $input.closest('.status-pills').after(errorHtml);
                                 } else {

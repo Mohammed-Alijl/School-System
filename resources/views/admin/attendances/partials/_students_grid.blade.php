@@ -11,7 +11,8 @@
             <div class="glass-card-body">
                 <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap">
                     <h5 class="mb-2 mb-md-0 font-weight-bold">{{ trans('admin.attendances.students_list') }}</h5>
-                    <span class="badge badge-primary px-3 py-2">{{ $students->count() }} {{ trans('admin.attendances.student') }}</span>
+                    <span class="badge badge-primary px-3 py-2">{{ $students->count() }}
+                        {{ trans('admin.attendances.student') }}</span>
                 </div>
 
                 <div class="students-table-wrap table-responsive">
@@ -106,13 +107,16 @@
                     </table>
                 </div>
 
-                <div class="submit-bar">
-                    <button type="submit" class="btn save-attendance-btn" id="saveAttendanceBtn">
-                        <span class="spinner-border spinner-border-sm d-none" id="saveAttendanceSpinner"></span>
-                        <i class="las la-save mr-1 ml-1"></i>
-                        {{ trans('admin.attendances.save') }}
-                    </button>
-                </div>
+                @can('create_attendances')
+                    <div class="submit-bar">
+                        <button type="submit" class="btn save-attendance-btn" id="saveAttendanceBtn">
+                            <span class="spinner-border spinner-border-sm d-none" id="saveAttendanceSpinner"></span>
+                            <i class="las la-save mr-1 ml-1"></i>
+                            {{ trans('admin.attendances.save') }}
+                        </button>
+                    </div>
+                @endcan
+
             </div>
         </div>
     </form>

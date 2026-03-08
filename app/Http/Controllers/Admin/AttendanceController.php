@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\Attendance\StoreRequest;
 use App\Http\Requests\Admin\Attendance\ShowRequest;
+use App\Http\Requests\Admin\Attendance\StoreRequest;
 use App\Services\AttendanceService;
 use App\Services\StudentService;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 
-class AttendanceController extends Controller
+class AttendanceController extends Controller implements HasMiddleware
 {
     protected $attendanceService;
     protected $studentService;
@@ -17,6 +19,16 @@ class AttendanceController extends Controller
     {
         $this->attendanceService = $attendanceService;
         $this->studentService = $studentService;
+    }
+
+
+    public static function middleware(): array
+    {
+        return [
+            new Middleware('permission:view_attendances', only: ['index', 'getStudents']),
+            new Middleware('permission:create_attendances', only: ['store']),
+            new Middleware('permission:print_attendances', only: ['printSectionAttendance']),
+        ];
     }
 
     /**
