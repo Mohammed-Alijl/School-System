@@ -24,7 +24,7 @@ class DatatableRequest extends FormRequest
         return [
             'academic_year_id' => 'nullable|numeric|integer|exists:academic_years,id',
             'grade_id'         => 'nullable|numeric|integer|exists:grades,id',
-            'classroom_id'     => 'nullable|numeric|integer|exists:classrooms,id',
+            'classroom_id'     => 'nullable|numeric|integer|exists:class_rooms,id',
             'section_id'       => 'nullable|numeric|integer|exists:sections,id',
             'teacher_id'       => 'nullable|numeric|integer|exists:teachers,id',
         ];
