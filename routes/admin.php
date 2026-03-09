@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AcademicYearController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AttendanceController;
 use App\Http\Controllers\Admin\Auth\AdminAuthController;
@@ -181,6 +182,10 @@ Route::group(
                     // ─── Helper Routes for Dependent Dropdowns ──────────────────────────────────────────
                     Route::get('get-classrooms', [ClassroomController::class, 'getByGrade'])->name('get_classrooms');
                     Route::get('get-sections', [SectionController::class, 'getByClassroom'])->name('get_sections');
+
+
+                    // ─── Academic Year ───────────────────────────────────────────────────────────────
+                    Route::resource('academic_years', AcademicYearController::class)->except(['show', 'create', 'edit', 'destroy']);
                 });
                 Route::post('logout', [AdminAuthController::class, 'destroy'])->name('logout');
             });

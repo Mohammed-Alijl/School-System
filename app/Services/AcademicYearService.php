@@ -1,0 +1,41 @@
+<?php
+
+namespace App\Services;
+
+use App\Models\AcademicYear;
+use Exception;
+
+class AcademicYearService
+{
+    /**
+     * get all Academic Years
+     */
+    public function getAll()
+    {
+        return AcademicYear::get()->sortBy('start_at');
+    }
+
+
+    /**
+     * get all Current Year
+     */
+    public function getCurrent()
+    {
+        return AcademicYear::where('is_current', true)->first();
+    }
+
+    public function store(array $data)
+    {
+        if ($data['is_current'] && $this->getCurrent())
+            throw new Exception(__('admin.academic_year.messages.failed.is_current'));
+        return AcademicYear::create($data);
+    }
+
+    public function update($academicYear, array $data)
+    {
+        if (!$academicYear->is_current && $data['is_current'] && $this->getCurrent())
+            throw new Exception(__('admin.academic_year.messages.failed.is_current'));
+        $academicYear->update($data);
+        return $academicYear;
+    }
+}

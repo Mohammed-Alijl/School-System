@@ -11,9 +11,7 @@ use Illuminate\Routing\Controllers\Middleware;
 
 class StudentPromotionController extends Controller implements HasMiddleware
 {
-    public function __construct(protected StudentPromotionService $promotionService)
-    {
-    }
+    public function __construct(protected StudentPromotionService $promotionService) {}
 
     public static function middleware(): array
     {

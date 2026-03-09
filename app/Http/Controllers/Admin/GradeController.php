@@ -13,9 +13,7 @@ use Illuminate\Routing\Controllers\Middleware;
 class GradeController extends Controller implements HasMiddleware
 {
 
-    public function __construct(protected GradeService $gradeService)
-    {
-    }
+    public function __construct(protected GradeService $gradeService) {}
 
     public static function middleware(): array
     {
@@ -120,7 +118,7 @@ class GradeController extends Controller implements HasMiddleware
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => $ex->getMessage() ?? __('admin.grades.messages.failed.restore') 
+                'message' => $e->getMessage() ?? __('admin.grades.messages.failed.restore')
             ], 404);
         }
     }
@@ -137,7 +135,7 @@ class GradeController extends Controller implements HasMiddleware
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'message' => $ex->getMessage() ?? __('admin.grades.messages.failed.delete')
+                'message' => $e->getMessage() ?? __('admin.grades.messages.failed.delete')
             ], 500);
         }
     }
