@@ -14,6 +14,7 @@ class RoleSeeder extends Seeder
             'admins'            => ['view', 'create', 'edit', 'delete'],
             'roles'             => ['view', 'create', 'edit', 'delete'],
             'grades'            => ['view', 'create', 'edit', 'delete', 'view-archived', 'restore', 'force-delete'],
+            'years'             => ['view', 'create', 'edit'],
             'classrooms'        => ['view', 'create', 'edit', 'delete', 'view-archived', 'restore', 'force-delete'],
             'sections'          => ['view', 'create', 'edit', 'delete', 'view-archived', 'restore', 'force-delete'],
             'guardians'         => ['view', 'create', 'edit', 'delete', 'view-archived', 'restore', 'force-delete'],

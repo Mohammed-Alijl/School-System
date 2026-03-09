@@ -98,6 +98,8 @@
             </div>
         </div>
     </div>
+    </div>
+    </div>
 
     @include('admin.academic_years.add_modal')
     @include('admin.academic_years.edit_modal')
