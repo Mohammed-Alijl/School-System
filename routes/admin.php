@@ -144,6 +144,11 @@ Route::group(
                     });
                     Route::resource('fee_categories', \App\Http\Controllers\Admin\Finance\FeeCategoryController::class)->except(['show', 'create', 'edit']);
 
+                    Route::prefix('fees')->name('fees.')->group(function () {
+                        Route::get('/datatable', [\App\Http\Controllers\Admin\Finance\FeeController::class, 'datatable'])->name('datatable');
+                    });
+                    Route::resource('fees', \App\Http\Controllers\Admin\Finance\FeeController::class)->except(['show', 'create', 'edit']);
+
                     // ─── Specializations ───────────────────────────────────────────────────────────────
                     Route::resource('specializations', \App\Http\Controllers\Admin\SpecializationController::class)->except(['show', 'create', 'edit']);
 

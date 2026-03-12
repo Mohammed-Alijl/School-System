@@ -30,6 +30,7 @@ class FeeRequest extends FormRequest
             'fee_category_id'   => ['required', 'exists:fee_categories,id'],
             'academic_year_id'  => ['required', 'exists:academic_years,id'],
             'grade_id'          => ['required', 'exists:grades,id'],
+            'classroom_id'      => ['nullable', 'exists:class_rooms,id'],
         ];
     }
 }

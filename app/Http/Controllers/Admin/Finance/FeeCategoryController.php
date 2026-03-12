@@ -20,10 +20,10 @@ class FeeCategoryController extends Controller implements HasMiddleware
     public static function middleware(): array
     {
         return [
-            new Middleware('permission:view_fees', only: ['index', 'datatable']),
-            new Middleware('permission:create_fees', only: ['create', 'store']),
-            new Middleware('permission:edit_fees', only: ['edit', 'update']),
-            new Middleware('permission:delete_fees', only: ['destroy']),
+            new Middleware('permission:view_fee_categories', only: ['index', 'datatable']),
+            new Middleware('permission:create_fee_categories', only: ['create', 'store']),
+            new Middleware('permission:edit_fee_categories', only: ['edit', 'update']),
+            new Middleware('permission:delete_fee_categories', only: ['destroy']),
         ];
     }
 
