@@ -114,6 +114,7 @@
 
     @include('admin.finance.fees.add_modal')
     @include('admin.finance.fees.edit_modal')
+    @include('admin.finance.fees.show_modal')
 
 @endsection
 

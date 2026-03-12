@@ -1172,6 +1172,7 @@ return [
             'title' => 'School Fees',
             'add' => 'Add Fee',
             'edit' => 'Edit Fee',
+            'show' => 'Fee Details',
             'fields' => [
                 'title' => 'Fee Title',
                 'title_ar' => 'Title (Arabic)',

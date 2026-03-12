@@ -1,4 +1,18 @@
 <div class="d-flex align-items-center justify-content-center">
+    @can('view_fees')
+        <button class="btn btn-sm btn-primary show-btn mx-1"
+                data-title_ar="{{ $fee->getTranslation('title', 'ar') }}"
+                data-title_en="{{ $fee->getTranslation('title', 'en') }}"
+                data-amount="{{ $fee->amount }}"
+                data-category_name="{{ $fee->feeCategory->title ?? '' }}"
+                data-academic_year_name="{{ $fee->academicYear->name ?? '' }}"
+                data-grade_name="{{ $fee->grade->name ?? '' }}"
+                data-classroom_name="{{ $fee->classroom->name ?? '' }}"
+                data-description="{{ $fee->description }}"
+                title="{{ __('admin.finance.fees.show') }}">
+            <i class="las la-eye"></i>
+        </button>
+    @endcan
     @can('edit_fees')
         <button class="btn btn-sm btn-info edit-btn mx-1"
                 data-toggle="modal" data-target="#editFeeModal"
