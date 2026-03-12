@@ -138,6 +138,12 @@ Route::group(
                     // ─── Teacher Assignments ───────────────────────────────────────────────────────────────
                     Route::resource('teacher_assignments', TeacherAssignmentController::class)->except(['show', 'create']);
 
+                    // ─── Finance (Fees & Fee Categories) ─────────────────────────────────────────────────
+                    Route::prefix('fee_categories')->name('fee_categories.')->group(function () {
+                        Route::get('/datatable', [\App\Http\Controllers\Admin\Finance\FeeCategoryController::class, 'datatable'])->name('datatable');
+                    });
+                    Route::resource('fee_categories', \App\Http\Controllers\Admin\Finance\FeeCategoryController::class)->except(['show', 'create', 'edit']);
+
                     // ─── Specializations ───────────────────────────────────────────────────────────────
                     Route::resource('specializations', \App\Http\Controllers\Admin\SpecializationController::class)->except(['show', 'create', 'edit']);
 
