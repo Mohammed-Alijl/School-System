@@ -6,22 +6,14 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Student\StoreRequest;
 use App\Http\Requests\Admin\Student\UpdateRequest;
 use App\Models\Student;
-use App\Models\Classroom;
-use App\Models\Section;
 use App\Services\StudentService;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
-use Yajra\DataTables\Facades\DataTables;
 
 class StudentController extends Controller implements HasMiddleware
 {
-    protected $studentService;
-
-    public function __construct(StudentService $studentService)
-    {
-        $this->studentService = $studentService;
-    }
+    public function __construct(protected readonly StudentService $studentService) {}
 
     public static function middleware(): array
     {
@@ -37,14 +29,14 @@ class StudentController extends Controller implements HasMiddleware
     }
 
 
-public function index(Request $request)
+    public function index(Request $request)
     {
         if ($request->ajax()) {
             return $this->studentService->getStudentsDataTable($request);
         }
-        
+
         $lookups = $this->studentService->getLookups();
-        
+
         return view('admin.students.index', $lookups);
     }
 
@@ -159,19 +151,27 @@ public function index(Request $request)
         }
     }
 
-    public function getNextStudentCode() {
+    public function getNextStudentCode()
+    {
         try {
             $student_code = $this->studentService->getNextStudentCode();
             return response()->json([
                 'status' => 'success',
                 'student_code' => $student_code
             ]);
-
-        }catch (\Exception $e) {
+        } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
                 'message' => $e->getMessage()
             ], 500);
         }
+    }
+
+    public function search(Request $request)
+    {
+        return response()->json([
+            'status' => 'success',
+            ...$this->studentService->searchForSelect($request),
+        ]);
     }
 }

@@ -64,6 +64,8 @@ class InvoiceService
     {
         $query->when(!empty($filters['student_id']), fn($q) => $q->where('student_id', $filters['student_id']));
         $query->when(!empty($filters['grade_id']), fn($q) => $q->where('grade_id', $filters['grade_id']));
+        $query->when(!empty($filters['classroom_id']), fn($q) => $q->where('classroom_id', $filters['classroom_id']));
+        $query->when(!empty($filters['fee_id']), fn($q) => $q->where('fee_id', $filters['fee_id']));
 
         return $query->latest();
     }

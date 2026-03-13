@@ -10,6 +10,7 @@ use App\Models\TypeBlood;
 use App\Models\Religion;
 use App\Models\Gender;
 use App\Models\AcademicYear;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
@@ -17,6 +18,8 @@ use Yajra\DataTables\Facades\DataTables;
 
 class StudentService
 {
+    private const SELECT_SEARCH_PER_PAGE = 20;
+
     public function getAll()
     {
         return Student::with(['grade', 'classroom', 'section', 'guardian'])->latest()->get();
@@ -25,7 +28,7 @@ class StudentService
     public function getStudentsDataTable(Request $request)
     {
         $query = $this->getStudentsQuery();
-        
+
         $query = $this->applyFilters($query, $request);
 
         return DataTables::of($query)
@@ -214,7 +217,7 @@ class StudentService
             Storage::disk('public')->delete($attachmentPath);
         }
 
-        $attachments = array_filter($student->attachments ?? [], function($path) use ($attachmentPath) {
+        $attachments = array_filter($student->attachments ?? [], function ($path) use ($attachmentPath) {
             return $path !== $attachmentPath;
         });
 
@@ -239,12 +242,61 @@ class StudentService
         return $currentYear . $newSequence;
     }
 
+    public function searchForSelect(Request $request): array
+    {
+        $students = $this->buildSelectSearchQuery($request)
+            ->paginate(
+                perPage: self::SELECT_SEARCH_PER_PAGE,
+                columns: ['id', 'name'],
+                pageName: 'page',
+                page: max($request->integer('page', 1), 1),
+            );
+
+        return [
+            'results' => $students->getCollection()
+                ->map(fn(Student $student) => $this->formatStudentForSelect($student))
+                ->values(),
+            'pagination' => [
+                'more' => $students->hasMorePages(),
+            ],
+        ];
+    }
+
+    private function buildSelectSearchQuery(Request $request): Builder
+    {
+        $searchTerm = trim((string) $request->input('q', $request->input('query', '')));
+
+        return Student::query()
+            ->select(['id', 'name'])
+            ->when(
+                $request->filled('grade_id'),
+                fn(Builder $query) => $query->where('grade_id', $request->integer('grade_id'))
+            )
+            ->when(
+                $request->filled('classroom_id'),
+                fn(Builder $query) => $query->where('classroom_id', $request->integer('classroom_id'))
+            )
+            ->when(
+                $searchTerm !== '',
+                fn(Builder $query) => $query->where('name', 'like', "%{$searchTerm}%")
+            )
+            ->orderBy('name');
+    }
+
+    private function formatStudentForSelect(Student $student): array
+    {
+        return [
+            'id' => $student->id,
+            'text' => $student->name,
+        ];
+    }
+
 
     private function applyFilters($query, Request $request)
     {
         return $query->when($request->filled('filter_grade'), function ($q) use ($request) {
-                $q->where('grade_id', (int) $request->filter_grade);
-            })
+            $q->where('grade_id', (int) $request->filter_grade);
+        })
             ->when($request->filled('filter_classroom'), function ($q) use ($request) {
                 $q->where('classroom_id', (int) $request->filter_classroom);
             })
@@ -260,6 +312,6 @@ class StudentService
     private function getStudentsQuery()
     {
         return Student::with(['grade', 'classroom', 'section', 'guardian'])
-                      ->select('students.*'); 
+            ->select('students.*');
     }
 }
