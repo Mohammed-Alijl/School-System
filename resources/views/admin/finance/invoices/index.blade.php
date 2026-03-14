@@ -300,7 +300,7 @@
                         url: studentSearchUrl,
                         dataType: 'json',
                         delay: 250,
-                        cache: true,
+                        cache: !includeFilterContext,
                         data: function(params) {
                             return buildStudentSearchParams(params, includeFilterContext);
                         },
