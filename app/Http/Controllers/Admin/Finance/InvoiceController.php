@@ -24,6 +24,7 @@ class InvoiceController extends Controller implements HasMiddleware
             new Middleware('permission:view_invoices', only: ['index', 'datatable']),
             new Middleware('permission:create_invoices', only: ['store']),
             new Middleware('permission:delete_invoices', only: ['destroy']),
+            new Middleware('permission:print_invoices', only: ['print']),
         ];
     }
 
@@ -75,5 +76,12 @@ class InvoiceController extends Controller implements HasMiddleware
                 'message' => trans('admin.finance.messages.failed.invoice_delete')
             ], 500);
         }
+    }
+
+    public function print(Invoice $invoice)
+    {
+        $invoice->load(['student', 'fee.feeCategory', 'grade', 'classroom', 'academicYear']);
+
+        return view('admin.finance.invoices.print', compact('invoice'));
     }
 }

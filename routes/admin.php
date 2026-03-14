@@ -156,6 +156,7 @@ Route::group(
                     // ─── Invoices ───────────────────────────────────────────────────────────────
                     Route::prefix('invoices')->name('invoices.')->group(function () {
                         Route::get('/datatable', [InvoiceController::class, 'datatable'])->name('datatable');
+                        Route::get('/{invoice}/print', [InvoiceController::class, 'print'])->name('print');
                     });
                     Route::resource('invoices', InvoiceController::class)->except(['show', 'create', 'edit']);
 
