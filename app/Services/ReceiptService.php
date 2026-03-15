@@ -78,6 +78,18 @@ class ReceiptService
     }
 
     /**
+     * Get The Required Data
+     */
+    public function getLookups(): array
+    {
+        return [
+            'academic_years'   => \App\Models\AcademicYear::select('id', 'name')->get(),
+            'payment_gateways' => \App\Models\PaymentGateway::where('status', true)->select('id', 'name')->get(),
+            'currencies'       => \App\Models\Currency::select('code', 'name', 'is_default')->get(),
+        ];
+    }
+
+    /**
      * convert the paid amount to the base currency using the exchange rate at the time of payment.
      */
     private function calculateBaseAmount(float $paidAmount, float $exchangeRate): float
