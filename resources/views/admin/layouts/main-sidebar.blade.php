@@ -291,20 +291,22 @@
             @endcan
             <li class="slide">
                 @can('view_library')
-                <a class="side-menu__item" href="{{ route('admin.library.index') }}"><svg xmlns="http://www.w3.org/2000/svg"
-                        class="side-menu__icon" viewBox="0 0 24 24" width="24px" fill="#e3e3e3">
-                        <path d="M0 0h24v24H0V0z" fill="none" />
-                        <path d="M20 4h-1v9l-3-2.25L13 13V4H8v12h12z" opacity=".3" />
-                        <path
-                            d="M4 22h14v-2H4V6H2v14c0 1.1.9 2 2 2zm18-6V4c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2zM15 4h2v5l-1-.75L15 9V4zM8 4h5v9l3-2.25L19 13V4h1v12H8V4z" />
-                    </svg><span class="side-menu__label">{{ __('admin.sidebar.library') }}</span></a>
+                    <a class="side-menu__item" href="{{ route('admin.library.index') }}"><svg
+                            xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24"
+                            width="24px" fill="#e3e3e3">
+                            <path d="M0 0h24v24H0V0z" fill="none" />
+                            <path d="M20 4h-1v9l-3-2.25L13 13V4H8v12h12z" opacity=".3" />
+                            <path
+                                d="M4 22h14v-2H4V6H2v14c0 1.1.9 2 2 2zm18-6V4c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2zM15 4h2v5l-1-.75L15 9V4zM8 4h5v9l3-2.25L19 13V4h1v12H8V4z" />
+                        </svg><span class="side-menu__label">{{ __('admin.sidebar.library') }}</span></a>
                 @endcan
             </li>
             <!-- START  Accounts -->
             <li class="side-item side-item-category">{{ __('admin.sidebar.accounts') }}</li>
             <li class="slide">
-                <a class="side-menu__item" data-toggle="slide" href="#"><svg xmlns="http://www.w3.org/2000/svg"
-                        class="side-menu__icon" viewBox="0 0 24 24" width="24px" fill="#e3e3e3">
+                <a class="side-menu__item" data-toggle="slide" href="#"><svg
+                        xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24"
+                        width="24px" fill="#e3e3e3">
                         <path d="M0 0h24v24H0V0z" fill="none" />
                         <path
                             d="M11.5 17.1c-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79z" />
@@ -317,20 +319,24 @@
                         </li>
                     @endcan
                     @can('view_fees')
-                        <li><a class="slide-item" href="{{ route('admin.fees.index') }}">{{ __('admin.sidebar.fees') }}</a></li>
+                        <li><a class="slide-item"
+                                href="{{ route('admin.fees.index') }}">{{ __('admin.sidebar.fees') }}</a></li>
                     @endcan
                 </ul>
             </li>
-            <li class="slide">
-                <a class="side-menu__item" href="#"><svg xmlns="http://www.w3.org/2000/svg"
-                        class="side-menu__icon" viewBox="0 0 24 24" width="24px" fill="#e3e3e3">
-                        <path d="M0 0h24v24H0V0z" fill="none" />
-                        <path d="M5 19.09h14V4.91H5v14.18zM6 7h12v2H6V7zm0 4h12v2H6v-2zm0 4h12v2H6v-2z"
-                            opacity=".3" />
-                        <path
-                            d="M19.5 3.5L18 2l-1.5 1.5L15 2l-1.5 1.5L12 2l-1.5 1.5L9 2 7.5 3.5 6 2 4.5 3.5 3 2v20l1.5-1.5L6 22l1.5-1.5L9 22l1.5-1.5L12 22l1.5-1.5L15 22l1.5-1.5L18 22l1.5-1.5L21 22V2l-1.5 1.5zM19 19.09H5V4.91h14v14.18zM6 15h12v2H6zm0-4h12v2H6zm0-4h12v2H6z" />
-                    </svg><span class="side-menu__label">{{ __('admin.sidebar.invoices') }}</span></a>
-            </li>
+            @can('view_invoices')
+                <li class="slide">
+                    <a class="side-menu__item" href="{{ route('admin.invoices.index') }}"><svg
+                            xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 24 24"
+                            width="24px" fill="#e3e3e3">
+                            <path d="M0 0h24v24H0V0z" fill="none" />
+                            <path d="M5 19.09h14V4.91H5v14.18zM6 7h12v2H6V7zm0 4h12v2H6v-2zm0 4h12v2H6v-2z"
+                                opacity=".3" />
+                            <path
+                                d="M19.5 3.5L18 2l-1.5 1.5L15 2l-1.5 1.5L12 2l-1.5 1.5L9 2 7.5 3.5 6 2 4.5 3.5 3 2v20l1.5-1.5L6 22l1.5-1.5L9 22l1.5-1.5L12 22l1.5-1.5L15 22l1.5-1.5L18 22l1.5-1.5L21 22V2l-1.5 1.5zM19 19.09H5V4.91h14v14.18zM6 15h12v2H6zm0-4h12v2H6zm0-4h12v2H6z" />
+                        </svg><span class="side-menu__label">{{ __('admin.sidebar.invoices') }}</span></a>
+                </li>
+            @endcan
             <li class="slide">
                 <a class="side-menu__item" href="#"><svg xmlns="http://www.w3.org/2000/svg"
                         class="side-menu__icon" viewBox="0 0 24 24" width="24px" fill="#e3e3e3">

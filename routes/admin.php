@@ -10,6 +10,9 @@ use App\Http\Controllers\Admin\Auth\ProfileController;
 use App\Http\Controllers\Admin\Auth\VerifyEmailController;
 use App\Http\Controllers\Admin\ClassroomController;
 use App\Http\Controllers\Admin\ExamController;
+use App\Http\Controllers\Admin\Finance\FeeCategoryController;
+use App\Http\Controllers\Admin\Finance\FeeController;
+use App\Http\Controllers\Admin\Finance\InvoiceController;
 use App\Http\Controllers\Admin\GradeController;
 use App\Http\Controllers\Admin\GuardianController;
 use App\Http\Controllers\Admin\OnlineClassController;
@@ -124,6 +127,7 @@ Route::group(
                         Route::delete('force-delete/{id}', [StudentController::class, 'forceDelete'])->name('forceDelete');
                         Route::get('/next-code', [StudentController::class, 'getNextStudentCode'])->name('next-code');
                         Route::post('attachments/destroy', [StudentController::class, 'deleteAttachment'])->name('attachment.destroy');
+                        Route::get('search', [StudentController::class, 'search'])->name('search');
                     });
 
                     // ─── Teachers ───────────────────────────────────────────────────────────────
@@ -140,17 +144,24 @@ Route::group(
 
                     // ─── Finance (Fees & Fee Categories) ─────────────────────────────────────────────────
                     Route::prefix('fee_categories')->name('fee_categories.')->group(function () {
-                        Route::get('/datatable', [\App\Http\Controllers\Admin\Finance\FeeCategoryController::class, 'datatable'])->name('datatable');
+                        Route::get('/datatable', [FeeCategoryController::class, 'datatable'])->name('datatable');
                     });
-                    Route::resource('fee_categories', \App\Http\Controllers\Admin\Finance\FeeCategoryController::class)->except(['show', 'create', 'edit']);
+                    Route::resource('fee_categories', FeeCategoryController::class)->except(['show', 'create', 'edit']);
 
                     Route::prefix('fees')->name('fees.')->group(function () {
-                        Route::get('/datatable', [\App\Http\Controllers\Admin\Finance\FeeController::class, 'datatable'])->name('datatable');
+                        Route::get('/datatable', [FeeController::class, 'datatable'])->name('datatable');
                     });
-                    Route::resource('fees', \App\Http\Controllers\Admin\Finance\FeeController::class)->except(['show', 'create', 'edit']);
+                    Route::resource('fees', FeeController::class)->except(['show', 'create', 'edit']);
+
+                    // ─── Invoices ───────────────────────────────────────────────────────────────
+                    Route::prefix('invoices')->name('invoices.')->group(function () {
+                        Route::get('/datatable', [InvoiceController::class, 'datatable'])->name('datatable');
+                        Route::get('/{invoice}/print', [InvoiceController::class, 'print'])->name('print');
+                    });
+                    Route::resource('invoices', InvoiceController::class)->except(['show', 'create', 'edit']);
 
                     // ─── Specializations ───────────────────────────────────────────────────────────────
-                    Route::resource('specializations', \App\Http\Controllers\Admin\SpecializationController::class)->except(['show', 'create', 'edit']);
+                    Route::resource('specializations', SpecializationController::class)->except(['show', 'create', 'edit']);
 
                     // ─── Profile ───────────────────────────────────────────────────────────────
                     Route::prefix('profile')->name('profile.')->group(function () {

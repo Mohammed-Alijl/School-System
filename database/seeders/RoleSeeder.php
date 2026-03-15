@@ -19,13 +19,14 @@ class RoleSeeder extends Seeder
             'sections'          => ['view', 'create', 'edit', 'delete', 'view-archived', 'restore', 'force-delete'],
             'guardians'         => ['view', 'create', 'edit', 'delete', 'view-archived', 'restore', 'force-delete'],
             'students'          => ['view', 'create', 'edit', 'delete', 'view-archived', 'restore', 'force-delete', 'graduate', 'promote'],
-            'teachers'          => ['view', 'create', 'edit', 'delete','view-archived', 'restore', 'force-delete',],
+            'teachers'          => ['view', 'create', 'edit', 'delete', 'view-archived', 'restore', 'force-delete',],
             'specializations'   => ['view', 'create', 'edit', 'delete'],
-            'subjects'          => ['view', 'create', 'print', 'delete','view-archived', 'restore', 'force-delete',],
+            'subjects'          => ['view', 'create', 'print', 'delete', 'view-archived', 'restore', 'force-delete',],
             'attendances'       => ['view', 'create', 'print'],
             'online_classes'    => ['view', 'delete'],
             'exams'             => ['view', 'view-student-attempts', 'reset-attempts'],
-            'invoices'          => ['view', 'create', 'edit', 'delete', 'print'],
+            'fees'              => ['view', 'create', 'edit', 'delete'],
+            'invoices'          => ['view', 'create', 'delete', 'print'],
         ];
 
         foreach ($permissions as $module => $actions) {

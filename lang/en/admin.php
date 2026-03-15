@@ -58,6 +58,12 @@ return [
         'reset_filters' => 'Reset Filters',
         'search' => 'Search',
         'print' => 'Print',
+        'name' => 'Name',
+        'code' => 'Code',
+        'no_description' => 'No description provided.',
+        'name' => 'Name',
+        'code' => 'Code',
+        'no_description' => 'No description provided.',
         'filters' => 'Filters',
         'archive_warning_title' => 'Warning: Destructive Zone',
         'dropify' => [
@@ -1148,11 +1154,15 @@ return [
                 'store' => 'Fee record created successfully.',
                 'update' => 'Fee record updated successfully.',
                 'delete' => 'Fee record deleted successfully.',
+                'invoice_created' => 'Invoice created successfuly.',
+                'invoice_deleted' => 'invoice deleted successfuly.'
             ],
             'failed' => [
                 'store' => 'Failed to create fee record.',
                 'update' => 'Failed to update fee record.',
                 'delete' => 'Failed to delete fee record.',
+                'invoice_created' => 'Failed to create invoice record.',
+                'invoice_deleted' => 'Failed to delete invoice record.'
             ],
         ],
 
@@ -1184,6 +1194,34 @@ return [
                 'academic_year' => 'Academic Year',
                 'academic_target' => 'Academic Target',
                 'description' => 'Description',
+            ],
+        ],
+
+        'invoices' => [
+            'title' => 'Invoices Management',
+            'show'             => 'Invoice Details',
+            'currency'         => 'American Dollar',
+            'amount_auto_note' => 'Amount is automatically set from the selected fee.',
+            'add' => 'Issue New Invoice',
+            'fields' => [
+                'student' => 'Student',
+                'fee' => 'Fee',
+                'fee_details' => 'Fee Details',
+                'academic_year' => 'Academic Year',
+                'amount' => 'Amount',
+                'date' => 'Date',
+                'description' => 'Description',
+            ],
+            'messages' => [
+                'success' => [
+                    'store' => 'Invoice issued successfully.',
+                    'delete' => 'Invoice deleted successfully.',
+                ],
+                'failed' => [
+                    'store' => 'Failed to issue invoice.',
+                    'delete' => 'Failed to delete invoice.',
+                ],
+                'delete_warning' => 'Deleting this invoice will also remove its record from the students financial ledger.',
             ],
         ],
     ],
